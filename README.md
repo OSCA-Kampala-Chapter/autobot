@@ -1,2 +1,3 @@
 # autobot
-An all round bot library
+
+Autobot is a bot library targetted to build software bots for various platforms with ease of integration in mind.
