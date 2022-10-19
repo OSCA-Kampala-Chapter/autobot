@@ -10,7 +10,7 @@ class BotCommandScopeAllChatAdministrators:
 class BotCommandScopeAllGroupChats:
     pass 
 
-class BotCommandScopeAllPrivatechats:
+class BotCommandScopeAllPrivateChats:
     pass
 class BotCommandScopeChat:
     pass 
