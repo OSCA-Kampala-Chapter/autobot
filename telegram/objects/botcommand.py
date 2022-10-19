@@ -4,7 +4,7 @@ class BotCommand:
 class BotCommandScope:
     pass 
 
-class BotCommandScopeAllChatAdministrattos:
+class BotCommandScopeAllChatAdministrators:
     pass 
 
 class BotCommandScopeAllGroupChats:
