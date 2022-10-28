@@ -1,4 +1,4 @@
-from .base import Base
+from .base import BaseObject
 
 class Message(BaseObject):
     def __init__ (self,

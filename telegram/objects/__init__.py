@@ -161,6 +161,5 @@ __all__ = ("Animation",
             "Voice",
             "WebAppData",
             "WebAppInfo",
-            "TelegramObject",
         )
         
