@@ -1,4 +1,6 @@
-class KeyboardButton:
+from .base import BaseObject
+
+class KeyboardButton(BaseObject):
     def __init__(self,
         type,
         request_contact = None,
@@ -15,7 +17,7 @@ class KeyboardButton:
 
 
 
-class KeyboardButtonPollType:
+class KeyboardButtonPollType(BaseObject):
     def __init__(self, type = None):
         self.type = type
 

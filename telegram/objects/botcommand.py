@@ -1,25 +1,28 @@
-class BotCommand:
+from .base import BaseObject
+
+class BotCommand(BaseObject):
     pass
 
-class BotCommandScope:
+class BotCommandScope(BaseObject):
     pass 
 
-class BotCommandScopeAllChatAdministrators:
+class BotCommandScopeAllChatAdministrators(BaseObject):
     pass 
 
-class BotCommandScopeAllGroupChats:
+class BotCommandScopeAllGroupChats(BaseObject):
     pass 
 
-class BotCommandScopeAllPrivateChats:
+class BotCommandScopeAllPrivateChats(BaseObject):
     pass
-class BotCommandScopeChat:
+    
+class BotCommandScopeChat(BaseObject):
     pass 
 
-class BotCommandScopeChatAdministrators:
+class BotCommandScopeChatAdministrators(BaseObject):
     pass 
 
-class BotCommandScopeChatMember:
+class BotCommandScopeChatMember(BaseObject):
     pass 
 
-class BotCommandScopeDefault:
+class BotCommandScopeDefault(BaseObject):
     pass 

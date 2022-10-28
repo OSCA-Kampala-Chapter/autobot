@@ -1,24 +1,25 @@
+from .base import BaseObject
 
-class ChatMember:
+class ChatMember(BaseObject):
     pass
     
-class ChatMemberAdministrator:
+class ChatMemberAdministrator(BaseObject):
     pass
     
-class ChatMemberBanned:
+class ChatMemberBanned(BaseObject):
     pass
     
-class ChatMemberLeft:
+class ChatMemberLeft(BaseObject):
     pass
     
-class ChatMemberMember:
+class ChatMemberMember(BaseObject):
     pass
     
-class ChatMemberOwner:
+class ChatMemberOwner(BaseObject):
     pass
     
-class ChatMemberRestricted:
+class ChatMemberRestricted(BaseObject):
     pass
     
-class ChatMemberUpdated:
+class ChatMemberUpdated(BaseObject):
     pass

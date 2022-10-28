@@ -1,4 +1,6 @@
-class Chat:
+from .base import BaseObject
+
+class Chat(BaseObject):
     def __init__(self, 
         id,
         type,
@@ -50,20 +52,20 @@ class Chat:
 
 
     
-class ChatAdministratorRights:
+class ChatAdministratorRights(BaseObject):
     pass
     
-class ChatInviteLink:
+class ChatInviteLink(BaseObject):
     pass
     
-class ChatJoinRequest:
+class ChatJoinRequest(BaseObject):
     pass
     
-class ChatLocation:
+class ChatLocation(BaseObject):
     pass
     
-class ChatPermissions:
+class ChatPermissions(BaseObject):
     pass
     
-class ChatPhoto:
+class ChatPhoto(BaseObject):
     pass

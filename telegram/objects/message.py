@@ -1,11 +1,13 @@
-class Message:
+from .base import Base
+
+class Message(BaseObject):
     def __init__ (self,
         message_id,
         from_ = None,
         sender_chat = None,
         date = None,
         chat = None,
-        forward_from = None
+        forward_from = None,
         forward_from_chat = None,
         forward_from_message_id = None,
         forward_signature = None,
@@ -120,10 +122,10 @@ class Message:
         self.web_app_data = web_app_data
         self.reply_markup = reply_markup
 
-class MessageAutoDeleteTimerChanged:
+class MessageAutoDeleteTimerChanged(BaseObject):
     pass 
 
-class MessageEntity:
+class MessageEntity(BaseObject):
     def __init__ (self,
         type,
         offset,
@@ -139,7 +141,7 @@ class MessageEntity:
         self.language = language
         self.custom_emoji_id = custom_emoji_id
 
-class MessageId:
+class MessageId(BaseObject):
     def __init__ (self,
         message_id
     ):

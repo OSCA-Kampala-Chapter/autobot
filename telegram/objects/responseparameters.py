@@ -1,2 +1,4 @@
-class ResponseParameters:
+from .base import BaseObject
+
+class ResponseParameters(BaseObject):
     pass 

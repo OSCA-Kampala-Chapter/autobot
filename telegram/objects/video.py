@@ -1,4 +1,6 @@
-class Video:
+from .base import BaseObject
+
+class Video(BaseObject):
     def __init__(self,
         file_id,
         file_unique_id,
@@ -21,28 +23,28 @@ class Video:
         self.mime_type = mime_type
         self.file_size = file_size
     
-class VideoChatEnded:
+class VideoChatEnded(BaseObject):
     def __init__(self, duration):
         self.duration = duration
     
-class VideoChatParticipantsInvited:
+class VideoChatParticipantsInvited(BaseObject):
     def __init__(self, users):
         self.users = users
 
     
-class VideoChatScheduled:
+class VideoChatScheduled(BaseObject):
     def __init__(self, start_date):
         self.start_date = start_date
 
     
-class VideoChatStarted:
+class VideoChatStarted(BaseObject):
     #This object represents a service message about a video chat started in the chat. 
     #
     #Currently holds no information.
     pass
 
     
-class VideoNote:
+class VideoNote(BaseObject):
     def __init__(self,
         file_id,
         file_unique_id,

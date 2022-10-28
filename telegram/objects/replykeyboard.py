@@ -1,5 +1,7 @@
-class ReplyKeyboardMarkup:
+from .base import BaseObject
+
+class ReplyKeyboardMarkup(BaseObject):
     pass 
 
-class ReplyKeyboardRemove:
+class ReplyKeyboardRemove(BaseObject):
     pass

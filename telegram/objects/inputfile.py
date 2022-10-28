@@ -1,21 +1,23 @@
-class InputFile:
+from .base import BaseObject
+
+class InputFile(BaseObject):
     pass
     
-class InputMedia:
+class InputMedia(BaseObject):
     pass
     
-class InputMediaAnimation:
+class InputMediaAnimation(BaseObject):
     pass
     
-class InputMediaAudio:
+class InputMediaAudio(BaseObject):
     pass
     
-class InputMediaDocument:
+class InputMediaDocument(BaseObject):
     pass
     
-class InputMediaPhoto:
+class InputMediaPhoto(BaseObject):
     pass
     
-class InputMediaVideo:
+class InputMediaVideo(BaseObject):
     pass
     

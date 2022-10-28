@@ -1,4 +1,6 @@
-class Venue:
+from .base import BaseObject
+
+class Venue(BaseObject):
     def __init__(self,
         location,
         title,

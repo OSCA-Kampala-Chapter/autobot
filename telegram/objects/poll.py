@@ -1,8 +1,10 @@
-class Poll:
+from .base import BaseObject
+
+class Poll(BaseObject):
     pass 
 
-class PollAnswer:
+class PollAnswer(BaseObject):
     pass 
 
-class PollOption:
+class PollOption(BaseObject):
     pass

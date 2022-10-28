@@ -1,4 +1,6 @@
-class Update:
+from .base import BaseObject
+
+class Update (BaseObject):
     def __init__ (self,
         update_id,
         message = None,

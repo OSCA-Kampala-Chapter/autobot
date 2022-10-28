@@ -1,4 +1,6 @@
-class User:
+from .base import BaseObject
+
+class User(BaseObject):
     def __init__ (self,
         id,
         is_bot,
@@ -23,7 +25,7 @@ class User:
         self.can_read_all_group_messages = can_read_all_group_messages
         self.supports_inline_queries = supports_inline_queries
 
-class UserProfilePhotos:
+class UserProfilePhotos(BaseObject):
     def __init__ (self,
         total_count,
         photos,

@@ -1,4 +1,6 @@
-class File:
+from .base import BaseObject
+
+class File(BaseObject):
     def __init__(self,
         file_id,
         file_unique_id,

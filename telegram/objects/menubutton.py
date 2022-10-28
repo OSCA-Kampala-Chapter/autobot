@@ -1,11 +1,13 @@
-class MenuButton:
+from .base import BaseObject
+
+class MenuButton(BaseObject):
     pass 
 
-class MenuButtonCommands:
+class MenuButtonCommands(BaseObject):
     pass 
 
-class MenuButtonDefault:
+class MenuButtonDefault(BaseObject):
     pass 
 
-class MenuButtonWebApp:
+class MenuButtonWebApp(BaseObject):
     pass 

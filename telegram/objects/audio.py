@@ -1,4 +1,6 @@
-class Audio:
+from .base import BaseObject
+
+class Audio(BaseObject):
     def __init__(self, 
         file_id,
         file_unique_id,
