@@ -14,7 +14,10 @@ class File(BaseObject):
         file_path (str): Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
     """
 
-    __slots__ = ('file_size', 'file_path')
+    __slots__ = (
+        'file_size', 
+        'file_path'
+        )
     
     
     def __init__(self, file_id, file_unique_id):
@@ -23,4 +26,4 @@ class File(BaseObject):
         self.file_size = None
         self.file_path = None
         
-        
+

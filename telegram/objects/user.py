@@ -60,4 +60,3 @@ class UserProfilePhotos(BaseObject):
         self.total_count = total_count
         self.photos = photos
 
-   

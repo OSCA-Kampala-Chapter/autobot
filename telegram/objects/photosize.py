@@ -26,4 +26,4 @@ class PhotoSize(BaseObject):
         self.height = height
         self.file_size = None
 
-
+ 
