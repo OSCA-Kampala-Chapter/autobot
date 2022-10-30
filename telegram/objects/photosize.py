@@ -25,3 +25,12 @@ class PhotoSize(BaseObject):
         self.width = width
         self.height = height
         self.file_size = None
+
+    @classmethod
+    def de_json(cls, data, bot):
+        if not data:
+            return None
+
+        data = super(PhotoSize, cls).de_json(data, bot)
+
+        return cls(**data)
