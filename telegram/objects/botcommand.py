@@ -1,10 +1,21 @@
 from .base import BaseObject
 
 class BotCommand(BaseObject):
-    pass
+    
+    __slots__ = (
+        "command",
+        "description",
+    )
+    
+    def __init__ (self,command,description):
+        self.command = command
+        self.description = description
 
 class BotCommandScope(BaseObject):
-    pass 
+   
+    __slots__ = ("type")
+    def __init__ (self,type):
+        self.type = type
 
 class BotCommandScopeAllChatAdministrators(BaseObject):
     pass 
