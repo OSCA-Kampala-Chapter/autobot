@@ -1,4 +1,4 @@
-# Welcome to MkDocs
+# Welcome to autobot Documentation
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
