@@ -51,80 +51,13 @@ class UserProfilePhotos(BaseObject):
         photos (List[List[PhotoSize]]): Requested profile pictures (in up to 4 sizes each)
     """
 
-    __slots__ = ('total_count', 'photos')
+    __slots__ = (
+        'total_count', 
+        'photos'
+        )
 
     def __init__(self, total_count, photos):
         self.total_count = total_count
         self.photos = photos
 
-    @classmethod
-    def de_json(cls, data, bot):
-        if not data:
-            return None
-
-        data = super(UserProfilePhotos, cls).de_json(data, bot)
-
-        data['photos'] = [[PhotoSize.de_json(photo, bot) for photo in photo_list] for photo_list in data['photos']]
-
-        return cls(**data)
-
-    def to_dict(self):
-        data = super(UserProfilePhotos, self).to_dict()
-
-        data['photos'] = [[photo.to_dict() for photo in photo_list] for photo_list in self.photos]
-
-        return data
-
-    def __reduce__(self):
-        return self.__class__, (self.total_count, self.photos)
-
-    def __eq__(self, other):
-        return (self.total_count == other.total_count and
-                self.photos == other.photos)
-
-    def __hash__(self):
-        return hash((self.total_count, self.photos))
-
-    def __str__(self):
-        return 'UserProfilePhotos(total_count={self.total_count!r}, photos={self.photos!r})'.format(self=self)
-
-    def __repr__(self):
-        return '<{self.__class__.__name__} total_count={self.total_count!r}, photos={self.photos!r}>'.format(self=self)
-
-    def get_file(self, file_id):
-        """
-        Shortcut for::
-
-            bot.get_file(file_id)
-
-        Args:
-            file_id (:obj:`str`): Unique identifier for the target file
-
-        Returns:
-            :class:`telegram.File`: On success, a file object is returned.
-
-        Raises:
-            :class:`telegram.TelegramError`
-
-        """
-        return self.bot.get_file(file_id)
-
-    def download(self, file_path, filename=None, **kwargs):
-        """
-        Shortcut for::
-
-            bot.download_file(file_path, filename, **kwargs)
-
-        Args:
-            file_path (:obj:`str`): File identifier to get info about
-            filename (:obj:`str`, optional): The name of the file. If not set, the file_id will be used.
-            **kwargs (:obj:`dict`): Arbitrary keyword arguments.
-
-        Returns:
-            :obj:`str`: The file path of the downloaded file.
-
-        Raises:
-            :class:`telegram.TelegramError`
-
-        """
-        return self.bot.download_file(file_path, filename, **kwargs)
+   
