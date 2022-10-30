@@ -17,7 +17,11 @@ class InputMedia(BaseObject):
         caption_entities (List[:obj:`MessageEntity`]): Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     """
     
-    __slots__ = ('caption', 'parse_mode', 'caption_entities')
+    __slots__ = (
+        'caption', 
+        'parse_mode', 
+        'caption_entities'
+    )
     
     def __init__(self, type, media):
         self.type = type
