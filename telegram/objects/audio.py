@@ -1,16 +1,4 @@
 from .base import BaseObject
-"""
- file_id,
-        file_unique_id,
-        duration = None,
-        performer = None,
-        title = None,
-        file_name = None,
-        mime_type = None,
-        file_size = None,
-        thumb = None
-"""
-
 
 class Audio(BaseObject):
     """
@@ -41,4 +29,3 @@ class Audio(BaseObject):
         self.file_size = None
         self.thumb = None
 
-        
