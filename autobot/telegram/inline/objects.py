@@ -1,3 +1,4 @@
+from ..objects import BaseObject
 
 class InlineQuery(BaseObject):
     
