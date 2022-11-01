@@ -17,6 +17,7 @@ class LoginUrl(BaseObject):
     """
 
     __slots__ = (
+        'url',
         'forward_text', 
         'bot_username', 
         'request_write_access'
