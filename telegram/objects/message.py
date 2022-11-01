@@ -61,6 +61,7 @@ class Message(BaseObject):
         reply_markup (:class:`telegram.InlineKeyboardMarkup`): Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
     """
     __slots__ = (
+        'message_id',
         'from_user',
         'date',
         'chat',
@@ -115,8 +116,6 @@ class Message(BaseObject):
         'voice_chat_participants_invited',
         'reply_markup'
     )
-
-
     
     def __init__ (self, message_id):
         self.message_id = message_id
@@ -187,7 +186,8 @@ class MessageAutoDeleteTimerChanged(BaseObject):
 
     """
 
-
+    __slots__ = ("message","message_auto_delete_time")
+    
     def __init__(self, message, message_auto_delete_time):
         self.message = message
         self.message_auto_delete_time = message_auto_delete_time
@@ -212,6 +212,9 @@ class MessageEntity(BaseObject):
     """
 
     __slots__ = (
+        'type',
+        'offset',
+        'length',
         'url', 
         'user', 
         'language'
@@ -233,7 +236,9 @@ class MessageId(BaseObject):
         message_id (int): Unique message identifier
 
     """
-
+    
+    __slots__ = ("message_id")
+    
     def __init__(self, message_id):
         self.message_id = message_id
         
