@@ -6,9 +6,31 @@ class InputFile(BaseObject):
     """
     
 class InputMedia(BaseObject):
-    """This object represents the content of a media message to be sent.
-
     """
+    This object represents the content of a media message to be sent.
+
+    Args:
+        type (str): Type of the result, must be photo
+        media (str): File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name.
+        caption (str): Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing
+        parse_mode (str): Optional. Mode for parsing entities in the photo caption. See formatting options for more details.
+        caption_entities (List[:obj:`MessageEntity`]): Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+    """
+    
+    __slots__ = (
+        'type',
+        'media',
+        'caption', 
+        'parse_mode', 
+        'caption_entities',
+    )
+    
+    def __init__(self, type, media):
+        self.type = type
+        self.media = media
+        self.caption = None
+        self.parse_mode = None
+        self.caption_entities = None
     
 class InputMediaAnimation(BaseObject):
     """Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
@@ -34,6 +56,8 @@ class InputMediaAnimation(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
         "thumb",
         "caption",
         "parse_mode",
@@ -78,6 +102,8 @@ class InputMediaAudio(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
         "thumb",
         "caption",
         "parse_mode",
@@ -118,6 +144,9 @@ class InputMediaDocument(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
+        "thumb",
         "caption",
         "parse_mode",
         "caption_entities",
@@ -149,6 +178,8 @@ class InputMediaPhoto(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
         "caption",
         "parse_mode",
         "caption_entities"
@@ -187,6 +218,8 @@ class InputMediaVideo(BaseObject):
     """
     
     __slots__ = (
+        "type",
+        "media",
         "thumb",
         "caption",
         "parse_mode",
