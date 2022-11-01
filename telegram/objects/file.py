@@ -16,7 +16,9 @@ class File(BaseObject):
 
     __slots__ = (
         'file_size', 
-        'file_path'
+        'file_path',
+        'file_size',
+        'file_path',
         )
     
     
