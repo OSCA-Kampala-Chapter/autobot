@@ -16,6 +16,10 @@ class PhotoSize(BaseObject):
     """
 
     __slots__ = (
+        "file_id",
+        "file_unique_id",
+        "width",
+        "height",
         "file_size",
     )
 
