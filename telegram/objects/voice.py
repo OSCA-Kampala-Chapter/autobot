@@ -13,6 +13,9 @@ class Voice(BaseObject):
     """
 
     __slots__ = (
+        'file_id',
+        'file_unique_id',
+        'duration',
         'mime_type',
         'file_size'
         )
