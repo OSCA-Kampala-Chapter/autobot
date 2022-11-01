@@ -12,6 +12,7 @@ class ReplyKeyboardMarkup(BaseObject):
     """
     
     __slots__ = (
+        'keyboard',
         'resize_keyboard', 
         'one_time_keyboard', 
         'selective'
@@ -34,7 +35,8 @@ class ReplyKeyboardRemove(BaseObject):
     """
     
     __slots__ = (
-        'selective'
+        'remove_keyboard',
+        'selective',
         )
     
     

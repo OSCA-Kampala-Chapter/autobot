@@ -16,6 +16,11 @@ class Video(BaseObject):
     """
 
     __slots__ = (
+        'file_id",
+        'file_unique_id',
+        'width',
+        'height',
+        'duration',
         'thumb', 
         'mime_type', 
         'file_size'
@@ -41,9 +46,10 @@ class VideoChatEnded(BaseObject):
             duration (int): Video duration in seconds
     """
     
-        
+    __slots__ = ("duration")
+    
     def __init__(self, duration):
-            self.duration = duration
+        self.duration = duration
     
 class VideoChatParticipantsInvited(BaseObject):
     """
@@ -53,6 +59,7 @@ class VideoChatParticipantsInvited(BaseObject):
         users (list[:class:`telegram.objects.user.User`]): Optional. New members that were invited to the video chat
     """
     
+    __slots__ = ("users")
     
     def __init__(self, users):
         self.users = users
@@ -65,10 +72,11 @@ class VideoChatScheduled(BaseObject):
         Args:
             start_date (:class:`telegram.objects.base.UnixTime`): Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator
     """
-        
-        
+    
+    __slots__ = ("start_date")
+    
     def __init__(self, start_date):
-            self.start_date = start_date
+        self.start_date = start_date
 
     
 class VideoChatStarted(BaseObject):
@@ -92,6 +100,10 @@ class VideoNote(BaseObject):
     """
 
     __slots__ = (
+        'file_id',
+        'file_unique_id',
+        'length',
+        'duration',
         'thumb', 
         'file_size'
         )

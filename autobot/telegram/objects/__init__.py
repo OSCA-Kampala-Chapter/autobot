@@ -1,5 +1,6 @@
 from .animation import Animation
 from .audio import Audio
+from .base import BaseObject
 from .botcommand import (BotCommand,
                         BotCommandScope,
                         BotCommandScopeAllChatAdministrators,
