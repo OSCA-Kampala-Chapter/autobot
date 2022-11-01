@@ -39,6 +39,7 @@ class Update (BaseObject):
     """
 
     __slots__ = (
+        'update_id',
         'message', 
         'edited_message', 
         'channel_post', 
