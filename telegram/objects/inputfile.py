@@ -18,9 +18,11 @@ class InputMedia(BaseObject):
     """
     
     __slots__ = (
+        'type',
+        'media',
         'caption', 
         'parse_mode', 
-        'caption_entities'
+        'caption_entities',
     )
     
     def __init__(self, type, media):
@@ -54,6 +56,8 @@ class InputMediaAnimation(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
         "thumb",
         "caption",
         "parse_mode",
@@ -98,6 +102,8 @@ class InputMediaAudio(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
         "thumb",
         "caption",
         "parse_mode",
@@ -138,6 +144,9 @@ class InputMediaDocument(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
+        "thumb",
         "caption",
         "parse_mode",
         "caption_entities",
@@ -169,6 +178,8 @@ class InputMediaPhoto(BaseObject):
     """
 
     __slots__ = (
+        "type",
+        "media",
         "caption",
         "parse_mode",
         "caption_entities"
@@ -207,6 +218,8 @@ class InputMediaVideo(BaseObject):
     """
     
     __slots__ = (
+        "type",
+        "media",
         "thumb",
         "caption",
         "parse_mode",
