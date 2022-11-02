@@ -42,4 +42,3 @@ class Venue(BaseObject):
         self.google_place_id = None
         self.google_place_type = None
 
- 

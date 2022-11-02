@@ -15,4 +15,3 @@ class Location(BaseObject):
         self.longitude = longitude
         self.latitude = latitude
 
-    
