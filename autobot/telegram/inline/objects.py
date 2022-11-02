@@ -14,8 +14,8 @@ class InlineQuery(BaseObject):
         self.from_ = from_
         self.query = query
         self.offset = offset
-        self.chat_type = chat_type
-        self.location = location
+        self.chat_type = None
+        self.location = None
         
 class InlineQueryResult (BaseObject):
     """
