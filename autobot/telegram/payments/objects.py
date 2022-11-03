@@ -14,10 +14,11 @@ class LabeledPrice(BaseObject):
             it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
 
     """
-    __slots__ = ("label", "amount")
+
+    __slots__ = ("label", "amount",)
 
     def __init__(self, label, amount):
-        self.lable = label
+        self.label = label
         self.amount = amount
 
 
@@ -45,7 +46,7 @@ class Invoice(BaseObject):
                 "description",
                 "start_parameter",
                 "currency",
-                "total_amount"  
+                "total_amount", 
                 )
 
     def __init__(self, title, description, start_parameter, currency, total_amount):
@@ -76,12 +77,13 @@ class ShippingAddress(BaseObject):
             post_code (str) : Address post code
     
     """
+
     __slots__ = ("country_code",
                 "state",
                 "city",
                 "street_line1",
                 "street_line2",
-                "post_code"    
+                "post_code", 
                 )
 
     def __init__(self, country_code, state, city, street_line1, street_line2, post_code):
@@ -111,7 +113,7 @@ class OrderInfo(BaseObject):
     __slots__ = ("name",
                 "phone_number",
                 "email",
-                "shipping_address"    
+                "shipping_address",    
                 )
 
     def __init__(self):
@@ -136,7 +138,7 @@ class ShippingOption(BaseObject):
             prices (:obj :List[`LabeledPrice`] ) : List of price portions
     """
 
-    __slots__ = ("id", "title", "prices")
+    __slots__ = ("id", "title", "prices",)
 
     def __init__(self, id, title, prices):
         self.id = id
@@ -166,13 +168,14 @@ class SuccessfulPayment(BaseObject):
             provider_payment_charge_id (str) : Provider payment identifier
     
     """
+
     __slots__ = ("currency",
                 "total_amount",
                 "invoice_payload",
                 "shipping_option_id",
                 "order_info",
                 "telegram_payment_charge_id",
-                "provider_payment_charge_id"   
+                "provider_payment_charge_id",
                 )
 
     def __init__(self, currency, total_amount, invoice_payload, telegram_payment_charge_id, provider_payment_charge_id):
@@ -208,6 +211,7 @@ class ShippingQuery(BaseObject):
             Used `sent_from` as an alias to `from`
     
     """
+
     __slots__ = ("id",
                 "sent_from",
                 "invoice_payload",
