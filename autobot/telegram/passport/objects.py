@@ -1,5 +1,5 @@
 from ..objects import BaseObject
-from typing import Optional, List
+from typing import Optional
 class PassportData(BaseObject):
     """Describes Telegram Passport data shared with the bot by the user.
 
@@ -8,7 +8,7 @@ class PassportData(BaseObject):
 
         credentials (str): Encrypted credentials required to decrypt the data
     """
-    def __init__(self, data:List[EncryptedPassportElement], credentials) -> None:
+    def __init__(self, data:List[EncryptedPassportElement], credentials:str) -> None:
         self.data = data 
         self.credentials = credentials
 
