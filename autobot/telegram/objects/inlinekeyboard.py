@@ -1,21 +1,8 @@
 from .base import BaseObject
+from .webapp import WebAppInfo
+from .loginurl import LoginUrl
+from typing import Optional
 
-class InlineKeyboardMarkup(BaseObject):
-
-    """"
-    
-        This object represents an inline keyboard that appears right next to the message it belongs to.
-
-        Args:
-
-            inline_keyboard (List[:obj:`InlineKeyboardButton`]) : Array of button rows, each represented by an Array of InlineKeyboardButton objects
-    
-    """
-    
-    __slots__ = ("inline_keyboard",)
-
-    def __init__(self, inline_keyboard):
-        self.inline_keyboard = inline_keyboard
 
 class InlineKeyboardButton(BaseObject):
 
@@ -73,13 +60,33 @@ class InlineKeyboardButton(BaseObject):
                 "pay",
                 )
 
-    def __init__(self, text):
+    def __init__(self, text: str) -> None:
         self.text = text
-        self.url = None
-        self.callback_data = None
-        self.web_app = None
-        self.login_url = None
-        self.switch_inline_query = None
-        self.switch_inline_query_current_chat = None
-        self.callback_game = None
-        self.pay = None
+        self.url: Optional[str] = None
+        self.callback_data: Optional[str] = None
+        self.web_app: Optional[WebAppInfo] = None
+        self.login_url: Optional[LoginUrl] = None
+        self.switch_inline_query: Optional[str] = None
+        self.switch_inline_query_current_chat: Optional[str] = None
+        self.callback_game: Optional[CallbackGame] = None
+        self.pay: Optional[bool] = None
+        
+
+
+class InlineKeyboardMarkup(BaseObject):
+
+    """"
+    
+        This object represents an inline keyboard that appears right next to the message it belongs to.
+
+        Args:
+
+            inline_keyboard (list[:obj:`InlineKeyboardButton`]) : Array of button rows, each represented by an Array of InlineKeyboardButton objects
+    
+    """
+    
+    __slots__ = ("inline_keyboard",)
+
+    def __init__(self, inline_keyboard: list[InlineKeyboardButton]) -> None:
+        self.inline_keyboard = inline_keyboard
+
