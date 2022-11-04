@@ -64,6 +64,7 @@ class InlineKeyboardButton(BaseObject):
     """
     
     __slots__ = (
+                "text",
                 "url",
                 "callback_data",
                 "web_app",

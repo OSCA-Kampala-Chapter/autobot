@@ -47,7 +47,7 @@ class MenuButtonWebApp(BaseObject):
 
     """ 
 
-    __slots__ = ("web_app",)
+    __slots__ = ("type", "text", "web_app",)
 
     def __init__(self, type:str, text:str):
         self.type = type
