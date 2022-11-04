@@ -12,16 +12,20 @@ class Voice(BaseObject):
         file_size (int): Optional. File size
     """
 
-    __slots__ = (
-        'file_id',
-        'file_unique_id',
-        'duration',
-        'mime_type',
-        'file_size'
-        )
+    __slots__ = ('file_id',
+                'file_unique_id',
+                'duration',
+                'mime_type',
+                'file_size'
+                )
 
     
-    def __init__(self, file_id, file_unique_id, duration):
+    def __init__(self, 
+                file_id:str, 
+                file_unique_id:str, 
+                duration:int
+                ):
+
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.duration = duration
