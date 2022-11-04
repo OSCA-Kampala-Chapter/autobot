@@ -1,5 +1,6 @@
 from .base import BaseObject
-
+from . import WebAppInfo
+from typing import Optional
 class MenuButton(BaseObject):
     
     """
@@ -26,9 +27,7 @@ class MenuButtonCommands(BaseObject):
 
     """ 
 
-    __slots__ = ("type",)
-
-    def __init__(self, type):
+    def __init__(self, type:str) -> None:
         self.type = type
 
 
@@ -48,13 +47,12 @@ class MenuButtonWebApp(BaseObject):
 
     """ 
 
-    __slots__ = ("type", "text", "web_app",)
+    __slots__ = ("web_app",)
 
-    def __init__(self, type, text, web_app):
+    def __init__(self, type:str, text:str):
         self.type = type
         self.text = text
-        self.web_app = web_app
-
+        self.web_app: Optional[WebAppInfo] = None
 
 class MenuButtonDefault(BaseObject):
     
@@ -67,7 +65,5 @@ class MenuButtonDefault(BaseObject):
 
     """
 
-    __slots__ = ("type",)
-
-    def __init__(self, type):
+    def __init__(self, type:str) -> None:
         self.type = type
