@@ -1,4 +1,5 @@
 # autobot
+![autobot-logo](./res/autobot.png)
 
 Autobot is a bot library targetted to build software bots for various platforms with ease of integration in mind.
 project still under active construction, so there's no proper documentation or support information to help that much. 
