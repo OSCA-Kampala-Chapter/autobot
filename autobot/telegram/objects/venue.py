@@ -1,5 +1,5 @@
-from . import Location
 from .base import BaseObject
+from . import Location
 from typing import Optional
 
 class Venue(BaseObject):
