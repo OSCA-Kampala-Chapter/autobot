@@ -1,4 +1,5 @@
-from ..objects import BaseObject
+from ..objects import BaseObject, PhotoSize, File
+from typing import List, Optional
 
 class Sticker(BaseObject):
 
@@ -54,7 +55,8 @@ class Sticker(BaseObject):
                 "file_size",
                 )
 
-    def __init__(self, file_id, file_unique_id, type, width, height, is_animated, is_video):
+# add type hints
+    def __init__(self, file_id: str, file_unique_id: str, type: str, width: int, height: int, is_animated: bool, is_video: bool) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.type = type
@@ -62,13 +64,13 @@ class Sticker(BaseObject):
         self.height = height
         self.is_animated = is_animated
         self.is_video = is_video
-        self.thumb = None
-        self.emoji = None
-        self.set_name = None
-        self.premium_animation = None
-        self.mask_position = None
-        self.custom_emoji_id = None
-        self.file_size = None
+        self.thumb: Optional[PhotoSize] = None
+        self.emoji: Optional[str] = None
+        self.set_name: Optional[str] = None
+        self.premium_animation: Optional[File] = None
+        self.mask_position: Optional[MaskPosition] = None
+        self.custom_emoji_id: Optional[str] = None
+        self.file_size: Optional[int] = None
 
 
 class StickerSet(BaseObject):
@@ -103,14 +105,14 @@ class StickerSet(BaseObject):
                 "thumb",
                 )
 
-    def __init__(self, name, title, sticker_type, is_animated, is_video, stickers):
+    def __init__(self, name: str, title: str, sticker_type: str, is_animated: bool, is_video: bool, stickers: List[Sticker]) -> None:
         self.name = name
         self.title = title
         self.sticker_type = sticker_type
         self.is_animated = is_animated
         self.is_video = is_video
         self.stickers = stickers
-        self.thumb = None
+        self.thumb: Optional[PhotoSize] = None
 
 
 class MaskPosition(BaseObject):
@@ -139,10 +141,9 @@ class MaskPosition(BaseObject):
                 "scale",
                 )
 
-    def __init__(self, point, x_shift, y_shift, scale):
+    def __init__(self, point: str, x_shift: float, y_shift: float, scale: float) -> None:
         self.point = point
         self.x_shift = x_shift
         self.y_shift = y_shift
         self.scale = scale
-
 
