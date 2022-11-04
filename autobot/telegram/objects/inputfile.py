@@ -1,5 +1,5 @@
 from .base import BaseObject
-
+from typing import Optional
 class InputFile(BaseObject):
     """This object represents the contents of a file to be uploaded.
     
@@ -25,12 +25,12 @@ class InputMedia(BaseObject):
         'caption_entities',
     )
     
-    def __init__(self, type, media):
+    def __init__(self, type:str, media:str) -> None:
         self.type = type
         self.media = media
-        self.caption = None
-        self.parse_mode = None
-        self.caption_entities = None
+        self.caption: Optional[str] = None
+        self.parse_mode: Optional[str] = None
+        self.caption_entities: Optional[str] = None
     
 class InputMediaAnimation(BaseObject):
     """Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
@@ -67,16 +67,16 @@ class InputMediaAnimation(BaseObject):
         "duration"
     )   
 
-    def __init__(self, type, media):
+    def __init__(self, type:str, media:str) -> None:
         self.type = type
         self.media = media
-        self.thumb = None
-        self.caption = None 
-        self.parse_mode = None 
-        self.caption_entities = None
-        self.width = None 
-        self.height = None 
-        self.duration = None 
+        self.thumb: Optional[str] = None
+        self.caption: Optional[str] = None 
+        self.parse_mode: Optional[str] = None 
+        self.caption_entities: Optional[list] = None
+        self.width: Optional[int] = None 
+        self.height: Optional[int] = None 
+        self.duration: Optional[int] = None 
     
 class InputMediaAudio(BaseObject):
     """Represents an audio file to be treated as music to be sent.
@@ -113,16 +113,16 @@ class InputMediaAudio(BaseObject):
         "title"
     )   
 
-    def __init__(self, type, media):
+    def __init__(self, type:str, media:str) -> None:
         self.type = type
         self.media = media
-        self.thumb = None
-        self.caption = None 
-        self.parse_mode = None 
-        self.caption_entities = None
-        self.duration = None 
-        self.title = None
-        self.performer = None 
+        self.thumb: Optional[str] = None
+        self.caption: Optional[str] = None 
+        self.parse_mode: Optional[str] = None 
+        self.caption_entities: Optional[list] = None
+        self.duration: Optional[int] = None 
+        self.title: Optional[str] = None
+        self.performer: Optional[str] = None 
     
 class InputMediaDocument(BaseObject):
     """Represents a general file to be sent.
@@ -153,14 +153,14 @@ class InputMediaDocument(BaseObject):
         "disable_content_type_detection"
     )
 
-    def __init__(self, type, media):
+    def __init__(self, type:str, media:str) -> None:
         self.type = type
         self.media = media
-        self.thumb = None 
-        self.caption = None 
-        self.parse_mode = None 
-        self.caption_entities = None 
-        self.disable_content_type_detection = None
+        self.thumb: Optional[str] = None 
+        self.caption: Optional[str] = None 
+        self.parse_mode: Optional[str] = None 
+        self.caption_entities: Optional[list] = None 
+        self.disable_content_type_detection: Optional[bool] = None
     
 class InputMediaPhoto(BaseObject):
     """Represents a photo to be sent.
@@ -185,12 +185,12 @@ class InputMediaPhoto(BaseObject):
         "caption_entities"
     )
 
-    def __init__(self, type, media):
+    def __init__(self, type:str, media:str) -> None:
         self.type = type
         self.media = media
-        self.caption = None 
-        self.parse_mode = None
-        self.caption_entities = None
+        self.caption: Optional[str] = None 
+        self.parse_mode: Optional[str] = None
+        self.caption_entities: Optional[list] = None
     
 class InputMediaVideo(BaseObject):
     """Represents a video to be sent.
@@ -230,15 +230,15 @@ class InputMediaVideo(BaseObject):
         "support_streaming"
     )
 
-    def __init__(self, type, media):
+    def __init__(self, type:str, media:str) -> None:
         self.type = type
         self.media = media
-        self.thumb = None
-        self.caption = None 
-        self.parse_mode = None 
-        self.caption_entities = None
-        self.width = None 
-        self.height = None 
-        self.duration = None 
-        self.support_streaming = None 
+        self.thumb: Optional[str] = None
+        self.caption: Optional[str] = None 
+        self.parse_mode: Optional[str] = None 
+        self.caption_entities: Optional[list] = None
+        self.width: Optional[int] = None 
+        self.height: Optional[int] = None 
+        self.duration: Optional[int] = None 
+        self.support_streaming: Optional[bool] = None 
     
