@@ -1,7 +1,7 @@
 from .base import BaseObject
-from .user import User
-from .poll import PollOption
 from typing import List
+
+from . import User, PollOption
 
 class Poll(BaseObject):
 
