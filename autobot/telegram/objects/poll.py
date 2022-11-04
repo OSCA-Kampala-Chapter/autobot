@@ -1,6 +1,10 @@
 from .base import BaseObject
+from .user import User
+from .poll import PollOption
+from typing import List
 
 class Poll(BaseObject):
+
     """
     This Object represents a poll
 
@@ -33,6 +37,7 @@ class Poll(BaseObject):
 
         open_period (int): Optional. Amount of time in seconds the poll will be active after creation
         close_date (int): Optional. Point in time (Unix timestamp) when the poll will be automatically closed
+
     """
 
     __slots__ = (
@@ -45,15 +50,16 @@ class Poll(BaseObject):
 
     def __init__(
         self,
-        id,
-        question,
-        options,
-        total_voter_count,
-        is_closed,
-        is_anonymous,
-        type,
-        allows_multiple_answers
+        id:str,
+        question:str,
+        options:List[PollOption],
+        total_voter_count:int,
+        is_closed:bool,
+        is_anonymous:bool,
+        type:str,
+        allows_multiple_answers:bool
     ):
+    
         self.id = id
         self.question = question
         self.options = options
@@ -81,7 +87,9 @@ class PollAnswer(BaseObject):
         May be empty if the user retracted their vote.
     """
 
-    def __init__(self, poll_id, user, option_ids):
+    __slots__ = ("poll_id", "user", "option_ids",)
+
+    def __init__(self, poll_id:str, user:User, option_ids:List[int]):
         self.poll_id = poll_id
         self.user = user
         self.option_ids = option_ids
@@ -94,8 +102,11 @@ class PollOption(BaseObject):
         text (str): Option text, 1-100 characters
 
         voter_count (int): Number of users that voted for this option
+
     """
 
-    def __init__(self, text, voter_count):
+    __slots__ = ("text", "voter_count",)
+
+    def __init__(self, text:str, voter_count:int):
         self.text = text
         self.voter_count = voter_count
