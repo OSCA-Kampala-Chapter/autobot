@@ -1,7 +1,6 @@
 from .base import BaseObject
-from .user import User
-from .poll import PollOption
-from typing import List
+from . import User, PollOption, MessageEntity
+from typing import Optional
 
 class Poll(BaseObject):
 
@@ -13,7 +12,7 @@ class Poll(BaseObject):
 
         question (str): Poll question, 1-255 characters
 
-        options (List[:class:`telegram.PollOption`]): List of poll options
+        options (list[:class:`telegram.PollOption`]): list of poll options
 
         total_voter_count (int): Total number of users that voted in the poll
 
@@ -32,7 +31,7 @@ class Poll(BaseObject):
         explanation (str): Optional. Text that is shown when a user chooses an 
         incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters
 
-        explanation_entities (List[:class:`telegram.MessageEntity`]): Optional. 
+        explanation_entities (list[:class:`telegram.MessageEntity`]): Optional. 
         Special entities like usernames, URLs, bot commands, etc. that appear in the explanation
 
         open_period (int): Optional. Amount of time in seconds the poll will be active after creation
@@ -52,7 +51,7 @@ class Poll(BaseObject):
         self,
         id:str,
         question:str,
-        options:List[PollOption],
+        options:list[PollOption],
         total_voter_count:int,
         is_closed:bool,
         is_anonymous:bool,
@@ -68,11 +67,11 @@ class Poll(BaseObject):
         self.is_anonymous = is_anonymous
         self.type = type
         self.allows_multiple_answers = allows_multiple_answers
-        self.correct_option_id = None
-        self.explanation = None
-        self.explanation_entities = None
-        self.open_period = None
-        self.close_date = None
+        self.correct_option_id: Optional[int] = None
+        self.explanation: Optional[str] = None
+        self.explanation_entities: Optional[list[MessageEntity]] = None
+        self.open_period: Optional[int] = None
+        self.close_date: Optional[int] = None
 
 class PollAnswer(BaseObject):
     """
@@ -83,13 +82,13 @@ class PollAnswer(BaseObject):
 
         user (:class:`telegram.User`): The user, who changed the answer to the poll
 
-        option_ids (List[int]): 0-based identifiers of answer options, chosen by the user. 
+        option_ids (list[int]): 0-based identifiers of answer options, chosen by the user. 
         May be empty if the user retracted their vote.
     """
 
     __slots__ = ("poll_id", "user", "option_ids",)
 
-    def __init__(self, poll_id:str, user:User, option_ids:List[int]):
+    def __init__(self, poll_id: str, user: User, option_ids: list[int]):
         self.poll_id = poll_id
         self.user = user
         self.option_ids = option_ids
