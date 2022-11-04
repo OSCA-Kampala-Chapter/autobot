@@ -1,4 +1,5 @@
 from .base import BaseObject
+from . import User
 
 class ProximityAlertTriggered(BaseObject):
     """
@@ -12,7 +13,7 @@ class ProximityAlertTriggered(BaseObject):
     
     __slots__ = ("traveler","watcher","distance")
     
-    def __init__(self, traveler, watcher, distance):
+    def __init__(self, traveler: User, watcher: User, distance: int) -> None:
         self.traveler = traveler
         self.watcher = watcher
         self.distance = distance
