@@ -1,5 +1,5 @@
 from .base import BaseObject
-from .photosize import PhotoSize
+from . import PhotoSize
 from typing import Optional
 
 class Document(BaseObject):

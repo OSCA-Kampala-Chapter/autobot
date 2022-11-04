@@ -1,5 +1,5 @@
-from . import PhotoSize
 from .base import BaseObject
+from . import PhotoSize
 from typing import Optional
 
 class User(BaseObject):

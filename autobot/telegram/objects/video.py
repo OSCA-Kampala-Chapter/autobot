@@ -1,6 +1,5 @@
 from .base import BaseObject
-from .photosize import PhotoSize
-from .user import User
+from . import PhotoSize, User
 from typing import Optional
 
 class Video(BaseObject):

@@ -1,6 +1,5 @@
 from .base import BaseObject
-from .webapp import WebAppInfo
-from .loginurl import LoginUrl
+from . import WebAppInfo, LoginUrl
 from typing import Optional
 
 
