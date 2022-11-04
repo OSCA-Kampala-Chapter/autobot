@@ -1,4 +1,5 @@
 from .base import BaseObject
+from typing import Optional
 
 class PhotoSize(BaseObject):
     """This object represents one size of a photo or a file / sticker thumbnail.
@@ -33,6 +34,6 @@ class PhotoSize(BaseObject):
         self.file_unique_id = file_unique_id
         self.width = width
         self.height = height
-        self.file_size = None
+        self.file_size: Optional[int] = None
 
  
