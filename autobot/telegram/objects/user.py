@@ -1,4 +1,4 @@
-from telegram.objects.photosize import PhotoSize
+from autobot.telegram.objects.photosize import PhotoSize
 from .base import BaseObject
 
 class User(BaseObject):
