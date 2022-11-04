@@ -1,4 +1,5 @@
 from .base import BaseObject
+from . import KeyboardButton
 
 class ReplyKeyboardMarkup(BaseObject):
     """
@@ -19,11 +20,11 @@ class ReplyKeyboardMarkup(BaseObject):
         )
     
     
-    def __init__(self, keyboard):
+    def __init__(self, keyboard: list[list[KeyboardButton]]) -> None:
         self.keyboard = keyboard
-        self.resize_keyboard = None
-        self.one_time_keyboard = None
-        self.selective = None
+        self.resize_keyboard: bool = None
+        self.one_time_keyboard: bool = None
+        self.selective: bool = None
 
 class ReplyKeyboardRemove(BaseObject):
     """
@@ -40,7 +41,7 @@ class ReplyKeyboardRemove(BaseObject):
         )
     
     
-    def __init__(self, remove_keyboard):
+    def __init__(self, remove_keyboard: bool):
         self.remove_keyboard = remove_keyboard
-        self.selective = None
+        self.selective: bool = None
 
