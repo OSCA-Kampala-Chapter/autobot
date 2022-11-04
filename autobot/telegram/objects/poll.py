@@ -1,5 +1,4 @@
 from .base import BaseObject
-from typing import List
 
 from . import User, PollOption
 
@@ -52,12 +51,12 @@ class Poll(BaseObject):
         self,
         id:str,
         question:str,
-        options:List[PollOption],
         total_voter_count:int,
         is_closed:bool,
         is_anonymous:bool,
         type:str,
-        allows_multiple_answers:bool
+        allows_multiple_answers:bool,
+        options:list = [PollOption],
     ):
     
         self.id = id
@@ -89,7 +88,7 @@ class PollAnswer(BaseObject):
 
     __slots__ = ("poll_id", "user", "option_ids",)
 
-    def __init__(self, poll_id:str, user:User, option_ids:List[int]):
+    def __init__(self, poll_id:str, user:User, option_ids:list = [int]):
         self.poll_id = poll_id
         self.user = user
         self.option_ids = option_ids
