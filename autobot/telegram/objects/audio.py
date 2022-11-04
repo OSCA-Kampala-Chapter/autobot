@@ -1,4 +1,6 @@
 from .base import BaseObject
+from .photosize import PhotoSize
+from typing import Optional
 
 class Audio(BaseObject):
     """
@@ -38,11 +40,11 @@ class Audio(BaseObject):
     def __init__(self, file_id, file_unique_id):
         self.file_id = file_id
         self.file_unique_id = file_unique_id
-        self.duration = None
-        self.performer = None
-        self.title = None
-        self.file_name = None
-        self.mime_type = None
-        self.file_size = None
-        self.thumb = None
+        self.duration: Optional[int] = None
+        self.performer: Optional[str] = None
+        self.title: Optional[str] = None
+        self.file_name: Optional[str] = None
+        self.mime_type: Optional[str] = None
+        self.file_size: Optional[int] = None
+        self.thumb: Optional[PhotoSize] = None
 
