@@ -1,4 +1,4 @@
-from telegram.objects.location import Location
+from autobot.telegram.objects.location import Location
 from .base import BaseObject
 
 class Venue(BaseObject):

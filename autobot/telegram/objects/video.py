@@ -16,7 +16,7 @@ class Video(BaseObject):
     """
 
     __slots__ = (
-        'file_id",
+        'file_id',
         'file_unique_id',
         'width',
         'height',
