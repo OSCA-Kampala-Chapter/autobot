@@ -1,5 +1,6 @@
 from . import PhotoSize
 from .base import BaseObject
+from typing import Optional
 
 class User(BaseObject):
     """
@@ -30,16 +31,16 @@ class User(BaseObject):
             )
         
         
-    def __init__(self, id, is_bot, first_name):
-            self.id = id
-            self.is_bot = is_bot
-            self.first_name = first_name
-            self.last_name = None
-            self.username = None
-            self.language_code = None
-            self.can_join_groups = None
-            self.can_read_all_group_messages = None
-            self.supports_inline_queries = None
+    def __init__(self, id: int, is_bot: bool, first_name: str) -> None:
+        self.id = id
+        self.is_bot = is_bot
+        self.first_name = first_name
+        self.last_name: Optional[str] = None
+        self.username: Optional[str] = None
+        self.language_code: Optional[str] = None
+        self.can_join_groups: Optional[bool] = None
+        self.can_read_all_group_messages: Optional[bool] = None
+        self.supports_inline_queries: Optional[bool] = None
 
          
 
@@ -59,7 +60,6 @@ class UserProfilePhotos(BaseObject):
         'photos'
         )
 
-    def __init__(self, total_count, photos):
+    def __init__(self, total_count: int, photos: list[list[PhotoSize]]) -> None:
         self.total_count = total_count
         self.photos = photos
-
