@@ -1,4 +1,5 @@
 from .base import BaseObject
+from typing import Optional
 
 class ResponseParameters(BaseObject):
     """
@@ -19,5 +20,5 @@ class ResponseParameters(BaseObject):
     
     
     def __init__(self):
-        self.migrate_to_chat_id = None
-        self.retry_after = None
+        self.migrate_to_chat_id: Optional[int] = None
+        self.retry_after: Optional[int] = None
