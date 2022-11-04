@@ -1,5 +1,5 @@
 from ..objects import BaseObject, PhotoSize, MessageEntity, User, Animation
-from typing import Optional
+from typing import Optional, List
 
 class Game(BaseObject):
     """
@@ -11,13 +11,13 @@ class Game(BaseObject):
 
         `description (str)`: Description of the game
 
-        `photo (list[PhotoSize])`: Photo that will be displayed in the game message in chats.
+        `photo (List[PhotoSize])`: Photo that will be displayed in the game message in chats.
 
         `text (Optional[str])`: Optional. Brief description of the game or high scores included in the game message. 
         Can be automatically edited to include current high scores for the game when the bot calls setGameScore, 
         or manually edited using `editMessageText`. 0-4096 characters.
 
-        `text_entities (Optional[list[MessageEntity]])`: Optional. Special entities that appear in text, such as usernames, URLs, bot commands, etc.
+        `text_entities (Optional[List[MessageEntity]])`: Optional. Special entities that appear in text, such as usernames, URLs, bot commands, etc.
 
         `animation (Optional[Animation])`: Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
     """
@@ -30,12 +30,12 @@ class Game(BaseObject):
                 "animation",
                 )
 
-    def __init__(self, title: str, description: str, photo: list[PhotoSize]) -> None:
+    def __init__(self, title: str, description: str, photo: List[PhotoSize]) -> None:
         self.title = title
         self.description = description
         self.photo = photo
         self.text: Optional[str] = None
-        self.text_entities: Optional[list[MessageEntity]] = None
+        self.text_entities: Optional[List[MessageEntity]] = None
         self.animation: Optional[Animation] = None
 
 
