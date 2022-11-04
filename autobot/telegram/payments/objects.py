@@ -1,4 +1,5 @@
-from ..objects import BaseObject
+from ..objects import BaseObject, User
+from typing import Optional
 
 class LabeledPrice(BaseObject):
 
@@ -15,9 +16,12 @@ class LabeledPrice(BaseObject):
 
     """
 
-    __slots__ = ("label", "amount",)
+    __slots__ = (
+        "label", 
+        "amount",
+        )
 
-    def __init__(self, label, amount):
+    def __init__(self, label: str, amount: int) -> None:
         self.label = label
         self.amount = amount
 
@@ -49,7 +53,7 @@ class Invoice(BaseObject):
                 "total_amount", 
                 )
 
-    def __init__(self, title, description, start_parameter, currency, total_amount):
+    def __init__(self, title: str, description: str, start_parameter: str, currency: str, total_amount: int) -> None:
         self.title = title
         self.description = description
         self.start_parameter = start_parameter
@@ -86,7 +90,7 @@ class ShippingAddress(BaseObject):
                 "post_code", 
                 )
 
-    def __init__(self, country_code, state, city, street_line1, street_line2, post_code):
+    def __init__(self, country_code: str, state: str, city: str, street_line1: str, street_line2: str, post_code: str) -> None:
         self.country_code = country_code
         self.state = state
         self.city = city
@@ -117,10 +121,10 @@ class OrderInfo(BaseObject):
                 )
 
     def __init__(self):
-        self.name = None
-        self.phone_number = None
-        self.email = None
-        self.shipping_address = None
+        self.name: Optional[str] = None
+        self.phone_number: Optional[str] = None
+        self.email: Optional[str] = None
+        self.shipping_address: Optional[ShippingAddress] = None
 
 
 class ShippingOption(BaseObject):
@@ -135,12 +139,16 @@ class ShippingOption(BaseObject):
 
             title (str) : Option title
 
-            prices (:obj :List[`LabeledPrice`] ) : List of price portions
+            prices (:obj :list[`LabeledPrice`] ) : list of price portions
     """
 
-    __slots__ = ("id", "title", "prices",)
+    __slots__ = (
+        "id", 
+        "title", 
+        "prices",
+        )
 
-    def __init__(self, id, title, prices):
+    def __init__(self, id: str, title: str, prices: list[LabeledPrice]) -> None:
         self.id = id
         self.title = title
         self.prices = prices
@@ -178,14 +186,14 @@ class SuccessfulPayment(BaseObject):
                 "provider_payment_charge_id",
                 )
 
-    def __init__(self, currency, total_amount, invoice_payload, telegram_payment_charge_id, provider_payment_charge_id):
+    def __init__(self, currency: str, total_amount: int, invoice_payload: str, telegram_payment_charge_id: str, provider_payment_charge_id: str) -> None:
         self.currency = currency
         self.total_amount = total_amount
         self.invoice_payload = invoice_payload
-        self.shipping_option_id = None
-        self.order_info = None
         self.telegram_payment_charge_id = telegram_payment_charge_id
         self.provider_payment_charge_id = provider_payment_charge_id
+        self.shipping_option_id: Optional[str] = None
+        self.order_info: Optional[OrderInfo] = None
 
 
 
@@ -218,7 +226,7 @@ class ShippingQuery(BaseObject):
                 "shipping_address",
                 )
 
-    def __init__(self, id, sent_from, invoice_payload, shipping_address):
+    def __init__(self, id: str, sent_from: User, invoice_payload: str, shipping_address: ShippingAddress) -> None:
         self.id = id
         self.sent_from = sent_from
         self.invoice_payload = invoice_payload
@@ -267,11 +275,11 @@ class PreCheckoutQuery(BaseObject):
                 "order_info",
                 )
 
-    def __init__(self, id, sent_from, currency, total_amount, invoice_payload):
+    def __init__(self, id: str, sent_from: User, currency: str, total_amount: int, invoice_payload: str) -> None:
         self.id = id
         self.sent_from = sent_from
         self.currency =currency
         self.total_amount = total_amount
         self.invoice_payload = invoice_payload
-        self.shipping_option_id = None
-        self.order_info = None
+        self.shipping_option_id: Optional[str] = None
+        self.order_info: Optional[OrderInfo] = None
