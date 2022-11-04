@@ -1,4 +1,4 @@
-from autobot.telegram.objects import BaseObject
+from .objects import BaseObject
 
 class PassportData(BaseObject):
     """Describes Telegram Passport data shared with the bot by the user.
@@ -8,7 +8,7 @@ class PassportData(BaseObject):
 
         credentials (str): Encrypted credentials required to decrypt the data
     """
-    def __init__(self, data:list, credentials):
+    def __init__(self, data:list, credentials:str) -> None:
         self.data = data 
         self.credentials = credentials
 
