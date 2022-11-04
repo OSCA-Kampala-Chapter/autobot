@@ -1,5 +1,6 @@
 from . import Location
 from .base import BaseObject
+from typing import Optional
 
 class Venue(BaseObject):
     """
@@ -33,13 +34,12 @@ class Venue(BaseObject):
         )
     
     
-    def __init__(self, location, title, address):
+    def __init__(self, location: Location, title: str, address: str) -> None:
         self.location = location
         self.title = title
         self.address = address
-        self.foursquare_id = None
-        self.foursquare_type = None
-        self.google_place_id = None
-        self.google_place_type = None
-
+        self.foursquare_id: Optional[str] = None
+        self.foursquare_type: Optional[str] = None
+        self.google_place_id: Optional[str] = None
+        self.google_place_type: Optional[str] = None
  
