@@ -1,4 +1,5 @@
 from .base import BaseObject
+from typing import Optional
 
 class Contact(BaseObject):
 
@@ -30,7 +31,7 @@ class Contact(BaseObject):
     def __init__(self, phone_number:str, first_name:str):
         self.phone_number = phone_number
         self.first_name = first_name
-        self.last_name = None
-        self.user_id = None
-        self.vcard = None
+        self.last_name: Optional[str] = None
+        self.user_id: Optional[int] = None
+        self.vcard: Optional[str] = None
 
