@@ -1,6 +1,6 @@
 from .base import BaseObject
 from . import InlineKeyboardButton, WebAppInfo, LoginUrl
-from typing import List, Optional
+from typing import Optional
 class InlineKeyboardMarkup(BaseObject):
 
     """"
@@ -15,7 +15,7 @@ class InlineKeyboardMarkup(BaseObject):
     
     __slots__ = ("inline_keyboard",)
 
-    def __init__(self, inline_keyboard: List[InlineKeyboardButton]) -> None:
+    def __init__(self, inline_keyboard: list[InlineKeyboardButton]) -> None:
         self.inline_keyboard = inline_keyboard
 
 class InlineKeyboardButton(BaseObject):
