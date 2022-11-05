@@ -1,6 +1,24 @@
 from ..objects import BaseObject, User, Location, MessageEntity, InlineKeyboardMarkup
 from typing import Optional
 
+
+class InputMessageContent(BaseObject):
+    """
+    This object represents the content of a message to be sent as a result of an inline query. 
+    Telegram clients currently support the following 5 types:
+    
+    `InputTextMessageContent`
+
+    `InputLocationMessageContent`
+
+    `InputVenueMessageContent`
+
+    `InputContactMessageContent`
+    
+    `InputInvoiceMessageContent`
+    """
+    pass
+
 class InlineQuery(BaseObject):
     
     __slots__ = ("id",
