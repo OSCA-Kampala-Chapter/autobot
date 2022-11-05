@@ -2,6 +2,13 @@ from .base import BaseObject
 from . import WebAppInfo, LoginUrl
 from typing import Optional
 
+class CallbackGame(BaseObject):
+    """
+    A placeholder, currently holds no information. 
+    Use BotFather to set up your game.
+    """
+    pass
+
 
 class InlineKeyboardButton(BaseObject):
 
