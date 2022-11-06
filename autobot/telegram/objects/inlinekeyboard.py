@@ -1,5 +1,6 @@
 from .base import BaseObject
-
+from . import InlineKeyboardButton, WebAppInfo, LoginUrl
+from typing import Optional
 class InlineKeyboardMarkup(BaseObject):
 
     """"
@@ -14,7 +15,7 @@ class InlineKeyboardMarkup(BaseObject):
     
     __slots__ = ("inline_keyboard",)
 
-    def __init__(self, inline_keyboard):
+    def __init__(self, inline_keyboard: list[InlineKeyboardButton]) -> None:
         self.inline_keyboard = inline_keyboard
 
 class InlineKeyboardButton(BaseObject):
@@ -62,7 +63,8 @@ class InlineKeyboardButton(BaseObject):
 
     """
     
-    __slots__ = ("text",
+    __slots__ = (
+                "text",
                 "url",
                 "callback_data",
                 "web_app",
@@ -73,13 +75,13 @@ class InlineKeyboardButton(BaseObject):
                 "pay",
                 )
 
-    def __init__(self, text):
+    def __init__(self, text:str):
         self.text = text
-        self.url = None
-        self.callback_data = None
-        self.web_app = None
-        self.login_url = None
-        self.switch_inline_query = None
-        self.switch_inline_query_current_chat = None
-        self.callback_game = None
-        self.pay = None
+        self.url: Optional[str] = None
+        self.callback_data: Optional[str] = None
+        self.web_app: Optional[WebAppInfo] = None
+        self.login_url: Optional[LoginUrl] = None
+        self.switch_inline_query: Optional[str] = None
+        self.switch_inline_query_current_chat: Optional[str] = None
+        self.callback_game: Optional[str] = None
+        self.pay: Optional[bool] = None
