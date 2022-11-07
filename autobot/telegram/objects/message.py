@@ -5,8 +5,8 @@ from .chat import Chat
 from .contact import Contact
 from .dice import Dice
 from .document import Document
-from games.objects import Game
-from inline.objects import InlineKeyboardMarkup
+from ..games.objects import Game
+from ..inline.objects import InlineKeyboardMarkup
 from .location import Location
 from .photosize import PhotoSize
 from .poll import Poll

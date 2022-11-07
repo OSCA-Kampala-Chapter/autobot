@@ -1,5 +1,8 @@
-from ..objects import BaseObject, User, Location, MessageEntity, InlineKeyboardMarkup
-from typing import Optional
+from ..objects import BaseObject
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..objects import User, Location, MessageEntity, InlineKeyboardMarkup
 
 
 class InputMessageContent(BaseObject):
