@@ -1,4 +1,6 @@
 from .base import BaseObject
+from . import PhotoSize
+from typing import Optional
 
 class Document(BaseObject):
     """This object represents a general file (as opposed to photos, voice messages and audio files).
@@ -25,10 +27,10 @@ class Document(BaseObject):
         "file_size"
     )
 
-    def __init__(self, file_id, file_unique_id):
+    def __init__(self, file_id:str, file_unique_id:str) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
-        self.thumb = None
-        self.file_name = None
-        self.mime_type = None
-        self.file_size = None
+        self.thumb: Optional[PhotoSize] = None
+        self.file_name: Optional[str] = None
+        self.mime_type: Optional[str] = None
+        self.file_size: Optional[int] = None

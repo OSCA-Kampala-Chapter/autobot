@@ -7,14 +7,14 @@ class BotCommand(BaseObject):
         "description",
     )
     
-    def __init__ (self,command,description):
+    def __init__ (self,command:str,description:str) -> None:
         self.command = command
         self.description = description
 
 class BotCommandScope(BaseObject):
    
     __slots__ = ("type")
-    def __init__ (self,type):
+    def __init__ (self,type:str) -> None:
         self.type = type
 
 class BotCommandScopeAllChatAdministrators(BaseObject):

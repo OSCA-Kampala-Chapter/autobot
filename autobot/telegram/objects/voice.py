@@ -1,4 +1,5 @@
 from .base import BaseObject
+from typing import Optional
 
 class Voice(BaseObject):
     """
@@ -29,6 +30,6 @@ class Voice(BaseObject):
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.duration = duration
-        self.mime_type = None
-        self.file_size = None
+        self.mime_type: Optional[str] = None
+        self.file_size: Optional[int] = None
  

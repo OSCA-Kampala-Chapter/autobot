@@ -1,4 +1,5 @@
 from .base import BaseObject
+from typing import Optional
 
 class LoginUrl(BaseObject):
     """
@@ -24,8 +25,8 @@ class LoginUrl(BaseObject):
         )
     
     
-    def __init__(self, url):
+    def __init__(self, url:str) -> None:
         self.url = url
-        self.forward_text = None
-        self.bot_username = None
-        self.request_write_access = None
+        self.forward_text: Optional[str] = None
+        self.bot_username: Optional[str] = None
+        self.request_write_access: Optional[bool] = None

@@ -1,4 +1,5 @@
 from .base import BaseObject
+from typing import Optional
 
 class File(BaseObject):
     """
@@ -22,10 +23,10 @@ class File(BaseObject):
         )
     
     
-    def __init__(self, file_id, file_unique_id):
+    def __init__(self, file_id:str, file_unique_id:str) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
-        self.file_size = None
-        self.file_path = None
+        self.file_size: Optional[int] = None
+        self.file_path: Optional[str] = None
         
 

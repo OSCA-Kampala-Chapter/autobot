@@ -1,4 +1,6 @@
 from .base import BaseObject
+from . import PhotoSize, User
+from typing import Optional
 
 class Video(BaseObject):
     """
@@ -27,16 +29,15 @@ class Video(BaseObject):
         )
 
     
-    def __init__(self, file_id, width, height, duration, file_unique_id):
+    def __init__(self, file_id: str, file_unique_id: str, width: int, height: int, duration: int) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.width = width
         self.height = height
         self.duration = duration
-        self.thumb = None
-        self.mime_type = None
-        self.file_size = None
-  
+        self.thumb: Optional[PhotoSize] = None
+        self.mime_type: Optional[str] = None
+        self.file_size: Optional[int] = None
     
 class VideoChatEnded(BaseObject):
     """
@@ -46,9 +47,9 @@ class VideoChatEnded(BaseObject):
             duration (int): Video duration in seconds
     """
     
-    __slots__ = ("duration")
+    __slots__ = ("duration",)
     
-    def __init__(self, duration):
+    def __init__(self, duration: int) -> None:
         self.duration = duration
     
 class VideoChatParticipantsInvited(BaseObject):
@@ -59,9 +60,9 @@ class VideoChatParticipantsInvited(BaseObject):
         users (list[:class:`telegram.objects.user.User`]): Optional. New members that were invited to the video chat
     """
     
-    __slots__ = ("users")
+    __slots__ = ("users",)
     
-    def __init__(self, users):
+    def __init__(self, users: list[User]) -> None:
         self.users = users
 
     
@@ -73,9 +74,9 @@ class VideoChatScheduled(BaseObject):
             start_date (:class:`telegram.objects.base.UnixTime`): Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator
     """
     
-    __slots__ = ("start_date")
+    __slots__ = ("start_date",)
     
-    def __init__(self, start_date):
+    def __init__(self, start_date: int) -> None:
         self.start_date = start_date
 
     
@@ -109,11 +110,11 @@ class VideoNote(BaseObject):
         )
 
     
-    def __init__(self, file_id, length, duration, file_unique_id):
+    def __init__(self, file_id: str, file_unique_id: str, length: int, duration: int) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.length = length
         self.duration = duration
-        self.thumb = None
-        self.file_size = None
+        self.thumb: Optional[PhotoSize] = None
+        self.file_size: Optional[int] = None
   

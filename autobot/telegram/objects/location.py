@@ -11,7 +11,7 @@ class Location(BaseObject):
     
     __slots__ = ("longitude","latitude")
     
-    def __init__(self, longitude, latitude):
+    def __init__(self, longitude: float, latitude: float) -> None:
         self.longitude = longitude
         self.latitude = latitude
 

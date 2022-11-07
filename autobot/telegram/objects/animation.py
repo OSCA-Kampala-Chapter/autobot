@@ -1,4 +1,6 @@
 from .base import BaseObject
+from . import PhotoSize
+from typing import Optional
 
 class Animation (BaseObject):
     """This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
@@ -48,7 +50,7 @@ class Animation (BaseObject):
         self.width = width
         self.height = height
         self.duration = duration
-        self.thumb = None,
-        self.file_name = None,
-        self.mime_type = None,
-        self.file_size = None
+        self.thumb: Optional[PhotoSize] = None
+        self.file_name: Optional[str] = None
+        self.mime_type: Optional[str] = None
+        self.file_size: Optional[int] = None
