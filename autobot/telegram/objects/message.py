@@ -1,28 +1,30 @@
+
+from __future__ import annotations
+from typing import Optional, TYPE_CHECKING
 from .base import BaseObject
-from .audio import Audio
-from .animation import Animation
-from .chat import Chat
-from .contact import Contact
-from .dice import Dice
-from .document import Document
-from ..games.objects import Game
-from ..inline.objects import InlineKeyboardMarkup
-from .location import Location
-from .photosize import PhotoSize
-from .poll import Poll
-from .proximityalerttriggered import ProximityAlertTriggered
-from passport.objects import PassportData
-from payments.objects import SuccessfulPayment, Invoice
-from stickers.objects import Sticker
-from .user import User
-from .venue import Venue
-from .video import Video, VideoNote, VideoChatStarted, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled
-from .voice import Voice
 
+if TYPE_CHECKING:
 
+    from .audio import Audio
+    from .animation import Animation
+    from .chat import Chat
+    from .contact import Contact
+    from .dice import Dice
+    from .document import Document
+    from ..games.objects import Game
+    from ..inline.objects import InlineKeyboardMarkup
+    from .location import Location
+    from .photosize import PhotoSize
+    from .poll import Poll
+    from .proximityalerttriggered import ProximityAlertTriggered
+    from passport.objects import PassportData
+    from payments.objects import SuccessfulPayment, Invoice
+    from stickers.objects import Sticker
+    from .user import User
+    from .venue import Venue
+    from .video import Video, VideoNote, VideoChatStarted, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled
+    from .voice import Voice
 
-
-from typing import Optional
 
 class Message(BaseObject):
     """
