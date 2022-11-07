@@ -1,5 +1,5 @@
 from .base import BaseObject
-from . import KeyboardButton
+from .keyboardbutton import KeyboardButton
 
 class ReplyKeyboardMarkup(BaseObject):
     """

@@ -1,6 +1,8 @@
 from .base import BaseObject
-from . import MessageEntity
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .message import MessageEntity
 
 class InputFile(BaseObject):
     """

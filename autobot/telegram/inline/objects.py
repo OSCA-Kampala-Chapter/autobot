@@ -1,5 +1,8 @@
-from ..objects import BaseObject, User, Location, MessageEntity, InlineKeyboardMarkup
-from typing import Optional
+from ..objects import BaseObject
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..objects import User, Location, MessageEntity, InlineKeyboardMarkup
 
 
 class InputMessageContent(BaseObject):
@@ -1179,4 +1182,33 @@ class InlineQueryResultGame(InlineQueryResult):
         self.reply_markup: Optional[InlineKeyboardMarkup] = None
 
 
-        
+class ChosenInlineResult(InlineQueryResult):
+    """
+    This object represents a result of an inline query that was chosen by the user and sent to their chat partner.
+
+    Args:
+        result_id (:obj:`str`): The unique identifier for the result that was chosen.
+
+        from_user (:obj:`User`): The user that chose the result.
+
+        location (:obj:`Location`, optional): Sender location, only for bots that require user location.
+
+        inline_message_id (:obj:`str`, optional): Identifier of the sent inline message. 
+        Available only if there is an inline keyboard attached to the message. 
+        Will be also received in callback queries and can be used to edit the message.
+
+        query (:obj:`str`): The query that was used to obtain the result.
+    """
+    __slots__ = ("result_id",
+                "from_user",
+                "location",
+                "inline_message_id",
+                "query",
+                )
+
+    def __init__ (self, result_id: str, from_user: User, query: str) -> None:
+        self.result_id = result_id
+        self.from_user = from_user
+        self.location: Optional[Location] = None
+        self.inline_message_id: Optional[str] = None
+        self.query = query

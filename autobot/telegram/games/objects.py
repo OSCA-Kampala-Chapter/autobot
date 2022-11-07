@@ -1,5 +1,9 @@
-from ..objects import BaseObject, PhotoSize, MessageEntity, User, Animation
-from typing import Optional
+from __future__ import annotations
+from ..objects import BaseObject
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..objects import PhotoSize, MessageEntity, User, Animation
 
 class Game(BaseObject):
     """

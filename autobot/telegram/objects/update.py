@@ -1,4 +1,14 @@
 from .base import BaseObject
+from .message import Message
+from .poll import Poll, PollAnswer
+from .chatmember import ChatMemberUpdated
+from .chat import ChatJoinRequest
+from .callbackquery import CallBackQuery
+from payments.objects import ShippingQuery, PreCheckoutQuery
+from inline.objects import InlineQuery, ChosenInlineResult
+
+
+from typing import Optional
 
 class Update (BaseObject):
     """
@@ -59,18 +69,18 @@ class Update (BaseObject):
     
     def __init__(self, update_id):
         self.update_id = update_id
-        self.message = None
-        self.edited_message = None
-        self.channel_post = None
-        self.edited_channel_post = None
-        self.inline_query = None
-        self.chosen_inline_result = None
-        self.callback_query = None
-        self.shipping_query = None
-        self.pre_checkout_query = None
-        self.poll = None
-        self.poll_answer = None
-        self.my_chat_member = None
-        self.chat_member = None
-        self.chat_join_request = None
+        self.message: Optional[Message] = None
+        self.edited_message: Optional[Message] = None
+        self.channel_post: Optional[Message] = None
+        self.edited_channel_post: Optional[Message] = None
+        self.inline_query: Optional[InlineQuery] = None
+        self.chosen_inline_result: Optional[ChosenInlineResult] = None
+        self.callback_query: Optional[CallBackQuery] = None
+        self.shipping_query: Optional[ShippingQuery] = None
+        self.pre_checkout_query: Optional[PreCheckoutQuery] = None
+        self.poll: Optional[Poll] = None
+        self.poll_answer: Optional[PollAnswer] = None
+        self.my_chat_member: Optional[ChatMemberUpdated] = None
+        self.chat_member: Optional[ChatMemberUpdated] = None
+        self.chat_join_request: Optional[ChatJoinRequest] = None
 

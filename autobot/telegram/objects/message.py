@@ -1,4 +1,28 @@
 from .base import BaseObject
+from .audio import Audio
+from .animation import Animation
+from .chat import Chat
+from .contact import Contact
+from .dice import Dice
+from .document import Document
+from ..games.objects import Game
+from ..inline.objects import InlineKeyboardMarkup
+from .location import Location
+from .photosize import PhotoSize
+from .poll import Poll
+from .proximityalerttriggered import ProximityAlertTriggered
+from passport.objects import PassportData
+from payments.objects import SuccessfulPayment, Invoice
+from stickers.objects import Sticker
+from .user import User
+from .venue import Venue
+from .video import Video, VideoNote, VideoChatStarted, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled
+from .voice import Voice
+
+
+
+
+from typing import Optional
 
 class Message(BaseObject):
     """
@@ -54,10 +78,10 @@ class Message(BaseObject):
         connected_website (str): Optional. The domain name of the website on which the user has logged in. More about Telegram Login »
         passport_data (:class:`telegram.PassportData`): Optional. Telegram Passport data
         proximity_alert_triggered (:class:`telegram.ProximityAlertTriggered`): Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
-        voice_chat_scheduled (:class:`telegram.VoiceChatScheduled`): Optional. Service message: voice chat scheduled
-        voice_chat_started (:class:`telegram.VoiceChatStarted`): Optional. Service message: voice chat started
-        voice_chat_ended (:class:`telegram.VoiceChatEnded`): Optional. Service message: voice chat ended
-        voice_chat_participants_invited (:class:`telegram.VoiceChatParticipantsInvited`): Optional. Service message: new participants invited to a voice chat
+        video_chat_scheduled (:class:`telegram.VideoChatScheduled`): Optional. Service message: voice chat scheduled
+        video_chat_started (:class:`telegram.VideoChatStarted`): Optional. Service message: voice chat started
+        video_chat_ended (:class:`telegram.VideoChatEnded`): Optional. Service message: voice chat ended
+        video_chat_participants_invited (:class:`telegram.VideoChatParticipantsInvited`): Optional. Service message: new participants invited to a voice chat
         reply_markup (:class:`telegram.InlineKeyboardMarkup`): Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
     """
     __slots__ = (
@@ -110,68 +134,68 @@ class Message(BaseObject):
         'connected_website',
         'passport_data',
         'proximity_alert_triggered',
-        'voice_chat_scheduled',
-        'voice_chat_started',
-        'voice_chat_ended',
-        'voice_chat_participants_invited',
+        'video_chat_scheduled',
+        'video_chat_started',
+        'video_chat_ended',
+        'video_chat_participants_invited',
         'reply_markup'
     )
     
-    def __init__ (self, message_id):
+    def __init__ (self, message_id: int) -> None:
         self.message_id = message_id
-        self.from_user = None
-        self.date = None
-        self.chat = None
-        self.forward_from = None
-        self.forward_from_chat = None
-        self.forward_from_message_id = None
-        self.forward_signature = None
-        self.forward_sender_name = None
-        self.forward_date = None
-        self.reply_to_message = None
-        self.via_bot = None
-        self.edit_date = None
-        self.media_group_id = None
-        self.author_signature = None
-        self.text = None
-        self.entities = None
-        self.caption_entities = None
-        self.audio = None
-        self.document = None
-        self.animation = None
-        self.game = None
-        self.photo = None
-        self.sticker = None
-        self.video = None
-        self.voice = None
-        self.video_note = None
-        self.caption = None
-        self.contact = None
-        self.location = None
-        self.venue = None
-        self.poll = None
-        self.dice = None
-        self.new_chat_members = None
-        self.left_chat_member = None
-        self.new_chat_title = None
-        self.new_chat_photo = None
-        self.delete_chat_photo = None
-        self.group_chat_created = None
-        self.supergroup_chat_created = None
-        self.channel_chat_created = None
-        self.migrate_to_chat_id = None
-        self.migrate_from_chat_id = None
-        self.pinned_message = None
-        self.invoice = None
-        self.successful_payment = None
-        self.connected_website = None
-        self.passport_data = None
-        self.proximity_alert_triggered = None
-        self.voice_chat_scheduled = None
-        self.voice_chat_started = None
-        self.voice_chat_ended = None
-        self.voice_chat_participants_invited = None
-        self.reply_markup = None
+        self.from_user: Optional[User] = None
+        self.date: Optional[int] = None
+        self.chat: Optional[Chat] = None
+        self.forward_from: Optional[User] = None
+        self.forward_from_chat: Optional[Chat] = None
+        self.forward_from_message_id: Optional[int] = None
+        self.forward_signature: Optional[str] = None
+        self.forward_sender_name: Optional[str] = None
+        self.forward_date: Optional[int] = None
+        self.reply_to_message: Optional[Message] = None
+        self.via_bot: Optional[User] = None
+        self.edit_date: Optional[int] = None
+        self.media_group_id: Optional[str] = None
+        self.author_signature: Optional[str] = None
+        self.text: Optional[str] = None
+        self.entities: Optional[list[MessageEntity]] = None
+        self.caption_entities: Optional[list[MessageEntity]] = None 
+        self.audio: Optional[Audio] = None
+        self.document: Optional[Document] = None
+        self.animation: Optional[Animation] = None
+        self.game: Optional[Game] = None
+        self.photo: Optional[list[PhotoSize]] = None
+        self.sticker: Optional[Sticker] = None
+        self.video: Optional[Video] = None
+        self.voice: Optional[Voice] = None
+        self.video_note: Optional[VideoNote] = None
+        self.caption: Optional[str] = None
+        self.contact: Optional[Contact] = None
+        self.location: Optional[Location] = None
+        self.venue: Optional[Venue] = None
+        self.poll: Optional[Poll] = None
+        self.dice: Optional[Dice] = None
+        self.new_chat_members: Optional[list[User]] = None
+        self.left_chat_member: Optional[User] = None
+        self.new_chat_title: Optional[str] = None
+        self.new_chat_photo: Optional[list[PhotoSize]] = None
+        self.delete_chat_photo: Optional[bool] = None
+        self.group_chat_created: Optional[bool] = None
+        self.supergroup_chat_created: Optional[bool] = None
+        self.channel_chat_created: Optional[bool] = None
+        self.migrate_to_chat_id: Optional[int] = None
+        self.migrate_from_chat_id: Optional[int] = None
+        self.pinned_message: Optional[Message] = None
+        self.invoice: Optional[Invoice] = None
+        self.successful_payment: Optional[SuccessfulPayment] = None
+        self.connected_website: Optional[str] = None
+        self.passport_data: Optional[PassportData] = None
+        self.proximity_alert_triggered: Optional[ProximityAlertTriggered] = None
+        self.video_chat_scheduled: Optional[VideoChatScheduled] = None
+        self.video_chat_started: Optional[VideoChatStarted] = None
+        self.video_chat_ended: Optional[VideoChatEnded] = None
+        self.video_chat_participants_invited: Optional[VideoChatParticipantsInvited] = None
+        self.reply_markup: Optional[InlineKeyboardMarkup] = None
 
 class MessageAutoDeleteTimerChanged(BaseObject):
     """This object represents a service message about a change in auto-delete timer settings.
@@ -220,13 +244,13 @@ class MessageEntity(BaseObject):
         'language'
         )
 
-    def __init__(self, type, offset, length):
+    def __init__(self, type: str, offset: int, length: int) -> None:
         self.type = type
         self.offset = offset
         self.length = length
-        self.url = None
-        self.user = None
-        self.language = None
+        self.url: Optional[str] = None
+        self.user: Optional[User] = None
+        self.language: Optional[str] = None
 
 class MessageId(BaseObject):
     """

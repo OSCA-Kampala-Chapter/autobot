@@ -1,6 +1,10 @@
+from __future__ import annotations
 from .base import BaseObject
-from . import Message
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
+
+
+if TYPE_CHECKING:
+    from .message import Message
 
 class Chat(BaseObject):
     """

@@ -1,5 +1,6 @@
 from .base import BaseObject
-from . import WebAppInfo, LoginUrl
+from .webapp import WebAppInfo
+from .loginurl import LoginUrl
 from typing import Optional
 
 class CallbackGame(BaseObject):
