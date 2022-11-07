@@ -1,5 +1,5 @@
 from .base import BaseObject
-from . import Message
+from .message import Message
 from typing import Optional
 
 class Chat(BaseObject):

@@ -1,5 +1,5 @@
 from .base import BaseObject
-from . import WebAppInfo
+from .webapp import WebAppInfo
 
 class MenuButton(BaseObject):
     

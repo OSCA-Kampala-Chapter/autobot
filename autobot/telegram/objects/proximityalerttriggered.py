@@ -1,5 +1,5 @@
 from .base import BaseObject
-from . import User
+from .user import User
 
 class ProximityAlertTriggered(BaseObject):
     """

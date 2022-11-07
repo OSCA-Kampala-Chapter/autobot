@@ -1,5 +1,5 @@
 from .base import BaseObject
-from . import PhotoSize
+from .photosize import PhotoSize
 from typing import Optional
 
 class Animation (BaseObject):

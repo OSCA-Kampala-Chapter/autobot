@@ -1,5 +1,5 @@
 from .base import BaseObject
-from . import MessageEntity
+from .message import MessageEntity
 from typing import Optional
 
 class InputFile(BaseObject):

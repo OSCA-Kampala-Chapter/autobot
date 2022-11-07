@@ -1,6 +1,26 @@
 from .base import BaseObject
-from typing import Optional
 from .user import User
+from .message import MessageEntity
+from typing import Optional
+
+
+class PollOption(BaseObject):
+    """
+    This object contains information about one answer option in a poll.
+
+    Args:
+        text (str): Option text, 1-100 characters
+
+        voter_count (int): Number of users that voted for this option
+
+    """
+
+    __slots__ = ("text", "voter_count",)
+
+    def __init__(self, text:str, voter_count:int):
+        self.text = text
+        self.voter_count = voter_count
+
 
 class Poll(BaseObject):
 
@@ -93,19 +113,3 @@ class PollAnswer(BaseObject):
         self.user = user
         self.option_ids = option_ids
 
-class PollOption(BaseObject):
-    """
-    This object contains information about one answer option in a poll.
-
-    Args:
-        text (str): Option text, 1-100 characters
-
-        voter_count (int): Number of users that voted for this option
-
-    """
-
-    __slots__ = ("text", "voter_count",)
-
-    def __init__(self, text:str, voter_count:int):
-        self.text = text
-        self.voter_count = voter_count
