@@ -1,3 +1,6 @@
+
+from __future__ import annotations
+
 from ..objects import BaseObject
 from typing import Optional, TYPE_CHECKING
 

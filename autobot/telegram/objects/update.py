@@ -1,14 +1,19 @@
+
+from __future__ import annotations
+from typing import Optional,TYPE_CHECKING
 from .base import BaseObject
-from .message import Message
-from .poll import Poll, PollAnswer
-from .chatmember import ChatMemberUpdated
-from .chat import ChatJoinRequest
-from .callbackquery import CallBackQuery
-from payments.objects import ShippingQuery, PreCheckoutQuery
-from inline.objects import InlineQuery, ChosenInlineResult
+
+if TYPE_CHECKING:
+
+    from .message import Message
+    from .poll import Poll, PollAnswer
+    from .chatmember import ChatMemberUpdated
+    from .chat import ChatJoinRequest
+    from .callbackquery import CallBackQuery
+    from ..payments.objects import ShippingQuery, PreCheckoutQuery
+    from ..inline.objects import InlineQuery, ChosenInlineResult
 
 
-from typing import Optional
 
 class Update (BaseObject):
     """
