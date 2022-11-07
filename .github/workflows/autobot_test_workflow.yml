@@ -1,0 +1,9 @@
+name: Autobot tests
+run-name: running tests
+on: [pull_request,push]
+jobs:
+    Automate autobot tests:
+        runs-on: [macos-latest,ubuntu-latest,windows-latest]
+        steps:
+            - uses: actions/python-setup@v3
+            - run: python -m unittest
