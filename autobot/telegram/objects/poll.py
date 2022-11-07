@@ -1,6 +1,6 @@
 from .base import BaseObject
-from . import User, PollOption, MessageEntity
 from typing import Optional
+from .user import User
 
 class Poll(BaseObject):
 
