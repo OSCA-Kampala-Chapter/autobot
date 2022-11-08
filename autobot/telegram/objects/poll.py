@@ -1,6 +1,6 @@
-from .base import BaseObject
-from .user import User
-from .message import MessageEntity
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.user import User
+from autobot.telegram.objects.message import MessageEntity
 from typing import Optional
 
 
@@ -17,7 +17,7 @@ class PollOption(BaseObject):
 
     __slots__ = ("text", "voter_count",)
 
-    def __init__(self, text:str, voter_count:int):
+    def __init__(self, text:str = None, voter_count:int = None) -> None:
         self.text = text
         self.voter_count = voter_count
 
@@ -69,15 +69,15 @@ class Poll(BaseObject):
 
     def __init__(
         self,
-        id:str,
-        question:str,
-        options:list[PollOption],
-        total_voter_count:int,
-        is_closed:bool,
-        is_anonymous:bool,
-        type:str,
-        allows_multiple_answers:bool
-    ):
+        id:str = None,
+        question:str = None,
+        options:list[PollOption] = None,
+        total_voter_count:int = None,
+        is_closed:bool = None,
+        is_anonymous:bool = None,
+        type:str = None,
+        allows_multiple_answers:bool = None
+    ) -> None:
     
         self.id = id
         self.question = question
@@ -108,7 +108,7 @@ class PollAnswer(BaseObject):
 
     __slots__ = ("poll_id", "user", "option_ids",)
 
-    def __init__(self, poll_id: str, user: User, option_ids: list[int]):
+    def __init__(self, poll_id: str = None, user: User = None, option_ids: list[int] = None) -> None:
         self.poll_id = poll_id
         self.user = user
         self.option_ids = option_ids
