@@ -6,6 +6,7 @@ from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from autobot.telegram.objects import User, Location, MessageEntity, InlineKeyboardMarkup
+    from autobot.telegram.payments.objects import LabeledPrice
 
 
 class InputMessageContent(BaseObject):
@@ -24,6 +25,223 @@ class InputMessageContent(BaseObject):
     `InputInvoiceMessageContent`
     """
     pass
+
+class InputTextMessageContent(InputMessageContent):
+    """
+    Represents the content of a text message to be sent as the result of an inline query.
+    
+    Args:
+        message_text (str): Text of the message to be sent, 1-4096 characters
+        parse_mode (str, optional): Mode for parsing entities in the message text. 
+            See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        disable_web_page_preview (bool, optional): Disables link previews for links in the sent message
+        entities (List[:class:`autobot.telegram.objects.MessageEntity`], optional): List of special entities that appear in message text, 
+            which can be specified instead of parse_mode
+        disable_notification (bool, optional): Sends the message silently. 
+            iOS users will not receive a notification, Android users will receive a notification with no sound.
+        reply_to_message_id (int, optional): If the message is a reply, ID of the original message
+        allow_sending_without_reply (bool, optional): Pass True, if the message should be sent even if the specified replied-to message is not found
+        reply_markup (:class:`autobot.telegram.objects.InlineKeyboardMarkup`, optional): Additional interface options. 
+            A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.
+    """
+    
+    __slots__ = (
+        'message_text',
+        'parse_mode',
+        'disable_web_page_preview',
+        'entities',
+        'disable_notification',
+        'reply_to_message_id',
+        'allow_sending_without_reply',
+        'reply_markup',
+    )
+
+    def __init__(self, message_text: str = None) -> None:
+        self.message_text = message_text
+        self.parse_mode: Optional[str] = None
+        self.disable_web_page_preview: Optional[bool] = None
+        self.entities: Optional[list[MessageEntity]] = None
+        self.disable_notification: Optional[bool] = None
+        self.reply_to_message_id: Optional[int] = None
+        self.allow_sending_without_reply: Optional[bool] = None
+        self.reply_markup: Optional[InlineKeyboardMarkup] = None
+
+
+class InputLocationMessageContent(InputMessageContent):
+    """
+    Represents the content of a location message to be sent as the result of an inline query.
+    
+    Args:
+        latitude (float): Latitude of the location in degrees
+        longitude (float): Longitude of the location in degrees
+        horizontal_accuracy (float, optional): The radius of uncertainty for the location, measured in meters; 0-1500
+        live_period (int, optional): Period in seconds for which the location can be updated, should be between 60 and 86400.
+        heading (int, optional): For live locations, a direction in which the user is moving, in degrees. 
+            Must be between 1 and 360 if specified.
+        proximity_alert_radius (int, optional): For live locations, a maximum distance for proximity alerts about approaching another chat member, 
+            in meters. Must be between 1 and 100000 if specified.
+    """
+    
+    __slots__ = (
+        'latitude',
+        'longitude',
+        'horizontal_accuracy',
+        'live_period',
+        'heading',
+        'proximity_alert_radius',
+    )
+
+    def __init__(self, latitude: float = None, longitude: float = None) -> None:
+        self.latitude = latitude
+        self.longitude = longitude
+        self.horizontal_accuracy: Optional[float] = None
+        self.live_period: Optional[int] = None
+        self.heading: Optional[int] = None
+        self.proximity_alert_radius: Optional[int] = None
+
+
+class InputVenueMessageContent(InputMessageContent):
+    """
+    Represents the content of a venue message to be sent as the result of an inline query.
+    
+    Args:
+        latitude (float): Latitude of the venue in degrees
+        longitude (float): Longitude of the venue in degrees
+        title (str): Name of the venue
+        address (str): Address of the venue
+        foursquare_id (str, optional): Foursquare identifier of the venue, if known
+        foursquare_type (str, optional): Foursquare type of the venue, if known. 
+            (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+        google_place_id (str, optional): Google Places identifier of the venue
+        google_place_type (str, optional): Google Places type of the venue. 
+            (See supported types.)
+    """
+    
+    __slots__ = (
+        'latitude',
+        'longitude',
+        'title',
+        'address',
+        'foursquare_id',
+        'foursquare_type',
+        'google_place_id',
+        'google_place_type',
+    )
+
+    def __init__(self, latitude: float = None, longitude: float = None, title: str = None, address: str = None) -> None:
+        self.latitude = latitude
+        self.longitude = longitude
+        self.title = title
+        self.address = address
+        self.foursquare_id: Optional[str] = None
+        self.foursquare_type: Optional[str] = None
+        self.google_place_id: Optional[str] = None
+        self.google_place_type: Optional[str] = None
+
+
+class InputContactMessageContent(InputMessageContent):
+    """
+    Represents the content of a contact message to be sent as the result of an inline query.
+    
+    Args:
+        phone_number (str): Contact's phone number
+        first_name (str): Contact's first name
+        last_name (str, optional): Contact's last name
+        vcard (str, optional): Additional data about the contact in the form of a vCard, 0-2048 bytes
+    """
+    
+    __slots__ = (
+        'phone_number',
+        'first_name',
+        'last_name',
+        'vcard',
+    )
+
+    def __init__(self, phone_number: str = None, first_name: str = None) -> None:
+        self.phone_number = phone_number
+        self.first_name = first_name
+        self.last_name: Optional[str] = None
+        self.vcard: Optional[str] = None
+
+
+
+class InputInvoiceMessageContent(InputMessageContent):
+    """
+    Represents the content of an invoice message to be sent as the result of an inline query.
+    
+    Args:
+        title (str): Product name, 1-32 characters
+        description (str): Product description, 1-255 characters
+        payload (str): Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+        provider_token (str): Payments provider token, obtained via Botfather
+        currency (str): Three-letter ISO 4217 currency code, see more on currencies
+        prices (List[:class:`autobot.telegram.objects.LabeledPrice`]): Price breakdown, a list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+        max_tip_amount (int, optional): The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). 
+            For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. 
+            See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+        suggested_tip_amounts (List[int], optional): A JSON-serialized array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). 
+            At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+        provider_data (str, optional): JSON-encoded data about the invoice, which will be shared with the payment provider. 
+            A detailed description of required fields should be provided by the payment provider.
+        photo_url (str, optional): URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. 
+            People like it better when they see what they are paying for.
+        photo_size (int, optional): Photo size
+        photo_width (int, optional): Photo width
+        photo_height (int, optional): Photo height
+        need_name (bool, optional): Pass True, if you require the user's full name to complete the order
+        need_phone_number (bool, optional): Pass True, if you require the user's phone number to complete the order
+        need_email (bool, optional): Pass True, if you require the user's email to complete the order
+        need_shipping_address (bool, optional): Pass True, if you require the user's shipping address to complete the order
+        send_phone_number_to_provider (bool, optional): Pass True, if user's phone number should be sent to provider
+        send_email_to_provider (bool, optional): Pass True, if user's email address should be sent to provider
+        is_flexible (bool, optional): Pass True, if the final price depends on the shipping method
+    """
+    
+    __slots__ = (
+        'title',
+        'description',
+        'payload',
+        'provider_token',
+        'currency',
+        'prices',
+        'max_tip_amount',
+        'suggested_tip_amounts',
+        'provider_data',
+        'photo_url',
+        'photo_size',
+        'photo_width',
+        'photo_height',
+        'need_name',
+        'need_phone_number',
+        'need_email',
+        'need_shipping_address',
+        'send_phone_number_to_provider',
+        'send_email_to_provider',
+        'is_flexible',
+    )
+
+    def __init__(self, title: str = None, description: str = None, payload: str = None, provider_token: str = None, currency: str = None, prices: list[LabeledPrice] = None) -> None:
+        self.title = title
+        self.description = description
+        self.payload = payload
+        self.provider_token = provider_token
+        self.currency = currency
+        self.prices = prices
+        self.max_tip_amount: Optional[int] = None
+        self.suggested_tip_amounts: Optional[list[int]] = None
+        self.provider_data: Optional[str] = None
+        self.photo_url: Optional[str] = None
+        self.photo_size: Optional[int] = None
+        self.photo_width: Optional[int] = None
+        self.photo_height: Optional[int] = None
+        self.need_name: Optional[bool] = None
+        self.need_phone_number: Optional[bool] = None
+        self.need_email: Optional[bool] = None
+        self.need_shipping_address: Optional[bool] = None
+        self.send_phone_number_to_provider: Optional[bool] = None
+        self.send_email_to_provider: Optional[bool] = None
+        self.is_flexible: Optional[bool] = None 
+
 
 class InlineQuery(BaseObject):
     
