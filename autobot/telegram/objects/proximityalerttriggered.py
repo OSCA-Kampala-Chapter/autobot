@@ -1,5 +1,5 @@
-from .base import BaseObject
-from .user import User
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.user import User
 
 class ProximityAlertTriggered(BaseObject):
     """
@@ -13,7 +13,7 @@ class ProximityAlertTriggered(BaseObject):
     
     __slots__ = ("traveler","watcher","distance")
     
-    def __init__(self, traveler: User, watcher: User, distance: int) -> None:
+    def __init__(self, traveler: User = None, watcher: User = None, distance: int = None) -> None:
         self.traveler = traveler
         self.watcher = watcher
         self.distance = distance
