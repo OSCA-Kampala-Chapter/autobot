@@ -1,4 +1,4 @@
-from ..objects import BaseObject, User
+from autobot.telegram.objects import BaseObject, User
 from typing import Optional
 
 class LabeledPrice(BaseObject):
@@ -21,7 +21,7 @@ class LabeledPrice(BaseObject):
         "amount",
         )
 
-    def __init__(self, label: str, amount: int) -> None:
+    def __init__(self, label: str = None, amount: int = None) -> None:
         self.label = label
         self.amount = amount
 
@@ -53,7 +53,7 @@ class Invoice(BaseObject):
                 "total_amount", 
                 )
 
-    def __init__(self, title: str, description: str, start_parameter: str, currency: str, total_amount: int) -> None:
+    def __init__(self, title: str = None, description: str = None, start_parameter: str = None, currency: str = None, total_amount: int = None) -> None:
         self.title = title
         self.description = description
         self.start_parameter = start_parameter
@@ -90,7 +90,7 @@ class ShippingAddress(BaseObject):
                 "post_code", 
                 )
 
-    def __init__(self, country_code: str, state: str, city: str, street_line1: str, street_line2: str, post_code: str) -> None:
+    def __init__(self, country_code: str = None, state: str = None, city: str = None, street_line1: str = None, street_line2: str = None, post_code: str = None) -> None:
         self.country_code = country_code
         self.state = state
         self.city = city
@@ -148,7 +148,7 @@ class ShippingOption(BaseObject):
         "prices",
         )
 
-    def __init__(self, id: str, title: str, prices: list[LabeledPrice]) -> None:
+    def __init__(self, id: str = None, title: str = None, prices: list[LabeledPrice] = None) -> None:
         self.id = id
         self.title = title
         self.prices = prices
@@ -186,7 +186,7 @@ class SuccessfulPayment(BaseObject):
                 "provider_payment_charge_id",
                 )
 
-    def __init__(self, currency: str, total_amount: int, invoice_payload: str, telegram_payment_charge_id: str, provider_payment_charge_id: str) -> None:
+    def __init__(self, currency: str = None, total_amount: int = None, invoice_payload: str = None, telegram_payment_charge_id: str = None, provider_payment_charge_id: str = None) -> None:
         self.currency = currency
         self.total_amount = total_amount
         self.invoice_payload = invoice_payload
@@ -226,7 +226,7 @@ class ShippingQuery(BaseObject):
                 "shipping_address",
                 )
 
-    def __init__(self, id: str, sent_from: User, invoice_payload: str, shipping_address: ShippingAddress) -> None:
+    def __init__(self, id: str = None, sent_from: User = None, invoice_payload: str = None, shipping_address: ShippingAddress = None) -> None:
         self.id = id
         self.sent_from = sent_from
         self.invoice_payload = invoice_payload
@@ -275,7 +275,7 @@ class PreCheckoutQuery(BaseObject):
                 "order_info",
                 )
 
-    def __init__(self, id: str, sent_from: User, currency: str, total_amount: int, invoice_payload: str) -> None:
+    def __init__(self, id: str = None, sent_from: User = None, currency: str = None, total_amount: int = None, invoice_payload: str = None) -> None:
         self.id = id
         self.sent_from = sent_from
         self.currency =currency
