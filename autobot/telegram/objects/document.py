@@ -1,5 +1,5 @@
-from .base import BaseObject
-from .photosize import PhotoSize
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.photosize import PhotoSize
 from typing import Optional
 
 class Document(BaseObject):
@@ -27,7 +27,7 @@ class Document(BaseObject):
         "file_size"
     )
 
-    def __init__(self, file_id:str, file_unique_id:str) -> None:
+    def __init__(self, file_id:str = None, file_unique_id:str = None) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.thumb: Optional[PhotoSize] = None
