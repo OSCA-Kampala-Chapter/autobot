@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional
 
 class LoginUrl(BaseObject):
@@ -25,7 +25,7 @@ class LoginUrl(BaseObject):
         )
     
     
-    def __init__(self, url:str) -> None:
+    def __init__(self, url:str = None) -> None:
         self.url = url
         self.forward_text: Optional[str] = None
         self.bot_username: Optional[str] = None
