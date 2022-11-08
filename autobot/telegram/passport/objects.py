@@ -1,5 +1,77 @@
 from autobot.telegram.objects import BaseObject
 from typing import Optional
+
+class PassportFile(BaseObject):
+    """
+    This object represents a file uploaded to Telegram Passport. Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
+
+    Source: https://core.telegram.org/bots/api#passportfile
+
+    Args:
+        file_id (str): Identifier for this file, which can be used to download or reuse the file
+        file_unique_id (str): Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+        file_size (int): File size (Optional)
+        file_date (int): Unix time when the file was uploaded (Optional)
+    """
+
+    __slots__ = (
+        'file_id',
+        'file_unique_id',
+        'file_size',
+        'file_date',
+    )
+
+    def __init__(self, file_id: str = None, file_unique_id: str = None) -> None:
+        self.file_id = file_id
+        self.file_unique_id = file_unique_id
+        self.file_size: Optional[int] = None
+        self.file_date: Optional[int] = None
+
+
+class EncryptedPassportElement(BaseObject):
+    """
+    This class represents an encrypted Telegram Passport element shared with the bot by the user.
+
+    Args:
+        type (:obj:`str`): Element type. One of "personal_details", "passport", "driver_license", "identity_card", "internal_passport", "address", "utility_bill", "bank_statement", "rental_agreement", "passport_registration", "temporary_registration", "phone_number", "email".
+        data (:obj:`str`): Optional. Base64-encoded encrypted Telegram Passport element data provided by the user, available for "personal_details", "passport", "driver_license", "identity_card", "internal_passport" and "address" types. Can be decrypted and verified using the accompanying EncryptedCredentials.
+        phone_number (:obj:`str`): Optional. User's verified phone number, available only for "phone_number" type
+        email (:obj:`str`): Optional. User's verified email address, available only for "email" type
+        files (:obj:`list`): Optional. Array of encrypted files with documents provided by the user, available for "utility_bill", "bank_statement", "rental_agreement", "passport_registration" and "temporary_registration" types. Files can be decrypted and verified using the accompanying EncryptedCredentials.
+        front_side (:class:`telegram.PassportFile`): Optional. Encrypted file with the front side of the document, provided by the user. Available for "passport", "driver_license", "identity_card" and "internal_passport". The file can be decrypted and verified using the accompanying EncryptedCredentials.
+        reverse_side (:class:`telegram.PassportFile`): Optional. Encrypted file with the reverse side of the document, provided by the user. Available for "driver_license" and "identity_card". The file can be decrypted and verified using the accompanying EncryptedCredentials.
+        selfie (:class:`telegram.PassportFile`): Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available for "passport", "driver_license", "identity_card" and "internal_passport". The file can be decrypted and verified using the accompanying EncryptedCredentials.
+        translation (:class:`telegram.PassportFile`): Optional. Array of encrypted files with translated versions of documents provided by the user. Available if requested for "passport", "driver_license", "identity_card", "internal_passport", "utility_bill", "bank_statement", "rental_agreement", "passport_registration" and "temporary_registration" types. Files can be decrypted and verified using the accompanying EncryptedCredentials.
+        hash (:obj:`str`): Base64-encoded element hash for using in PassportElementErrorUnspecified
+    """
+
+    __slots__ = (
+        'type',
+        'data',
+        'phone_number',
+        'email',
+        'files',
+        'front_side',
+        'reverse_side',
+        'selfie',
+        'translation',
+        'hash',
+    )
+
+    def __init__(self, type: str = None) -> None:
+        self.type = type
+        self.data: Optional[str] = None
+        self.phone_number: Optional[str] = None
+        self.email: Optional[str] = None
+        self.files: Optional[list[PassportFile]] = None
+        self.front_side: Optional[PassportFile] = None
+        self.reverse_side: Optional[PassportFile] = None
+        self.selfie: Optional[PassportFile] = None
+        self.translation: Optional[PassportFile] = None
+        self.hash: Optional[str] = None
+
+
+
 class PassportData(BaseObject):
     """Describes Telegram Passport data shared with the bot by the user.
 
@@ -22,7 +94,7 @@ class PassportFile(BaseObject):
             file_date (int): Unix time when the file was uploaded.
     """
 
-    def __init__(self, file_id:str, file_unique_id:str, file_size:int, file_date:int) -> None:
+    def __init__(self, file_id:str = None, file_unique_id:str = None, file_size:int = None, file_date:int = None) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.file_size = file_size
@@ -65,7 +137,7 @@ class EncryptedPassportElement(BaseObject):
         self.email: Optional[str] = None 
         self.files: Optional[list[PassportFile]] = None
         self.front_side: Optional[PassportFile] = None 
-        self.reverse_side: Optional[PassporFile] = None 
+        self.reverse_side: Optional[PassportFile] = None 
         self.selfie: Optional[PassportFile] = None 
         self.translation: Optional[list[PassportFile]] = None 
 
