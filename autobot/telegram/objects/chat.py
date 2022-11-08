@@ -1,10 +1,10 @@
 from __future__ import annotations
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional, TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from .message import Message
+    from autobot.telegram.objects.message import Message
 
 class Chat(BaseObject):
     """
@@ -66,7 +66,7 @@ class Chat(BaseObject):
 
     )
 
-    def __init__(self, id: int, type: str) -> None:
+    def __init__(self, id: int = None, type: str = None) -> None:
         self.id = id
         self.type = type
         self.title: Optional[str] = None
