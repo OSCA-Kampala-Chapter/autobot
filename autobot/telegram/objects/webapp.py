@@ -1,9 +1,9 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 
 class WebAppData(BaseObject):
     def __init__(self,
-        data,
-        button_text,
+        data = None,
+        button_text = None,
     ):
 
         self.data = data
@@ -12,6 +12,6 @@ class WebAppData(BaseObject):
 
 class WebAppInfo(BaseObject):
     def __init__(self,
-        url,
+        url: str = None,
     ):
         self.url = url 
