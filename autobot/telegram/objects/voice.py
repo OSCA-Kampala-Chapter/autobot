@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional
 
 class Voice(BaseObject):
@@ -22,9 +22,9 @@ class Voice(BaseObject):
 
     
     def __init__(self, 
-                file_id:str, 
-                file_unique_id:str, 
-                duration:int
+                file_id:str = None, 
+                file_unique_id:str = None, 
+                duration:int = None
                 ):
 
         self.file_id = file_id
