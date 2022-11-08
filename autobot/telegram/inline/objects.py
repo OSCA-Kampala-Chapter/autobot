@@ -1,11 +1,11 @@
 
 from __future__ import annotations
 
-from ..objects import BaseObject
+from autobot.telegram.objects import BaseObject
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..objects import User, Location, MessageEntity, InlineKeyboardMarkup
+    from autobot.telegram.objects import User, Location, MessageEntity, InlineKeyboardMarkup
 
 
 class InputMessageContent(BaseObject):
@@ -34,7 +34,7 @@ class InlineQuery(BaseObject):
                 "chat_type",
                 "location",
                 )
-    def __init__(self, id: str, from_: User, query: str, offset: str) -> None:
+    def __init__(self, id: str = None, from_: User = None, query: str = None, offset: str = None) -> None:
         self.id = id
         self.from_ = from_
         self.query = query
@@ -49,7 +49,7 @@ class InlineQueryResult (BaseObject):
     __slots__ = ("type",
                 "id",
                 )
-    def __init__ (self, type: str, id: str) -> None:
+    def __init__ (self, type: str = None, id: str = None) -> None:
         self.type = type
         self.id = id
         
@@ -88,7 +88,7 @@ class InlineQueryResultCachedAudio (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, audio_file_id: str, type: str = "audio") -> None:
+    def __init__ (self, id: str = None, audio_file_id: str = None, type: str = "audio") -> None:
         self.id = id
         self.audio_file_id = audio_file_id
         self.caption: Optional[str] = None
@@ -138,7 +138,7 @@ class InlineQueryResultCachedDocument (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, title: str, document_file_id: str, type: str = "document") -> None:
+    def __init__ (self, id: str = None, title: str = None, document_file_id: str = None, type: str = "document") -> None:
         self.id = id
         self.title = title
         self.type = type
@@ -188,7 +188,7 @@ class InlineQueryResultCachedGif (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, gif_file_id: str, type: str = "gif") -> None:
+    def __init__ (self, id: str = None, gif_file_id: str = None, type: str = "gif") -> None:
         self.id = id
         self.type = type
         self.gif_file_id = gif_file_id
@@ -237,7 +237,7 @@ class InlineQueryResultCachedMpeg4Gif (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, mpeg4_file_id: str, type: str = "mpeg4_gif") -> None:
+    def __init__ (self, id: str = None, mpeg4_file_id: str = None, type: str = "mpeg4_gif") -> None:
         self.id = id
         self.type = type
         self.mpeg4_file_id = mpeg4_file_id
@@ -272,7 +272,7 @@ class InlineQueryResultCachedSticker (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, sticker_file_id: str, type: str = "sticker") -> None:
+    def __init__ (self, id: str = None, sticker_file_id: str = None, type: str = "sticker") -> None:
         self.id = id
         self.type = type
         self.sticker_file_id = sticker_file_id
@@ -322,7 +322,7 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, photo_file_id: str, type: str = "photo") -> None:
+    def __init__ (self, id: str = None, photo_file_id: str = None, type: str = "photo") -> None:
         self.id = id
         self.type = type
         self.photo_file_id = photo_file_id
@@ -376,7 +376,7 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, video_file_id: str, type: str = "video") -> None:
+    def __init__ (self, id: str = None, video_file_id: str = None, type: str = "video") -> None:
         self.id = id
         self.type = type
         self.video_file_id = video_file_id
@@ -427,7 +427,7 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, voice_file_id: str, title: str, type: str = "voice") -> None:
+    def __init__ (self, id: str = None, voice_file_id: str = None, title: str = None, type: str = "voice") -> None:
         self.id = id
         self.type = type
         self.voice_file_id = voice_file_id
@@ -478,7 +478,7 @@ class InlineQueryResultArticle(InlineQueryResult):
                 "thumb_width",
                 "thumb_height",
                 )
-    def __init__ (self, id: str, title: str, input_message_content: InputMessageContent, type: str = "article") -> None:
+    def __init__ (self, id: str = None, title: str = None, input_message_content: InputMessageContent = None, type: str = "article") -> None:
         self.id = id
         self.type = type
         self.title = title
@@ -613,7 +613,7 @@ class InlineQueryResultGif(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, gif_url: str, thumb_url: str, type: str = "gif") -> None:
+    def __init__ (self, id: str = None, gif_url: str = None, thumb_url: str = None, type: str = "gif") -> None:
         self.id = id
         self.type = type
         self.gif_url = gif_url
@@ -685,7 +685,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, mpeg4_url: str, thumb_url: str, type: str = "mpeg4_gif") -> None:
+    def __init__ (self, id: str = None, mpeg4_url: str = None, thumb_url: str = None, type: str = "mpeg4_gif") -> None:
         self.id = id
         self.type = type
         self.mpeg4_url = mpeg4_url
@@ -762,7 +762,7 @@ class InlineQueryResultVideo(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, video_url: str, mime_type: str, thumb_url: str, title: str, type: str = "video") -> None:
+    def __init__ (self, id: str = None, video_url: str = None, mime_type: str = None, thumb_url: str = None, title: str = None, type: str = "video") -> None:
         self.id = id
         self.type = type
         self.video_url = video_url
@@ -823,7 +823,7 @@ class InlineQueryResultAudio(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, audio_url: str, title: str, type: str = "audio") -> None:
+    def __init__ (self, id: str = None, audio_url: str = None, title: str = None, type: str = "audio") -> None:
         self.id = id
         self.type = type
         self.audio_url = audio_url
@@ -878,7 +878,7 @@ class InlineQueryResultVoice(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, voice_url: str, title: str, type: str = "voice") -> None:
+    def __init__ (self, id: str = None, voice_url: str = None, title: str = None, type: str = "voice") -> None:
         self.id = id
         self.type = type
         self.voice_url = voice_url
@@ -943,7 +943,7 @@ class InlineQueryResultDocument(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, title: str, document_url: str, mime_type: str, type: str = "document") -> None:
+    def __init__ (self, id: str = None, title: str = None, document_url: str = None, mime_type: str = None, type: str = "document") -> None:
         self.id = id
         self.type = type
         self.title = title
@@ -1013,7 +1013,7 @@ class InlineQueryResultLocation(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, latitude: float, longitude: float, title: str, type: str = "location") -> None:
+    def __init__ (self, id: str = None, latitude: float = None, longitude: float = None, title: str = None, type: str = "location") -> None:
         self.id = id
         self.type = type
         self.latitude = latitude
@@ -1085,7 +1085,7 @@ class InlineQueryResultVenue(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, latitude: float, longitude: float, title: str, address: str, type: str = "venue") -> None:
+    def __init__ (self, id: str = None, latitude: float = None, longitude: float = None, title: str = None, address: str = None, type: str = "venue") -> None:
         self.id = id
         self.type = type
         self.latitude = latitude
@@ -1145,7 +1145,7 @@ class InlineQueryResultContact(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, phone_number: str, first_name: str, type: str = "contact") -> None:
+    def __init__ (self, id: str = None, phone_number: str = None, first_name: str = None, type: str = "contact") -> None:
         self.id = id
         self.type = type
         self.phone_number = phone_number
@@ -1178,7 +1178,7 @@ class InlineQueryResultGame(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, game_short_name: str, type: str = "game") -> None:
+    def __init__ (self, id: str = None, game_short_name: str = None, type: str = "game") -> None:
         self.id = id
         self.type = type
         self.game_short_name = game_short_name
@@ -1209,7 +1209,7 @@ class ChosenInlineResult(InlineQueryResult):
                 "query",
                 )
 
-    def __init__ (self, result_id: str, from_user: User, query: str) -> None:
+    def __init__ (self, result_id: str =None, from_user: User =None, query: str =None) -> None:
         self.result_id = result_id
         self.from_user = from_user
         self.location: Optional[Location] = None
