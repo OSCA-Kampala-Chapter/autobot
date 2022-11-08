@@ -1,6 +1,6 @@
-from .base import BaseObject
-from .photosize import PhotoSize
-from .user import User
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.photosize import PhotoSize
+from autobot.telegram.objects.user import User
 from typing import Optional
 
 class Video(BaseObject):
@@ -30,7 +30,7 @@ class Video(BaseObject):
         )
 
     
-    def __init__(self, file_id: str, file_unique_id: str, width: int, height: int, duration: int) -> None:
+    def __init__(self, file_id: str = None, file_unique_id: str = None, width: int = None, height: int = None, duration: int = None) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.width = width
@@ -50,7 +50,7 @@ class VideoChatEnded(BaseObject):
     
     __slots__ = ("duration",)
     
-    def __init__(self, duration: int) -> None:
+    def __init__(self, duration: int = None) -> None:
         self.duration = duration
     
 class VideoChatParticipantsInvited(BaseObject):
@@ -63,7 +63,7 @@ class VideoChatParticipantsInvited(BaseObject):
     
     __slots__ = ("users",)
     
-    def __init__(self, users: list[User]) -> None:
+    def __init__(self, users: list[User] = None) -> None:
         self.users = users
 
     
@@ -77,7 +77,7 @@ class VideoChatScheduled(BaseObject):
     
     __slots__ = ("start_date",)
     
-    def __init__(self, start_date: int) -> None:
+    def __init__(self, start_date: int = None) -> None:
         self.start_date = start_date
 
     
@@ -111,7 +111,7 @@ class VideoNote(BaseObject):
         )
 
     
-    def __init__(self, file_id: str, file_unique_id: str, length: int, duration: int) -> None:
+    def __init__(self, file_id: str = None, file_unique_id: str = None, length: int = None, duration: int = None) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.length = length
