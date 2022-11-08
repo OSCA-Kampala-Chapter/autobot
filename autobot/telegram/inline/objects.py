@@ -1,11 +1,12 @@
 
 from __future__ import annotations
 
-from ..objects import BaseObject
+from autobot.telegram.objects import BaseObject
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..objects import User, Location, MessageEntity, InlineKeyboardMarkup
+    from autobot.telegram.objects import User, Location, MessageEntity, InlineKeyboardMarkup
+    from autobot.telegram.payments.objects import LabeledPrice
 
 
 class InputMessageContent(BaseObject):
@@ -25,6 +26,223 @@ class InputMessageContent(BaseObject):
     """
     pass
 
+class InputTextMessageContent(InputMessageContent):
+    """
+    Represents the content of a text message to be sent as the result of an inline query.
+    
+    Args:
+        message_text (str): Text of the message to be sent, 1-4096 characters
+        parse_mode (str, optional): Mode for parsing entities in the message text. 
+            See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        disable_web_page_preview (bool, optional): Disables link previews for links in the sent message
+        entities (List[:class:`autobot.telegram.objects.MessageEntity`], optional): List of special entities that appear in message text, 
+            which can be specified instead of parse_mode
+        disable_notification (bool, optional): Sends the message silently. 
+            iOS users will not receive a notification, Android users will receive a notification with no sound.
+        reply_to_message_id (int, optional): If the message is a reply, ID of the original message
+        allow_sending_without_reply (bool, optional): Pass True, if the message should be sent even if the specified replied-to message is not found
+        reply_markup (:class:`autobot.telegram.objects.InlineKeyboardMarkup`, optional): Additional interface options. 
+            A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.
+    """
+    
+    __slots__ = (
+        'message_text',
+        'parse_mode',
+        'disable_web_page_preview',
+        'entities',
+        'disable_notification',
+        'reply_to_message_id',
+        'allow_sending_without_reply',
+        'reply_markup',
+    )
+
+    def __init__(self, message_text: str = None) -> None:
+        self.message_text = message_text
+        self.parse_mode: Optional[str] = None
+        self.disable_web_page_preview: Optional[bool] = None
+        self.entities: Optional[list[MessageEntity]] = None
+        self.disable_notification: Optional[bool] = None
+        self.reply_to_message_id: Optional[int] = None
+        self.allow_sending_without_reply: Optional[bool] = None
+        self.reply_markup: Optional[InlineKeyboardMarkup] = None
+
+
+class InputLocationMessageContent(InputMessageContent):
+    """
+    Represents the content of a location message to be sent as the result of an inline query.
+    
+    Args:
+        latitude (float): Latitude of the location in degrees
+        longitude (float): Longitude of the location in degrees
+        horizontal_accuracy (float, optional): The radius of uncertainty for the location, measured in meters; 0-1500
+        live_period (int, optional): Period in seconds for which the location can be updated, should be between 60 and 86400.
+        heading (int, optional): For live locations, a direction in which the user is moving, in degrees. 
+            Must be between 1 and 360 if specified.
+        proximity_alert_radius (int, optional): For live locations, a maximum distance for proximity alerts about approaching another chat member, 
+            in meters. Must be between 1 and 100000 if specified.
+    """
+    
+    __slots__ = (
+        'latitude',
+        'longitude',
+        'horizontal_accuracy',
+        'live_period',
+        'heading',
+        'proximity_alert_radius',
+    )
+
+    def __init__(self, latitude: float = None, longitude: float = None) -> None:
+        self.latitude = latitude
+        self.longitude = longitude
+        self.horizontal_accuracy: Optional[float] = None
+        self.live_period: Optional[int] = None
+        self.heading: Optional[int] = None
+        self.proximity_alert_radius: Optional[int] = None
+
+
+class InputVenueMessageContent(InputMessageContent):
+    """
+    Represents the content of a venue message to be sent as the result of an inline query.
+    
+    Args:
+        latitude (float): Latitude of the venue in degrees
+        longitude (float): Longitude of the venue in degrees
+        title (str): Name of the venue
+        address (str): Address of the venue
+        foursquare_id (str, optional): Foursquare identifier of the venue, if known
+        foursquare_type (str, optional): Foursquare type of the venue, if known. 
+            (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+        google_place_id (str, optional): Google Places identifier of the venue
+        google_place_type (str, optional): Google Places type of the venue. 
+            (See supported types.)
+    """
+    
+    __slots__ = (
+        'latitude',
+        'longitude',
+        'title',
+        'address',
+        'foursquare_id',
+        'foursquare_type',
+        'google_place_id',
+        'google_place_type',
+    )
+
+    def __init__(self, latitude: float = None, longitude: float = None, title: str = None, address: str = None) -> None:
+        self.latitude = latitude
+        self.longitude = longitude
+        self.title = title
+        self.address = address
+        self.foursquare_id: Optional[str] = None
+        self.foursquare_type: Optional[str] = None
+        self.google_place_id: Optional[str] = None
+        self.google_place_type: Optional[str] = None
+
+
+class InputContactMessageContent(InputMessageContent):
+    """
+    Represents the content of a contact message to be sent as the result of an inline query.
+    
+    Args:
+        phone_number (str): Contact's phone number
+        first_name (str): Contact's first name
+        last_name (str, optional): Contact's last name
+        vcard (str, optional): Additional data about the contact in the form of a vCard, 0-2048 bytes
+    """
+    
+    __slots__ = (
+        'phone_number',
+        'first_name',
+        'last_name',
+        'vcard',
+    )
+
+    def __init__(self, phone_number: str = None, first_name: str = None) -> None:
+        self.phone_number = phone_number
+        self.first_name = first_name
+        self.last_name: Optional[str] = None
+        self.vcard: Optional[str] = None
+
+
+
+class InputInvoiceMessageContent(InputMessageContent):
+    """
+    Represents the content of an invoice message to be sent as the result of an inline query.
+    
+    Args:
+        title (str): Product name, 1-32 characters
+        description (str): Product description, 1-255 characters
+        payload (str): Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+        provider_token (str): Payments provider token, obtained via Botfather
+        currency (str): Three-letter ISO 4217 currency code, see more on currencies
+        prices (List[:class:`autobot.telegram.objects.LabeledPrice`]): Price breakdown, a list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+        max_tip_amount (int, optional): The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). 
+            For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. 
+            See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+        suggested_tip_amounts (List[int], optional): A JSON-serialized array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). 
+            At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+        provider_data (str, optional): JSON-encoded data about the invoice, which will be shared with the payment provider. 
+            A detailed description of required fields should be provided by the payment provider.
+        photo_url (str, optional): URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. 
+            People like it better when they see what they are paying for.
+        photo_size (int, optional): Photo size
+        photo_width (int, optional): Photo width
+        photo_height (int, optional): Photo height
+        need_name (bool, optional): Pass True, if you require the user's full name to complete the order
+        need_phone_number (bool, optional): Pass True, if you require the user's phone number to complete the order
+        need_email (bool, optional): Pass True, if you require the user's email to complete the order
+        need_shipping_address (bool, optional): Pass True, if you require the user's shipping address to complete the order
+        send_phone_number_to_provider (bool, optional): Pass True, if user's phone number should be sent to provider
+        send_email_to_provider (bool, optional): Pass True, if user's email address should be sent to provider
+        is_flexible (bool, optional): Pass True, if the final price depends on the shipping method
+    """
+    
+    __slots__ = (
+        'title',
+        'description',
+        'payload',
+        'provider_token',
+        'currency',
+        'prices',
+        'max_tip_amount',
+        'suggested_tip_amounts',
+        'provider_data',
+        'photo_url',
+        'photo_size',
+        'photo_width',
+        'photo_height',
+        'need_name',
+        'need_phone_number',
+        'need_email',
+        'need_shipping_address',
+        'send_phone_number_to_provider',
+        'send_email_to_provider',
+        'is_flexible',
+    )
+
+    def __init__(self, title: str = None, description: str = None, payload: str = None, provider_token: str = None, currency: str = None, prices: list[LabeledPrice] = None) -> None:
+        self.title = title
+        self.description = description
+        self.payload = payload
+        self.provider_token = provider_token
+        self.currency = currency
+        self.prices = prices
+        self.max_tip_amount: Optional[int] = None
+        self.suggested_tip_amounts: Optional[list[int]] = None
+        self.provider_data: Optional[str] = None
+        self.photo_url: Optional[str] = None
+        self.photo_size: Optional[int] = None
+        self.photo_width: Optional[int] = None
+        self.photo_height: Optional[int] = None
+        self.need_name: Optional[bool] = None
+        self.need_phone_number: Optional[bool] = None
+        self.need_email: Optional[bool] = None
+        self.need_shipping_address: Optional[bool] = None
+        self.send_phone_number_to_provider: Optional[bool] = None
+        self.send_email_to_provider: Optional[bool] = None
+        self.is_flexible: Optional[bool] = None 
+
+
 class InlineQuery(BaseObject):
     
     __slots__ = ("id",
@@ -34,7 +252,7 @@ class InlineQuery(BaseObject):
                 "chat_type",
                 "location",
                 )
-    def __init__(self, id: str, from_: User, query: str, offset: str) -> None:
+    def __init__(self, id: str = None, from_: User = None, query: str = None, offset: str = None) -> None:
         self.id = id
         self.from_ = from_
         self.query = query
@@ -49,7 +267,7 @@ class InlineQueryResult (BaseObject):
     __slots__ = ("type",
                 "id",
                 )
-    def __init__ (self, type: str, id: str) -> None:
+    def __init__ (self, type: str = None, id: str = None) -> None:
         self.type = type
         self.id = id
         
@@ -88,7 +306,7 @@ class InlineQueryResultCachedAudio (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, audio_file_id: str, type: str = "audio") -> None:
+    def __init__ (self, id: str = None, audio_file_id: str = None, type: str = "audio") -> None:
         self.id = id
         self.audio_file_id = audio_file_id
         self.caption: Optional[str] = None
@@ -138,7 +356,7 @@ class InlineQueryResultCachedDocument (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, title: str, document_file_id: str, type: str = "document") -> None:
+    def __init__ (self, id: str = None, title: str = None, document_file_id: str = None, type: str = "document") -> None:
         self.id = id
         self.title = title
         self.type = type
@@ -188,7 +406,7 @@ class InlineQueryResultCachedGif (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, gif_file_id: str, type: str = "gif") -> None:
+    def __init__ (self, id: str = None, gif_file_id: str = None, type: str = "gif") -> None:
         self.id = id
         self.type = type
         self.gif_file_id = gif_file_id
@@ -237,7 +455,7 @@ class InlineQueryResultCachedMpeg4Gif (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, mpeg4_file_id: str, type: str = "mpeg4_gif") -> None:
+    def __init__ (self, id: str = None, mpeg4_file_id: str = None, type: str = "mpeg4_gif") -> None:
         self.id = id
         self.type = type
         self.mpeg4_file_id = mpeg4_file_id
@@ -272,7 +490,7 @@ class InlineQueryResultCachedSticker (InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, sticker_file_id: str, type: str = "sticker") -> None:
+    def __init__ (self, id: str = None, sticker_file_id: str = None, type: str = "sticker") -> None:
         self.id = id
         self.type = type
         self.sticker_file_id = sticker_file_id
@@ -322,7 +540,7 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, photo_file_id: str, type: str = "photo") -> None:
+    def __init__ (self, id: str = None, photo_file_id: str = None, type: str = "photo") -> None:
         self.id = id
         self.type = type
         self.photo_file_id = photo_file_id
@@ -376,7 +594,7 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, video_file_id: str, type: str = "video") -> None:
+    def __init__ (self, id: str = None, video_file_id: str = None, type: str = "video") -> None:
         self.id = id
         self.type = type
         self.video_file_id = video_file_id
@@ -427,7 +645,7 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, voice_file_id: str, title: str, type: str = "voice") -> None:
+    def __init__ (self, id: str = None, voice_file_id: str = None, title: str = None, type: str = "voice") -> None:
         self.id = id
         self.type = type
         self.voice_file_id = voice_file_id
@@ -478,7 +696,7 @@ class InlineQueryResultArticle(InlineQueryResult):
                 "thumb_width",
                 "thumb_height",
                 )
-    def __init__ (self, id: str, title: str, input_message_content: InputMessageContent, type: str = "article") -> None:
+    def __init__ (self, id: str = None, title: str = None, input_message_content: InputMessageContent = None, type: str = "article") -> None:
         self.id = id
         self.type = type
         self.title = title
@@ -613,7 +831,7 @@ class InlineQueryResultGif(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, gif_url: str, thumb_url: str, type: str = "gif") -> None:
+    def __init__ (self, id: str = None, gif_url: str = None, thumb_url: str = None, type: str = "gif") -> None:
         self.id = id
         self.type = type
         self.gif_url = gif_url
@@ -685,7 +903,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, mpeg4_url: str, thumb_url: str, type: str = "mpeg4_gif") -> None:
+    def __init__ (self, id: str = None, mpeg4_url: str = None, thumb_url: str = None, type: str = "mpeg4_gif") -> None:
         self.id = id
         self.type = type
         self.mpeg4_url = mpeg4_url
@@ -762,7 +980,7 @@ class InlineQueryResultVideo(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, video_url: str, mime_type: str, thumb_url: str, title: str, type: str = "video") -> None:
+    def __init__ (self, id: str = None, video_url: str = None, mime_type: str = None, thumb_url: str = None, title: str = None, type: str = "video") -> None:
         self.id = id
         self.type = type
         self.video_url = video_url
@@ -823,7 +1041,7 @@ class InlineQueryResultAudio(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, audio_url: str, title: str, type: str = "audio") -> None:
+    def __init__ (self, id: str = None, audio_url: str = None, title: str = None, type: str = "audio") -> None:
         self.id = id
         self.type = type
         self.audio_url = audio_url
@@ -878,7 +1096,7 @@ class InlineQueryResultVoice(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, voice_url: str, title: str, type: str = "voice") -> None:
+    def __init__ (self, id: str = None, voice_url: str = None, title: str = None, type: str = "voice") -> None:
         self.id = id
         self.type = type
         self.voice_url = voice_url
@@ -943,7 +1161,7 @@ class InlineQueryResultDocument(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, title: str, document_url: str, mime_type: str, type: str = "document") -> None:
+    def __init__ (self, id: str = None, title: str = None, document_url: str = None, mime_type: str = None, type: str = "document") -> None:
         self.id = id
         self.type = type
         self.title = title
@@ -1013,7 +1231,7 @@ class InlineQueryResultLocation(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, latitude: float, longitude: float, title: str, type: str = "location") -> None:
+    def __init__ (self, id: str = None, latitude: float = None, longitude: float = None, title: str = None, type: str = "location") -> None:
         self.id = id
         self.type = type
         self.latitude = latitude
@@ -1085,7 +1303,7 @@ class InlineQueryResultVenue(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, latitude: float, longitude: float, title: str, address: str, type: str = "venue") -> None:
+    def __init__ (self, id: str = None, latitude: float = None, longitude: float = None, title: str = None, address: str = None, type: str = "venue") -> None:
         self.id = id
         self.type = type
         self.latitude = latitude
@@ -1145,7 +1363,7 @@ class InlineQueryResultContact(InlineQueryResult):
                 "thumb_height",
                 )
 
-    def __init__ (self, id: str, phone_number: str, first_name: str, type: str = "contact") -> None:
+    def __init__ (self, id: str = None, phone_number: str = None, first_name: str = None, type: str = "contact") -> None:
         self.id = id
         self.type = type
         self.phone_number = phone_number
@@ -1178,7 +1396,7 @@ class InlineQueryResultGame(InlineQueryResult):
                 "reply_markup",
                 )
 
-    def __init__ (self, id: str, game_short_name: str, type: str = "game") -> None:
+    def __init__ (self, id: str = None, game_short_name: str = None, type: str = "game") -> None:
         self.id = id
         self.type = type
         self.game_short_name = game_short_name
@@ -1209,7 +1427,7 @@ class ChosenInlineResult(InlineQueryResult):
                 "query",
                 )
 
-    def __init__ (self, result_id: str, from_user: User, query: str) -> None:
+    def __init__ (self, result_id: str =None, from_user: User =None, query: str =None) -> None:
         self.result_id = result_id
         self.from_user = from_user
         self.location: Optional[Location] = None

@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional
 
 class ResponseParameters(BaseObject):

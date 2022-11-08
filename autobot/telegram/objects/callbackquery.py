@@ -1,10 +1,10 @@
 from __future__ import annotations
-from .base import BaseObject
-from .user import User
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.user import User
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .message import Message
+    from autobot.telegram.objects.message import Message
 
 class CallBackQuery(BaseObject):
     """
@@ -30,7 +30,7 @@ class CallBackQuery(BaseObject):
         'game_short_name'
     )
 
-    def __init__(self, id: str, from_: User, chat_instance: str):
+    def __init__(self, id: str = None, from_: User = None, chat_instance: str = None) -> None:
         self.id = id
         self.from_ = from_
         self.chat_instance = chat_instance

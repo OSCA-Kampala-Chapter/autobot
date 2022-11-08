@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 
 class BotCommand(BaseObject):
     
@@ -7,14 +7,14 @@ class BotCommand(BaseObject):
         "description",
     )
     
-    def __init__ (self,command:str,description:str) -> None:
+    def __init__ (self,command:str = None,description:str = None) -> None:
         self.command = command
         self.description = description
 
 class BotCommandScope(BaseObject):
    
     __slots__ = ("type")
-    def __init__ (self,type:str) -> None:
+    def __init__ (self,type:str = None) -> None:
         self.type = type
 
 class BotCommandScopeAllChatAdministrators(BaseObject):

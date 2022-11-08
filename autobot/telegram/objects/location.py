@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 
 class Location(BaseObject):
     """
@@ -11,7 +11,7 @@ class Location(BaseObject):
     
     __slots__ = ("longitude","latitude")
     
-    def __init__(self, longitude: float, latitude: float) -> None:
+    def __init__(self, longitude: float = None, latitude: float = None) -> None:
         self.longitude = longitude
         self.latitude = latitude
 

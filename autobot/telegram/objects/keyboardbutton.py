@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional
 
 class KeyboardButton(BaseObject):
@@ -27,7 +27,7 @@ class KeyboardButton(BaseObject):
         "web_app",
     )
     
-    def __init__(self, text: str, type: str) -> None:
+    def __init__(self, text: str = None, type: str = None) -> None:
         self.text = text
         self.type = type
         self.request_contact: Optional[bool] = None
@@ -49,6 +49,6 @@ class KeyboardButtonPollType(BaseObject):
 
     __slots__ = ("type",)
 
-    def __init__(self, type: str) -> None:
+    def __init__(self, type: str = None) -> None:
         self.type = type
 

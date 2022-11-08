@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 
 class Dice(BaseObject):
     
@@ -14,6 +14,6 @@ class Dice(BaseObject):
 
     __slots__ = ("emoji", "value",)
 
-    def __init__(self, emoji:str, value:int):
+    def __init__(self, emoji:str = None, value:int = None) -> None:
         self.emoji = emoji
         self.value = value

@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional
 
 class Contact(BaseObject):
@@ -28,7 +28,7 @@ class Contact(BaseObject):
                 "vcard",
                 )
 
-    def __init__(self, phone_number:str, first_name:str):
+    def __init__(self, phone_number:str = None, first_name:str = None) -> None:
         self.phone_number = phone_number
         self.first_name = first_name
         self.last_name: Optional[str] = None

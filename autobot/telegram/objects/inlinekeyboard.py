@@ -1,6 +1,6 @@
-from .base import BaseObject
-from .webapp import WebAppInfo
-from .loginurl import LoginUrl
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.webapp import WebAppInfo
+from autobot.telegram.objects.loginurl import LoginUrl
 from typing import Optional
 
 class CallbackGame(BaseObject):
@@ -53,7 +53,7 @@ class InlineKeyboardButton(BaseObject):
                 "pay",
                 )
 
-    def __init__(self, text: str) -> None:
+    def __init__(self, text: str = None) -> None:
         self.text = text
         self.url: Optional[str] = None
         self.callback_data: Optional[str] = None
@@ -78,5 +78,5 @@ class InlineKeyboardMarkup(BaseObject):
     
     __slots__ = ("inline_keyboard",)
 
-    def __init__(self, inline_keyboard: list[InlineKeyboardButton]) -> None:
+    def __init__(self, inline_keyboard: list[InlineKeyboardButton] = None) -> None:
         self.inline_keyboard = inline_keyboard

@@ -1,29 +1,29 @@
 
 from __future__ import annotations
 from typing import Optional, TYPE_CHECKING
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 
 if TYPE_CHECKING:
 
-    from .audio import Audio
-    from .animation import Animation
-    from .chat import Chat
-    from .contact import Contact
-    from .dice import Dice
-    from .document import Document
-    from ..games.objects import Game
-    from ..inline.objects import InlineKeyboardMarkup
-    from .location import Location
-    from .photosize import PhotoSize
-    from .poll import Poll
-    from .proximityalerttriggered import ProximityAlertTriggered
-    from passport.objects import PassportData
-    from payments.objects import SuccessfulPayment, Invoice
-    from stickers.objects import Sticker
-    from .user import User
-    from .venue import Venue
-    from .video import Video, VideoNote, VideoChatStarted, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled
-    from .voice import Voice
+    from autobot.telegram.objects.audio import Audio
+    from autobot.telegram.objects.animation import Animation
+    from autobot.telegram.objects.chat import Chat
+    from autobot.telegram.objects.contact import Contact
+    from autobot.telegram.objects.dice import Dice
+    from autobot.telegram.objects.document import Document
+    from autobot.telegram.games.objects import Game
+    from autobot.telegram.inline.objects import InlineKeyboardMarkup
+    from autobot.telegram.objects.location import Location
+    from autobot.telegram.objects.photosize import PhotoSize
+    from autobot.telegram.objects.poll import Poll
+    from autobot.telegram.objects.proximityalerttriggered import ProximityAlertTriggered
+    from autobot.telegram.passport.objects import PassportData
+    from autobot.telegram.payments.objects import SuccessfulPayment, Invoice
+    from autobot.telegram.stickers.objects import Sticker
+    from autobot.telegram.objects.user import User
+    from autobot.telegram.objects.venue import Venue
+    from autobot.telegram.objects.video import Video, VideoNote, VideoChatStarted, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled
+    from autobot.telegram.objects.voice import Voice
 
 
 class Message(BaseObject):
@@ -143,7 +143,7 @@ class Message(BaseObject):
         'reply_markup'
     )
     
-    def __init__ (self, message_id: int) -> None:
+    def __init__ (self, message_id: int = None) -> None:
         self.message_id = message_id
         self.from_user: Optional[User] = None
         self.date: Optional[int] = None
@@ -214,7 +214,7 @@ class MessageAutoDeleteTimerChanged(BaseObject):
 
     __slots__ = ("message","message_auto_delete_time")
     
-    def __init__(self, message, message_auto_delete_time):
+    def __init__(self, message: Message = None, message_auto_delete_time: MessageAutoDeleteTimerChanged = None) -> None:
         self.message = message
         self.message_auto_delete_time = message_auto_delete_time
 
@@ -246,7 +246,7 @@ class MessageEntity(BaseObject):
         'language'
         )
 
-    def __init__(self, type: str, offset: int, length: int) -> None:
+    def __init__(self, type: str = None, offset: int = None, length: int = None) -> None:
         self.type = type
         self.offset = offset
         self.length = length
@@ -265,6 +265,6 @@ class MessageId(BaseObject):
     
     __slots__ = ("message_id")
     
-    def __init__(self, message_id):
+    def __init__(self, message_id: int = None) -> None:
         self.message_id = message_id
         

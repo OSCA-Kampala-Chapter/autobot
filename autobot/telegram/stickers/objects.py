@@ -1,4 +1,4 @@
-from ..objects import BaseObject, PhotoSize, File
+from autobot.telegram.objects import BaseObject, PhotoSize, File
 from typing import List, Optional
 
 class Sticker(BaseObject):
@@ -56,7 +56,7 @@ class Sticker(BaseObject):
                 )
 
 # add type hints
-    def __init__(self, file_id: str, file_unique_id: str, type: str, width: int, height: int, is_animated: bool, is_video: bool) -> None:
+    def __init__(self, file_id: str = None, file_unique_id: str = None, type: str = None, width: int = None, height: int = None, is_animated: bool = None, is_video: bool = None) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.type = type
@@ -105,7 +105,7 @@ class StickerSet(BaseObject):
                 "thumb",
                 )
 
-    def __init__(self, name: str, title: str, sticker_type: str, is_animated: bool, is_video: bool, stickers: List[Sticker]) -> None:
+    def __init__(self, name: str = None, title: str = None, sticker_type: str = None, is_animated: bool = None, is_video: bool = None, stickers: List[Sticker] = None) -> None:
         self.name = name
         self.title = title
         self.sticker_type = sticker_type
@@ -141,7 +141,7 @@ class MaskPosition(BaseObject):
                 "scale",
                 )
 
-    def __init__(self, point: str, x_shift: float, y_shift: float, scale: float) -> None:
+    def __init__(self, point: str = None, x_shift: float = None, y_shift: float = None, scale: float = None) -> None:
         self.point = point
         self.x_shift = x_shift
         self.y_shift = y_shift

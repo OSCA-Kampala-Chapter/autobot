@@ -1,5 +1,5 @@
-from .base import BaseObject
-from .keyboardbutton import KeyboardButton
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.keyboardbutton import KeyboardButton
 
 class ReplyKeyboardMarkup(BaseObject):
     """
@@ -20,7 +20,7 @@ class ReplyKeyboardMarkup(BaseObject):
         )
     
     
-    def __init__(self, keyboard: list[list[KeyboardButton]]) -> None:
+    def __init__(self, keyboard: list[list[KeyboardButton]] = None) -> None:
         self.keyboard = keyboard
         self.resize_keyboard: bool = None
         self.one_time_keyboard: bool = None
@@ -41,7 +41,7 @@ class ReplyKeyboardRemove(BaseObject):
         )
     
     
-    def __init__(self, remove_keyboard: bool):
+    def __init__(self, remove_keyboard: bool = None) -> None:
         self.remove_keyboard = remove_keyboard
         self.selective: bool = None
 

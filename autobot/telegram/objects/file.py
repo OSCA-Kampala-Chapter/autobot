@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional
 
 class File(BaseObject):
@@ -23,7 +23,7 @@ class File(BaseObject):
         )
     
     
-    def __init__(self, file_id:str, file_unique_id:str) -> None:
+    def __init__(self, file_id:str = None, file_unique_id:str = None) -> None:
         self.file_id = file_id
         self.file_unique_id = file_unique_id
         self.file_size: Optional[int] = None

@@ -1,4 +1,4 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional
 
 class PhotoSize(BaseObject):
@@ -24,10 +24,10 @@ class PhotoSize(BaseObject):
                 )
 
     def __init__(self, 
-                file_id:str,
-                file_unique_id:str, 
-                width:str, 
-                height:str
+                file_id:str = None,
+                file_unique_id:str = None, 
+                width:str = None, 
+                height:str = None
                 ):
                 
         self.file_id = file_id

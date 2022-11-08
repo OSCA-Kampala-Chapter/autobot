@@ -1,5 +1,5 @@
-from .base import BaseObject
-from .webapp import WebAppInfo
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.webapp import WebAppInfo
 
 class MenuButton(BaseObject):
     
@@ -23,7 +23,7 @@ class MenuButtonCommands(BaseObject):
 
     __slots__ = ("type",)
 
-    def __init__(self, type: str) -> None:
+    def __init__(self, type: str = None) -> None:
         self.type = type
 
 
@@ -45,7 +45,7 @@ class MenuButtonWebApp(BaseObject):
         "web_app",
         )
 
-    def __init__(self, type: str, text: str, web_app: WebAppInfo) -> None:
+    def __init__(self, type: str = None, text: str = None, web_app: WebAppInfo = None) -> None:
         self.type = type
         self.text = text
         self.web_app = web_app
@@ -61,5 +61,5 @@ class MenuButtonDefault(BaseObject):
 
     __slots__ = ("type",)
 
-    def __init__(self, type: str) -> None:
+    def __init__(self, type: str = None) -> None:
         self.type = type

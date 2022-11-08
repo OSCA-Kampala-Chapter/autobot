@@ -1,17 +1,17 @@
 
 from __future__ import annotations
 from typing import Optional,TYPE_CHECKING
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 
 if TYPE_CHECKING:
 
-    from .message import Message
-    from .poll import Poll, PollAnswer
-    from .chatmember import ChatMemberUpdated
-    from .chat import ChatJoinRequest
-    from .callbackquery import CallBackQuery
-    from ..payments.objects import ShippingQuery, PreCheckoutQuery
-    from ..inline.objects import InlineQuery, ChosenInlineResult
+    from autobot.telegram.objects.message import Message
+    from autobot.telegram.objects.poll import Poll, PollAnswer
+    from autobot.telegram.objects.chatmember import ChatMemberUpdated
+    from autobot.telegram.objects.chat import ChatJoinRequest
+    from autobot.telegram.objects.callbackquery import CallBackQuery
+    from autobot.telegram.payments.objects import ShippingQuery, PreCheckoutQuery
+    from autobot.telegram.inline.objects import InlineQuery, ChosenInlineResult
 
 
 
@@ -72,7 +72,7 @@ class Update (BaseObject):
         )
     
     
-    def __init__(self, update_id):
+    def __init__(self, update_id: int = None) -> None:
         self.update_id = update_id
         self.message: Optional[Message] = None
         self.edited_message: Optional[Message] = None

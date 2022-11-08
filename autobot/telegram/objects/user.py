@@ -1,5 +1,5 @@
-from .base import BaseObject
-from .photosize import PhotoSize
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.photosize import PhotoSize
 from typing import Optional
 
 class User(BaseObject):
@@ -31,7 +31,7 @@ class User(BaseObject):
             )
         
         
-    def __init__(self, id: int, is_bot: bool, first_name: str) -> None:
+    def __init__(self, id: int = None, is_bot: bool = None, first_name: str = None) -> None:
         self.id = id
         self.is_bot = is_bot
         self.first_name = first_name
@@ -60,6 +60,6 @@ class UserProfilePhotos(BaseObject):
         'photos'
         )
 
-    def __init__(self, total_count: int, photos: list[list[PhotoSize]]) -> None:
+    def __init__(self, total_count: int = None, photos: list[list[PhotoSize]] = None) -> None:
         self.total_count = total_count
         self.photos = photos

@@ -1,9 +1,9 @@
 from __future__ import annotations
-from ..objects import BaseObject
+from autobot.telegram.objects import BaseObject
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..objects import PhotoSize, MessageEntity, User, Animation
+    from autobot.telegram.objects import PhotoSize, MessageEntity, User, Animation
 
 class Game(BaseObject):
     """
@@ -34,7 +34,7 @@ class Game(BaseObject):
                 "animation",
                 )
 
-    def __init__(self, title: str, description: str, photo: list[PhotoSize]) -> None:
+    def __init__(self, title: str = None, description: str = None, photo: list[PhotoSize] = None) -> None:
         self.title = title
         self.description = description
         self.photo = photo
@@ -61,7 +61,7 @@ class GameHighScore(BaseObject):
                 "score",
                 )
 
-    def __init__(self, position: int, user: User, score: int) -> None:
+    def __init__(self, position: int = None, user: User = None, score: int = None) -> None:
         self.position = position
         self.user = user
         self.score = score
