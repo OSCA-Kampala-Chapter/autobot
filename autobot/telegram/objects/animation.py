@@ -1,5 +1,5 @@
-from .base import BaseObject
-from .photosize import PhotoSize
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.photosize import PhotoSize
 from typing import Optional
 
 class Animation (BaseObject):
@@ -39,10 +39,10 @@ class Animation (BaseObject):
     )
 
     def __init__(self, 
-                 file_id:str, 
-                 file_unique_id:str, 
-                 width:int, height:int, 
-                 duration:int
+                 file_id:str = None, 
+                 file_unique_id:str = None, 
+                 width:int = None, height:int = None, 
+                 duration:int = None
                 ) -> None:
         
         self.file_id = file_id
