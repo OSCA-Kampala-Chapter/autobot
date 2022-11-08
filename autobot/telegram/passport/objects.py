@@ -1,4 +1,4 @@
-from ..objects import BaseObject
+from autobot.telegram.objects import BaseObject
 from typing import Optional
 class PassportData(BaseObject):
     """Describes Telegram Passport data shared with the bot by the user.
@@ -8,7 +8,7 @@ class PassportData(BaseObject):
 
         credentials (str): Encrypted credentials required to decrypt the data
     """
-    def __init__(self, data:list[EncryptedPassportElement], credentials:str) -> None:
+    def __init__(self, data:list[EncryptedPassportElement] = None, credentials:str = None) -> None:
         self.data = data 
         self.credentials = credentials
 
@@ -57,7 +57,7 @@ class EncryptedPassportElement(BaseObject):
         "translation",
         
     )
-    def __init__(self, type:str, hash:str) -> None:
+    def __init__(self, type:str = None, hash:str = None) -> None:
         self.type = type
         self.hash = hash
         self.data: Optional[str] = None 
@@ -79,7 +79,7 @@ class EncryptedCredentials(BaseObject):
             secret (str): Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption.
     """
 
-    def __init__(self, data:str, hash:str, secret:str):
+    def __init__(self, data:str = None, hash:str = None, secret:str = None) -> None:
         self.data = data
         self.hash = hash
         self.secret = secret
@@ -95,7 +95,7 @@ class PassportElementErrorDataField(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, field_name:str, data_hash:str, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, field_name:str = None, data_hash:str = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.field_name = field_name
@@ -112,7 +112,7 @@ class PassportElementErrorFrontSide(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, file_hash:str, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, file_hash:str = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.file_hash = file_hash
@@ -128,7 +128,7 @@ class PassportElementErrorReverseSide(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, file_hash:str, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, file_hash:str = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.file_hash = file_hash
@@ -144,7 +144,7 @@ class PassportElementErrorSelfie(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, file_hash:str, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, file_hash:str = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.file_hash = file_hash
@@ -160,7 +160,7 @@ class PassportElementErrorFile(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, file_hash:str, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, file_hash:str = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.file_hash = file_hash
@@ -176,7 +176,7 @@ class PassportElementErrorFiles(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, file_hash:list, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, file_hash:list = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.file_hash = file_hash
@@ -192,7 +192,7 @@ class PassportElementErrorTranslationFile(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, file_hash:str, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, file_hash:str = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.file_hash = file_hash
@@ -208,7 +208,7 @@ class PassportElementErrorTranslationFiles(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, file_hash:list, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, file_hash:list = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.file_hash = file_hash
@@ -224,7 +224,7 @@ class PassportElementErrorUnspecified(BaseObject):
             message (str): Error message.
     """
 
-    def __init__(self, source:str, type:str, element_hash:str, message:str) -> None:
+    def __init__(self, source:str = None, type:str = None, element_hash:str = None, message:str = None) -> None:
         self.source = source
         self.type = type
         self.element_hash = element_hash
