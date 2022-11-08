@@ -1,8 +1,8 @@
-from .base import BaseObject
+from autobot.telegram.objects.base import BaseObject
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .message import MessageEntity
+    from autobot.telegram.objects.message import MessageEntity
 
 class InputFile(BaseObject):
     """
@@ -29,7 +29,7 @@ class InputMedia(BaseObject):
         'caption_entities',
     )
     
-    def __init__(self, type: str, media: str) -> None:
+    def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
         self.media = media
         self.thumb: Optional[InputFile] = None
@@ -66,7 +66,7 @@ class InputMediaAnimation(BaseObject):
         "duration"
     )   
 
-    def __init__(self, type: str, media: str) -> None:
+    def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
         self.media = media
         self.thumb: Optional[InputFile] = None
@@ -103,7 +103,7 @@ class InputMediaAudio(BaseObject):
         "title"
     )   
 
-    def __init__(self, type: str, media: str) -> None:
+    def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
         self.media = media
         self.thumb: Optional[InputFile] = None
@@ -136,7 +136,7 @@ class InputMediaDocument(BaseObject):
         "disable_content_type_detection"
     )
 
-    def __init__(self, type: str, media: str) -> None:
+    def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
         self.media = media
         self.thumb: Optional[InputFile] = None
@@ -163,7 +163,7 @@ class InputMediaPhoto(BaseObject):
         "caption_entities"
     )
 
-    def __init__(self, type: str, media: str) -> None:
+    def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
         self.media = media
         self.caption: Optional[str] = None 
@@ -198,7 +198,7 @@ class InputMediaVideo(BaseObject):
         "support_streaming"
     )
 
-    def __init__(self, type: str, media: str) -> None:
+    def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
         self.media = media
         self.thumb: Optional[InputFile] = None
