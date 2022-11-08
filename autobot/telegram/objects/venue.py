@@ -1,5 +1,5 @@
-from .base import BaseObject
-from .location import Location
+from autobot.telegram.objects.base import BaseObject
+from autobot.telegram.objects.location import Location
 from typing import Optional
 
 class Venue(BaseObject):
@@ -34,7 +34,7 @@ class Venue(BaseObject):
         )
     
     
-    def __init__(self, location: Location, title: str, address: str) -> None:
+    def __init__(self, location: Location = None, title: str = None, address: str = None) -> None:
         self.location = location
         self.title = title
         self.address = address
