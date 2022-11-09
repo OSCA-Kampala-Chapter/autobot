@@ -5,6 +5,8 @@ from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from autobot.telegram.objects.message import Message
+    from autobot.telegram.objects.user import User
+    from autobot.telegram.objects.location import Location
 
 class Chat(BaseObject):
     """
@@ -96,19 +98,189 @@ class Chat(BaseObject):
 
     
 class ChatAdministratorRights(BaseObject):
-    pass
+    """
+    This object represents the rights of a chat administrator.
+    
+    Refer to the `Telegram API documentation <https://core.telegram.org/bots/api#chatadministrator>`_ for more information.
+
+    Args:
+        is_anonymous	(bool):	True, if the user's presence in the chat is hidden
+        can_manage_chat	(bool):	True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege
+        can_delete_messages	(bool):	True, if the administrator can delete messages of other users
+        can_manage_video_chats (bool):	True, if the administrator can manage video chats
+        can_restrict_members (bool):	True, if the administrator can restrict, ban or unban chat members
+        can_promote_members	(bool):	True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)
+        can_change_info	(bool):	True, if the user is allowed to change the chat title, photo and other settings
+        can_invite_users (bool): True, if the user is allowed to invite new users to the chat
+        can_post_messages (bool): Optional. True, if the administrator can post in the channel; channels only
+        can_edit_messages (bool): Optional. True, if the administrator can edit messages of other users and can pin messages; channels only
+        can_pin_messages (bool): Optional. True, if the user is allowed to pin messages; groups and supergroups only
+        can_manage_topics (bool): Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+    """
+
+    __slots__ = (
+        'is_anonymous',
+        'can_manage_chat',
+        'can_delete_messages',
+        'can_manage_video_chats',
+        'can_restrict_members',
+        'can_promote_members',
+        'can_change_info',
+        'can_invite_users',
+        'can_post_messages',
+        'can_edit_messages',
+        'can_pin_messages',
+        'can_manage_topics'
+    )
+
+    def __init__(self, is_anonymous: bool = None, can_manage_chat: bool = None, can_delete_messages: bool = None, can_manage_video_chats: bool = None, can_restrict_members: bool = None, can_promote_members: bool = None, can_change_info: bool = None, can_invite_users: bool = None) -> None:
+        self.is_anonymous: Optional[bool] = is_anonymous
+        self.can_manage_chat: Optional[bool] = can_manage_chat
+        self.can_delete_messages: Optional[bool] = can_delete_messages
+        self.can_manage_video_chats: Optional[bool] = can_manage_video_chats
+        self.can_restrict_members: Optional[bool] = can_restrict_members
+        self.can_promote_members: Optional[bool] = can_promote_members
+        self.can_change_info: Optional[bool] = can_change_info
+        self.can_invite_users: Optional[bool] = can_invite_users
+        self.can_post_messages: Optional[bool] = None
+        self.can_edit_messages: Optional[bool] = None
+        self.can_pin_messages: Optional[bool] = None
+        self.can_manage_topics: Optional[bool] = None
     
 class ChatInviteLink(BaseObject):
-    pass
+    """
+    This object represents an invite link for a chat.
+    
+    Refer to the `Telegram API documentation <https://core.telegram.org/bots/api#chatinvitelink>`_ for more information.
+
+    Args:
+        invite_link (str): The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with “…”.
+        creator (User): Creator of the link
+        is_primary (bool): True, if the link is primary
+        is_revoked (bool): True, if the link is revoked
+        expire_date (int): Optional. Point in time (Unix timestamp) when the link will expire or has been expired
+        member_limit (int): Optional. Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+    """
+
+    __slots__ = (
+        'invite_link',
+        'creator',
+        'is_primary',
+        'is_revoked',
+        'expire_date',
+        'member_limit'
+    )
+
+    def __init__(self, invite_link: str = None, creator: User = None, is_primary: bool = None, is_revoked: bool = None) -> None:
+        self.invite_link: Optional[str] = invite_link
+        self.creator: Optional[User] = creator
+        self.is_primary: Optional[bool] = is_primary
+        self.is_revoked: Optional[bool] = is_revoked
+        self.expire_date: Optional[int] = None
+        self.member_limit: Optional[int] = None
     
 class ChatJoinRequest(BaseObject):
-    pass
+    """
+    This object represents a chat member that has joined the chat by an invite link.
+    
+    Refer to the `Telegram API documentation <https://core.telegram.org/bots/api#chatjoinrequest>`_ for more information.
+
+    Args:
+        user (User): User that requested to join the chat
+        status (str): Optional. The member's status in the chat. Can be “creator”, “administrator”, “member”, “restricted”, “left” or “kicked”
+    """
+
+    __slots__ = (
+        'user',
+        'status'
+    )
+
+    def __init__(self, user: User = None) -> None:
+        self.user: Optional[User] = user
+        self.status: Optional[str] = None
     
 class ChatLocation(BaseObject):
-    pass
+    """
+    This object represents a location to which a chat is connected.
+    
+    Refer to the `Telegram API documentation <https://core.telegram.org/bots/api#chatlocation>`_ for more information.
+
+    Args:
+        location (Location): The location to which the supergroup is connected. Can't be a live location.
+        address (str): Location address; 1-64 characters, as defined by the chat owner
+    """
+
+    __slots__ = (
+        'location',
+        'address'
+    )
+
+    def __init__(self, location: Location = None, address: str = None) -> None:
+        self.location: Optional[Location] = location
+        self.address: Optional[str] = address
     
 class ChatPermissions(BaseObject):
-    pass
+    """
+    This object describes actions that a non-administrator user is allowed to take in a chat.
+    
+    Refer to the `Telegram API documentation <https://core.telegram.org/bots/api#chatpermissions>`_ for more information.
+
+    Args:
+        can_send_messages (bool): Optional. True, if the user is allowed to send text messages, contacts, locations and venues
+        can_send_media_messages (bool): Optional. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages
+        can_send_polls (bool): Optional. True, if the user is allowed to send polls, implies can_send_messages
+        can_send_other_messages (bool): Optional. True, if the user is allowed to send animations, games, stickers and use inline bots, implies can_send_media_messages
+        can_add_web_page_previews (bool): Optional. True, if the user is allowed to add web page previews to their messages, implies can_send_media_messages
+        can_change_info (bool): Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
+        can_invite_users (bool): Optional. True, if the user is allowed to invite new users to the chat
+        can_pin_messages (bool): Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
+    """
+
+    __slots__ = (
+        'can_send_messages',
+        'can_send_media_messages',
+        'can_send_polls',
+        'can_send_other_messages',
+        'can_add_web_page_previews',
+        'can_change_info',
+        'can_invite_users',
+        'can_pin_messages'
+    )
+
+    def __init__(self) -> None:
+        self.can_send_messages: Optional[bool] = None
+        self.can_send_media_messages: Optional[bool] = None
+        self.can_send_polls: Optional[bool] = None
+        self.can_send_other_messages: Optional[bool] = None
+        self.can_add_web_page_previews: Optional[bool] = None
+        self.can_change_info: Optional[bool] = None
+        self.can_invite_users: Optional[bool] = None
+        self.can_pin_messages: Optional[bool] = None
+
     
 class ChatPhoto(BaseObject):
-    pass
+    """
+    This object represents a chat photo.
+    
+    Refer to the `Telegram API documentation <https://core.telegram.org/bots/api#chatphoto>`_ for more information.
+
+    Args:
+        small_file_id (str): Unique file identifier of small (160x160) chat photo. This file_id can be used only for photo download.
+        small_file_unique_id (str): Unique file identifier of small (160x160) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+        big_file_id (str): Unique file identifier of big (640x640) chat photo. This file_id can be used only for photo download.
+        big_file_unique_id (str): Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    """
+
+    __slots__ = (
+        'small_file_id',
+        'small_file_unique_id',
+        'big_file_id',
+        'big_file_unique_id'
+    )
+
+    def __init__(self, small_file_id: str = None, small_file_unique_id: str = None, big_file_id: str = None, big_file_unique_id: str = None) -> None:
+        self.small_file_id: Optional[str] = small_file_id
+        self.small_file_unique_id: Optional[str] = small_file_unique_id
+        self.big_file_id: Optional[str] = big_file_id
+        self.big_file_unique_id: Optional[str] = big_file_unique_id
+
