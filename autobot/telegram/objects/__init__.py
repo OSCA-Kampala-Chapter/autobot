@@ -87,9 +87,13 @@ from .voice import Voice
 from .webapp import (WebAppData,
                     WebAppInfo,
                     )
-                    
+from .forumtopic import (ForumTopicCreated,
+                        ForumTopicClosed,
+                        ForumTopicReopened
+                        )
 __all__ = ("Animation",
             "Audio",
+            "BaseObject",
             "BotCommand",
             "BotCommandScope",
             "BotCommandScopeAllChatAdministrators",
