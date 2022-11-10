@@ -114,7 +114,7 @@ class Parser:
         
         return chat_obj
 
-    def _parse_message (self,key:str,val:dict|list) -> Message|MessageId|MessageEntity|MessageAutoDeleteTimerChanged:
+    def _parse_message (self,key:str,val:dict|list) -> Message|MessageEntity|MessageAutoDeleteTimerChanged:
         msg_obj = None
 
         if (key == "message" or
@@ -234,6 +234,8 @@ class Parser:
             msg_obj = MessageAutoDeleteTimerChanged()
             for k,v in val.items():
                 setattr(msg_obj,k,v)
+
+        return msg_obj
 
     # methods to parse games objects
     
