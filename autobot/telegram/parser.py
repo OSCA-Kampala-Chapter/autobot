@@ -209,6 +209,9 @@ class Parser:
                         rep = self._parse_inline(k,v)
                         setattr(msg_obj,k,rep)
 
+                    case _ :
+                        setattr(msg_obj,k,v)
+
 
         elif (
             key == "entities" or
