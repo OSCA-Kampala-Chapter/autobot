@@ -100,47 +100,6 @@ class PassportFile(BaseObject):
         self.file_size = file_size
         self.file_date = file_date
 
-class EncryptedPassportElement(BaseObject):
-    """Describes documents or other Telegram Passport elements shared with the bot by the user.
-
-        Args:
-            type (str): Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”.
-            hash (str): Base64-encoded element hash for using in PassportElementErrorUnspecified
-            data (str): Optional. Base64-encoded encrypted Telegram Passport element data provided by the user, available for “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport” and “address” types. Can be decrypted and verified using the accompanying EncryptedCredentials.
-            phone_number (str):  Optional. User's verified phone number, available only for “phone_number” type.
-            email (str): Optional. User's verified email address, available only for “email” type.
-            files (list): Optional. A list of encrypted files with documents provided by the user, available for “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials.
-            front_side (PassportFile): Optional. Encrypted file with the front side of the document, provided by the user. Available for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials.
-            reverse_side (PassportFile): Optional. Encrypted file with the reverse side of the document, provided by the user. Available for “driver_license” and “identity_card”. The file can be decrypted and verified using the accompanying EncryptedCredentials.
-            selfie (PassportFile): Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying EncryptedCredentials.
-            translation (list): Optional. A list of encrypted files with translated versions of documents provided by the user. Available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying EncryptedCredentials.
-
-    """
-    __slots__ = (
-        "type",
-        "hash",
-        "data",
-        "phone_number",
-        "email",
-        "files",
-        "front_side",
-        "reverse_side",
-        "selfie",
-        "translation",
-        
-    )
-    def __init__(self, type:str = None, hash:str = None) -> None:
-        self.type = type
-        self.hash = hash
-        self.data: Optional[str] = None 
-        self.phone_number: Optional[str] = None 
-        self.email: Optional[str] = None 
-        self.files: Optional[list[PassportFile]] = None
-        self.front_side: Optional[PassportFile] = None 
-        self.reverse_side: Optional[PassportFile] = None 
-        self.selfie: Optional[PassportFile] = None 
-        self.translation: Optional[list[PassportFile]] = None 
-
 
 class EncryptedCredentials(BaseObject):
     """Describes data required for decrypting and authenticating EncryptedPassportElement.
