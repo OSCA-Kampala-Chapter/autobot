@@ -5,6 +5,9 @@ from autobot.telegram.passport.objects import *
 from autobot.telegram.payments.objects import *
 from autobot.telegram.stickers.objects import *
 
+
+InlineQueryResults = list[InlineQueryResult, InlineQueryResultArticle, InlineQueryResultAudio, InlineQueryResultCachedAudio, InlineQueryResultCachedDocument, InlineQueryResultCachedGif, InlineQueryResultCachedMpeg4Gif, InlineQueryResultCachedPhoto, InlineQueryResultCachedSticker, InlineQueryResultCachedVideo, InlineQueryResultCachedVoice, InlineQueryResultContact, InlineQueryResultDocument, InlineQueryResultGame, InlineQueryResultGif, InlineQueryResultLocation, InlineQueryResultMpeg4Gif, InlineQueryResultPhoto, InlineQueryResultVenue, InlineQueryResultVideo, InlineQueryResultVoice]
+
 class Parser:
     
     # methods to parse general telegram objects
@@ -20,7 +23,7 @@ class Parser:
                     setattr(update_obj,k,msg)
                     
                 case "inline_query"|"chosen_inline_result":
-                    qry = self._parse_inline(k,v)
+                    qry = self._parse_inlinekeyboardobjects(k,v)
                     setattr(update_obj,k,qry)
                     
                 case "callback_query":
@@ -206,7 +209,7 @@ class Parser:
                         setattr(msg_obj,k,web_app)
 
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(msg_obj,k,rep)
 
                     case _ :
@@ -263,7 +266,7 @@ class Parser:
     
     
     # methods to parse inline objects
-    def _parse_inlinequeryresults (self,key:str,val:dict) -> InlineQueryResult|InlineQueryResultArticle|InlineQueryResultAudio|InlineQueryResultCachedAudio|InlineQueryResultCachedDocument|InlineQueryResultCachedGif|InlineQueryResultCachedMpeg4Gif|InlineQueryResultCachedPhoto|InlineQueryResultCachedSticker|InlineQueryResultCachedVideo|InlineQueryResultCachedVoice|InlineQueryResultContact|InlineQueryResultDocument|InlineQueryResultGame|InlineQueryResultGif|InlineQueryResultLocation|InlineQueryResultMpeg4Gif|InlineQueryResultPhoto|InlineQueryResultVenue|InlineQueryResultVideo|InlineQueryResultVoice:
+    def _parse_inlinequeryresults (self,key:str,val:dict) -> InlineQueryResults:
         inline_obj = None
 
         if (key == "inline_query_result"):
@@ -276,7 +279,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -290,7 +293,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -305,7 +308,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -320,7 +323,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -335,7 +338,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -350,7 +353,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -365,7 +368,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -380,7 +383,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -395,7 +398,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -410,7 +413,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -425,7 +428,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlin
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -440,7 +443,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -452,7 +455,7 @@ class Parser:
                     case "game_short_name":
                         setattr(inline_obj,k,v)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -469,7 +472,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -484,7 +487,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -501,7 +504,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -518,7 +521,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -535,7 +538,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -552,7 +555,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -569,7 +572,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
