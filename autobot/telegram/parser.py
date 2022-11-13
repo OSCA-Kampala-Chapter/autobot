@@ -317,12 +317,12 @@ class Parser:
         passport_obj = PassportData()
         for k,v in val.items():
             match k:
-                case "encrypted_data":
-                    enc_data = self._parse_encryptedpassportelement(k,v)
-                    setattr(passport_obj,k,enc_data)
                 case "data":
                     data = self._parse_passportelement(k,v)
                     setattr(passport_obj,k,data)
+                case "credentials":
+                    cred = self._parse_encryptedcredentials(k,v)
+                    setattr(passport_obj,k,cred)
                 case _:
                     setattr(passport_obj,k,v)
         return passport_obj
