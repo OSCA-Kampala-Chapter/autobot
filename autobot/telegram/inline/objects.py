@@ -759,7 +759,7 @@ class InlineQueryResultPhoto(InlineQueryResult):
                 "input_message_content",
                 "reply_markup",
                 )
-    def __init__ (self, id: str, photo_url: str, thumb_url: str, type: str = "photo") -> None:
+    def __init__ (self, id: str = None, photo_url: str = None, thumb_url: str = None, type: str = "photo") -> None:
         self.id = id
         self.type = type
         self.photo_url = photo_url
