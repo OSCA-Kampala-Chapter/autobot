@@ -238,9 +238,32 @@ class Parser:
         return msg_obj
 
     # methods to parse games objects
+    def _parse_game (self,key:str,val:dict) -> Game|GameHighScore:
+        game_obj = None
+
+        if (key == "game"):
+            game_obj = Game()
+            for k,v in val.items():
+                match k:
+                    case "photo":
+                        pht = self._parse_photosize(k,v)
+                        setattr(game_obj,k,pht)
+                    case "animation":
+                        anim = self._parse_animation(k,v)
+                        setattr(game_obj,k,anim)
+                    case _:
+                        setattr(game_obj,k,v)
+
+        elif (key == "game_high_score"):
+            game_obj = GameHighScore()
+            for k,v in val.items():
+                setattr(game_obj,k,v)
+
+        return game_obj
     
     
     # methods to parse inline objects
+    
     
     
     # methods to parse passport objects
