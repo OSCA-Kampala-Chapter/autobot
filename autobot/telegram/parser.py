@@ -263,14 +263,114 @@ class Parser:
     
     
     # methods to parse inline objects
+    def _parse_inline (self,key:str,val:dict) -> InlineKeyboardMarkup|InlineQueryResult|InputMessageContent:
+        inline_obj = None
+
+        if (key == "reply_markup"):
+            inline_obj = InlineKeyboardMarkup()
+            for k,v in val.items():
+                match k:
+                    case "inline_keyboard":
+                        inline_keyboard = self._parse_inlinekeyboardbutton(k,v)
+                        setattr(inline_obj,k,inline_keyboard)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result"):
+            inline_obj = InlineQueryResult()
+            for k,v in val.items():
+                match k:
+                    case "thumb_url"|"thumb_width"|"thumb_height":
+                        thumb = self._parse_thumb(k,v)
+                        setattr(inline_obj,k,thumb)
+                    case "input_message_content":
+                        input_msg = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,input_msg)
+                    case "reply_markup":
+                        inline_keyboard = self._parse_inlinekeyboardmarkup(k,v)
+                        setattr(inline_obj,k,inline_keyboard)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "input_message_content"):
+            inline_obj = InputMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "location":
+                        loc = self._parse_location(k,v)
+                        setattr(inline_obj,k,loc)
+                    case "venue":
+                        ven = self._parse_venue(k,v)
+                        setattr(inline_obj,k,ven)
+                    case "contact":
+                        cont = self._parse_contact(k,v)
+                        setattr(inline_obj,k,cont)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        return inline_obj
     
     
     
     # methods to parse passport objects
+    def _parse_passport (self,key:str,val:dict) -> PassportData:
+        passport_obj = PassportData()
+        for k,v in val.items():
+            match k:
+                case "encrypted_data":
+                    enc_data = self._parse_encryptedpassportelement(k,v)
+                    setattr(passport_obj,k,enc_data)
+                case "data":
+                    data = self._parse_passportelement(k,v)
+                    setattr(passport_obj,k,data)
+                case _:
+                    setattr(passport_obj,k,v)
+        return passport_obj
     
     
     # methods to parse payment objects
+    def _parse_payments (self,key:str,val:dict) -> Invoice|SuccessfulPayment:
+        payment_obj = None
+
+        if (key == "invoice"):
+            payment_obj = Invoice()
+            for k,v in val.items():
+                setattr(payment_obj,k,v)
+
+        elif (key == "successful_payment"):
+            payment_obj = SuccessfulPayment()
+            for k,v in val.items():
+                setattr(payment_obj,k,v)
+
+        return payment_obj
     
     
     # methods to parse sticker objects
+    def _parse_sticker (self,key:str,val:dict) -> Sticker|StickerSet:
+        sticker_obj = None
+
+        if (key == "sticker"):
+            sticker_obj = Sticker()
+            for k,v in val.items():
+                match k:
+                    case "thumb":
+                        thumb = self._parse_photosize(k,v)
+                        setattr(sticker_obj,k,thumb)
+                    case "mask_position":
+                        mask_pos = self._parse_maskposition(k,v)
+                        setattr(sticker_obj,k,mask_pos)
+                    case _:
+                        setattr(sticker_obj,k,v)
+
+        elif (key == "sticker_set"):
+            sticker_obj = StickerSet()
+            for k,v in val.items():
+                match k:
+                    case "thumb":
+                        thumb = self._parse_photosize(k,v)
+                        setattr(sticker_obj,k,thumb)
+                    case _:
+                        setattr(sticker_obj,k,v)
+
+        return sticker_obj
 
