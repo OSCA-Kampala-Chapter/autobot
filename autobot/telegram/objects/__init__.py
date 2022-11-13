@@ -35,6 +35,10 @@ from .dice import Dice
 from .document import Document
 from .file import File
 from .forcereply import ForceReply
+from .forumtopic import (ForumTopicClosed,
+                        ForumTopicCreated,
+                        ForumTopicReopened,
+                        )
 from .inlinekeyboard import (InlineKeyboardButton,
                             InlineKeyboardMarkup,
                             )
@@ -124,6 +128,9 @@ __all__ = ("Animation",
             "Document",
             "File",
             "ForceReply",
+            "ForumTopicClosed",
+            "ForumTopicCreated",
+            "ForumTopicReopened",
             "InlineKeyboardButton",
             "InlineKeyboardMarkup",
             "InputFile",
