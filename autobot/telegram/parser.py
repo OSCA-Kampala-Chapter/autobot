@@ -575,6 +575,61 @@ class Parser:
                         setattr(inline_obj,k,v)
 
         return inline_obj
+
+    def _parse_inlinekeyboardobjects(self,key,val) -> InlineKeyboardButton|InlineKeyboardMarkup:
+        if (key == "inline_keyboard_button"):
+            inline_obj = InlineKeyboardButton()
+            for k,v in val.items():
+                match k:
+                    case "text"|"url"|"callback_data"|"switch_inline_query"|"switch_inline_query_current_chat"|"callback_game"|"pay":
+                        setattr(inline_obj,k,v)
+                    case _:
+                        setattr(inline_obj,k,v)
+        elif (key == "inline_keyboard_markup"):
+            inline_obj = InlineKeyboardMarkup()
+            for k,v in val.items():
+                match k:
+                    case "inline_keyboard":
+                        setattr(inline_obj,k,self._parse_inlinekeyboard(v))
+                    case _:
+                        setattr(inline_obj,k,v)
+        return inline_obj
+
+
+    def _parse_inputemessagecontents(self,key,val) -> InputMessageContent:
+        if (key == "input_text_message_content"):
+            input_obj = InputTextMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "message_text"|"parse_mode"|"disable_web_page_preview":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        elif (key == "input_location_message_content"):
+            input_obj = InputLocationMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "latitude"|"longitude":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        elif (key == "input_venue_message_content"):
+            input_obj = InputVenueMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "latitude"|"longitude"|"title"|"address"|"foursquare_id":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        elif (key == "input_contact_message_content"):
+            input_obj = InputContactMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "phone_number"|"first_name"|"last_name":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        return input_obj
     
     
     # methods to parse passport objects
