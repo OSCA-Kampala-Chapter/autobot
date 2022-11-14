@@ -5,6 +5,9 @@ from autobot.telegram.passport.objects import *
 from autobot.telegram.payments.objects import *
 from autobot.telegram.stickers.objects import *
 
+
+InlineQueryResults = list[InlineQueryResult, InlineQueryResultArticle, InlineQueryResultAudio, InlineQueryResultCachedAudio, InlineQueryResultCachedDocument, InlineQueryResultCachedGif, InlineQueryResultCachedMpeg4Gif, InlineQueryResultCachedPhoto, InlineQueryResultCachedSticker, InlineQueryResultCachedVideo, InlineQueryResultCachedVoice, InlineQueryResultContact, InlineQueryResultDocument, InlineQueryResultGame, InlineQueryResultGif, InlineQueryResultLocation, InlineQueryResultMpeg4Gif, InlineQueryResultPhoto, InlineQueryResultVenue, InlineQueryResultVideo, InlineQueryResultVoice]
+
 class Parser:
     
     # methods to parse general telegram objects
@@ -20,7 +23,7 @@ class Parser:
                     setattr(update_obj,k,msg)
                     
                 case "inline_query"|"chosen_inline_result":
-                    qry = self._parse_inline(k,v)
+                    qry = self._parse_inlinekeyboardobjects(k,v)
                     setattr(update_obj,k,qry)
                     
                 case "callback_query":
@@ -206,7 +209,7 @@ class Parser:
                         setattr(msg_obj,k,web_app)
 
                     case "reply_markup":
-                        rep = self._parse_inline(k,v)
+                        rep = self._parse_inlinekeyboardobjects(k,v)
                         setattr(msg_obj,k,rep)
 
                     case _ :
@@ -238,16 +241,459 @@ class Parser:
         return msg_obj
 
     # methods to parse games objects
+    def _parse_game (self,key:str,val:dict) -> Game|GameHighScore:
+        game_obj = None
+
+        if (key == "game"):
+            game_obj = Game()
+            for k,v in val.items():
+                match k:
+                    case "photo":
+                        pht = self._parse_photosize(k,v)
+                        setattr(game_obj,k,pht)
+                    case "animation":
+                        anim = self._parse_animation(k,v)
+                        setattr(game_obj,k,anim)
+                    case _:
+                        setattr(game_obj,k,v)
+
+        elif (key == "game_high_score"):
+            game_obj = GameHighScore()
+            for k,v in val.items():
+                setattr(game_obj,k,v)
+
+        return game_obj
     
     
     # methods to parse inline objects
+    def _parse_inlinequeryresults (self,key:str,val:dict) -> InlineQueryResults:
+        inline_obj = None
+
+        if (key == "inline_query_result"):
+            inline_obj = InlineQueryResult()
+            for k,v in val.items():
+                match k:
+                    case "photo_url"|"thumb_url"|"gif_url"|"mpeg4_url"|"video_url"|"audio_url"|"voice_url"|"document_url"|"sticker_url"|"photo_file_id"|"gif_file_id"|"mpeg4_file_id"|"video_file_id"|"audio_file_id"|"voice_file_id"|"document_file_id"|"sticker_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+    
+        elif (key == "inline_query_result_article"):
+            inline_obj = InlineQueryResultArticle()
+            for k,v in val.items():
+                match k:
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_audio"):
+            inline_obj = InlineQueryResultAudio()
+            for k,v in val.items():
+                match k:
+                    case "audio_url"|"thumb_url":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_audio"):
+            inline_obj = InlineQueryResultCachedAudio()
+            for k,v in val.items():
+                match k:
+                    case "audio_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_document"):
+            inline_obj = InlineQueryResultCachedDocument()
+            for k,v in val.items():
+                match k:
+                    case "document_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_gif"):
+            inline_obj = InlineQueryResultCachedGif()
+            for k,v in val.items():
+                match k:
+                    case "gif_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_mpeg4_gif"):
+            inline_obj = InlineQueryResultCachedMpeg4Gif()
+            for k,v in val.items():
+                match k:
+                    case "mpeg4_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_photo"):
+            inline_obj = InlineQueryResultCachedPhoto()
+            for k,v in val.items():
+                match k:
+                    case "photo_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_sticker"):
+            inline_obj = InlineQueryResultCachedSticker()
+            for k,v in val.items():
+                match k:
+                    case "sticker_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_video"):
+            inline_obj = InlineQueryResultCachedVideo()
+            for k,v in val.items():
+                match k:
+                    case "video_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_cached_voice"):
+            inline_obj = InlineQueryResultCachedVoice()
+            for k,v in val.items():
+                match k:
+                    case "voice_file_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlin
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_contact"):
+            inline_obj = InlineQueryResultContact()
+            for k,v in val.items():
+                match k:
+                    case "phone_number"|"first_name"|"last_name"|"thumb_url":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_game"):
+            inline_obj = InlineQueryResultGame()
+            for k,v in val.items():
+                match k:
+                    case "game_short_name":
+                        setattr(inline_obj,k,v)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_gif"):
+            inline_obj = InlineQueryResultGif()
+            for k,v in val.items():
+                match k:
+                    case "gif_url"|"thumb_url"|"title"|"caption":
+                        setattr(inline_obj,k,v)
+                    case "gif_width"|"gif_height"|"gif_duration":
+                        setattr(inline_obj,k,int(v))
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_location"):
+            inline_obj = InlineQueryResultLocation()
+            for k,v in val.items():
+                match k:
+                    case "latitude"|"longitude"|"title"|"thumb_url":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_mpeg4_gif"):
+            inline_obj = InlineQueryResultMpeg4Gif()
+            for k,v in val.items():
+                match k:
+                    case "mpeg4_url"|"thumb_url"|"title"|"caption":
+                        setattr(inline_obj,k,v)
+                    case "mpeg4_width"|"mpeg4_height"|"mpeg4_duration":
+                        setattr(inline_obj,k,int(v))
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_photo"):
+            inline_obj = InlineQueryResultPhoto()
+            for k,v in val.items():
+                match k:
+                    case "photo_url"|"thumb_url"|"title"|"caption":
+                        setattr(inline_obj,k,v)
+                    case "photo_width"|"photo_height":
+                        setattr(inline_obj,k,int(v))
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_venue"):
+            inline_obj = InlineQueryResultVenue()
+            for k,v in val.items():
+                match k:
+                    case "latitude"|"longitude"|"title"|"address"|"thumb_url":
+                        setattr(inline_obj,k,v)
+                    case "foursquare_id":
+                        setattr(inline_obj,k,v)
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_video"):
+            inline_obj = InlineQueryResultVideo()
+            for k,v in val.items():
+                match k:
+                    case "video_url"|"mime_type"|"thumb_url"|"title"|"caption":
+                        setattr(inline_obj,k,v)
+                    case "video_width"|"video_height"|"video_duration":
+                        setattr(inline_obj,k,int(v))
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        elif (key == "inline_query_result_voice"):
+            inline_obj = InlineQueryResultVoice()
+            for k,v in val.items():
+                match k:
+                    case "voice_url"|"title"|"caption":
+                        setattr(inline_obj,k,v)
+                    case "voice_duration":
+                        setattr(inline_obj,k,int(v))
+                    case "input_message_content":
+                        imc = self._parse_inputmessagecontent(k,v)
+                        setattr(inline_obj,k,imc)
+                    case "reply_markup":
+                        rep = self._parse_inlinekeyboardobjects(k,v)
+                        setattr(inline_obj,k,rep)
+                    case _:
+                        setattr(inline_obj,k,v)
+
+        return inline_obj
+
+    def _parse_inlinekeyboardobjects(self,key,val) -> InlineKeyboardButton|InlineKeyboardMarkup:
+        if (key == "inline_keyboard_button"):
+            inline_obj = InlineKeyboardButton()
+            for k,v in val.items():
+                match k:
+                    case "text"|"url"|"callback_data"|"switch_inline_query"|"switch_inline_query_current_chat"|"callback_game"|"pay":
+                        setattr(inline_obj,k,v)
+                    case _:
+                        setattr(inline_obj,k,v)
+        elif (key == "inline_keyboard_markup"):
+            inline_obj = InlineKeyboardMarkup()
+            for k,v in val.items():
+                match k:
+                    case "inline_keyboard":
+                        setattr(inline_obj,k,self._parse_inlinekeyboard(v))
+                    case _:
+                        setattr(inline_obj,k,v)
+        return inline_obj
+
+
+    def _parse_inputemessagecontents(self,key,val) -> InputMessageContent:
+        if (key == "input_text_message_content"):
+            input_obj = InputTextMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "message_text"|"parse_mode"|"disable_web_page_preview":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        elif (key == "input_location_message_content"):
+            input_obj = InputLocationMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "latitude"|"longitude":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        elif (key == "input_venue_message_content"):
+            input_obj = InputVenueMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "latitude"|"longitude"|"title"|"address"|"foursquare_id":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        elif (key == "input_contact_message_content"):
+            input_obj = InputContactMessageContent()
+            for k,v in val.items():
+                match k:
+                    case "phone_number"|"first_name"|"last_name":
+                        setattr(input_obj,k,v)
+                    case _:
+                        setattr(input_obj,k,v)
+        return input_obj
     
     
     # methods to parse passport objects
+    def _parse_passport (self,key:str,val:dict) -> PassportData:
+        passport_obj = PassportData()
+        for k,v in val.items():
+            match k:
+                case "data":
+                    data = self._parse_passportelement(k,v)
+                    setattr(passport_obj,k,data)
+                case "credentials":
+                    cred = self._parse_encryptedcredentials(k,v)
+                    setattr(passport_obj,k,cred)
+                case _:
+                    setattr(passport_obj,k,v)
+        return passport_obj
     
     
     # methods to parse payment objects
+    def _parse_payments (self,key:str,val:dict) -> Invoice|SuccessfulPayment:
+        payment_obj = None
+
+        if (key == "invoice"):
+            payment_obj = Invoice()
+            for k,v in val.items():
+                setattr(payment_obj,k,v)
+
+        elif (key == "successful_payment"):
+            payment_obj = SuccessfulPayment()
+            for k,v in val.items():
+                setattr(payment_obj,k,v)
+
+        return payment_obj
     
     
     # methods to parse sticker objects
+    def _parse_sticker (self,key:str,val:dict) -> Sticker|StickerSet:
+        sticker_obj = None
+
+        if (key == "sticker"):
+            sticker_obj = Sticker()
+            for k,v in val.items():
+                match k:
+                    case "thumb":
+                        thumb = self._parse_photosize(k,v)
+                        setattr(sticker_obj,k,thumb)
+                    case "mask_position":
+                        mask_pos = self._parse_maskposition(k,v)
+                        setattr(sticker_obj,k,mask_pos)
+                    case _:
+                        setattr(sticker_obj,k,v)
+
+        elif (key == "sticker_set"):
+            sticker_obj = StickerSet()
+            for k,v in val.items():
+                match k:
+                    case "thumb":
+                        thumb = self._parse_photosize(k,v)
+                        setattr(sticker_obj,k,thumb)
+                    case _:
+                        setattr(sticker_obj,k,v)
+
+        return sticker_obj
 
