@@ -48,9 +48,10 @@ class TestInstances:
 
                         # quick fix
                         if not hasattr(obj,attr):
-                            if attr == "from" and obj == "Message":
+                            if attr == "from":
                                 pass
-                            missing_args.append(attr)
+                            else:
+                                missing_args.append(attr)
 
                         setattr(obj,attr,None) # this is not supposed to assign attributes not in __slots__, but it does.
 
