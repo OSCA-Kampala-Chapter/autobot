@@ -27,6 +27,7 @@ scanned_objs = []
 
 
 class TestInstances:
+    fail = False
 
     def test_all_objects (self):
         missing_objs = []
@@ -44,8 +45,15 @@ class TestInstances:
                     for bot_field in bot_obj["fields"]:
                         attr = bot_field["name"]
                         print(f"found {attr}")
-                        setattr(obj,attr,None)
-                    print("DONE !!!")
+
+                        # quick fix
+                        if not hasattr(obj,attr):
+                            if attr == "from" and obj == "Message":
+                                pass
+                            missing_args.append(attr)
+
+                        setattr(obj,attr,None) # this is not supposed to assign attributes not in __slots__, but it does.
+
                 except AttributeError:
                     if (attr == "from"):
                         print("found from")
@@ -63,6 +71,9 @@ class TestInstances:
                     for missing in missing_args:
                         print(f"  missing {missing}  ".center(80,"X"))
                     objs_missing_args.append((cnt,gen_obj))
+
+                if objs_missing_args or missing_objs:
+                    self.fail = True
 
             scanned_objs.append(gen_obj)
             cnt += 1
@@ -84,3 +95,5 @@ class TestInstances:
 if __name__ == "__main__":
     test = TestInstances()
     test.test_all_objects()
+    if test.fail:
+        sys.exit(1)
