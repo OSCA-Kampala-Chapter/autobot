@@ -96,5 +96,4 @@ class TestInstances:
 if __name__ == "__main__":
     test = TestInstances()
     test.test_all_objects()
-    if test.fail:
-        sys.exit(1)
+    
