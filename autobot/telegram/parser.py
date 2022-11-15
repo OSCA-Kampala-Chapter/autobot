@@ -697,3 +697,169 @@ class Parser:
 
         return sticker_obj
 
+
+    def _parse_animations(self,key:str,val:dict) -> Animation:
+        animation_obj = Animation()
+        for k,v in val.items():
+            match k:
+                case "thumb":
+                    thumb = self._parse_photosize(k,v)
+                    setattr(animation_obj,k,thumb)
+
+                case "file_name"|"mime_type":
+                    setattr(animation_obj,k,v)
+
+                case "file_size":
+                    setattr(animation_obj,k,int(v))
+                case _:
+                    setattr(animation_obj,k,v)
+        return animation_obj
+
+    
+    def _parse_audio(self,key:str,val:dict) -> Audio:
+        audio_obj = Audio()
+        for k,v in val.items():
+            match k:
+                case "performer"|"title":
+                    setattr(audio_obj,k,v)
+
+                case "file_size":
+                    setattr(audio_obj,k,int(v))
+                case _:
+                    setattr(audio_obj,k,v)
+        return audio_obj
+
+
+    def _parse_video(self,key:str,val:dict) -> Video:
+        video_obj = Video()
+        for k,v in val.items():
+            match k:
+                case "thumb":
+                    thumb = self._parse_photosize(k,v)
+                    setattr(video_obj,k,thumb)
+
+                case "file_name"|"mime_type":
+                    setattr(video_obj,k,v)
+
+                case "file_size":
+                    setattr(video_obj,k,int(v))
+                case _:
+                    setattr(video_obj,k,v)
+        return video_obj
+
+    def _parse_venue(self,key:str,val:dict) -> Venue:
+        venue_obj = Venue()
+        for k,v in val.items():
+            match k:
+                case "location":
+                    loc = self._parse_location(k,v)
+                    setattr(venue_obj,k,loc)
+                case "title"|"address"|"foursquare_id":
+                    setattr(venue_obj,k,v)
+                case _:
+                    setattr(venue_obj,k,v)
+        return venue_obj
+
+    def _parse_photosize(self,key:str,val:dict) -> PhotoSize:
+        photosize_obj = PhotoSize()
+        for k,v in val.items():
+            match k:
+                case "file_size":
+                    setattr(photosize_obj,k,int(v))
+                case _:
+                    setattr(photosize_obj,k,v)
+        return photosize_obj
+
+    def _parse_location(self,key:str,val:dict) -> Location:
+        location_obj = Location()
+        for k,v in val.items():
+            match k:
+                case "longitude"|"latitude":
+                    setattr(location_obj,k,v)
+                case _:
+                    setattr(location_obj,k,v)
+        return location_obj
+
+
+    def _parse_contact(self,key:str,val:dict) -> Contact:
+        contact_obj = Contact()
+        for k,v in val.items():
+            match k:
+                case "phone_number"|"first_name"|"last_name":
+                    setattr(contact_obj,k,v)
+                case _:
+                    setattr(contact_obj,k,v)
+        return contact_obj
+
+    def _parse_proximityalerttriggered(self,key:str,val:dict) -> ProximityAlertTriggered:
+        proximityalerttriggered_obj = ProximityAlertTriggered()
+        for k,v in val.items():
+            match k:
+                case "traveler"|"watcher"|"distance":
+                    setattr(proximityalerttriggered_obj,k,v)
+                case _:
+                    setattr(proximityalerttriggered_obj,k,v)
+        return proximityalerttriggered_obj
+
+    def _parse_login_url(self,key:str,val:dict) -> LoginUrl:
+        loginurl_obj = LoginUrl()
+        for k,v in val.items():
+            match k:
+                case "url"|"forward_text"|"bot_username"|"request_write_access":
+                    setattr(loginurl_obj,k,v)
+                case _:
+                    setattr(loginurl_obj,k,v)
+        return loginurl_obj
+
+
+    def _parse_maskposition(self,key:str,val:dict) -> MaskPosition:
+        maskposition_obj = MaskPosition()
+        for k,v in val.items():
+            match k:
+                case "point"|"x_shift"|"y_shift"|"scale":
+                    setattr(maskposition_obj,k,v)
+                case _:
+                    setattr(maskposition_obj,k,v)
+        return maskposition_obj
+
+    def _parse_inlinekeyboardbutton(self,key:str,val:dict) -> InlineKeyboardButton:
+        inlinekeyboardbutton_obj = InlineKeyboardButton()
+        for k,v in val.items():
+            match k:
+                case "text"|"url"|"callback_data"|"switch_inline_query"|"switch_inline_query_current_chat"|"callback_game"|"pay":
+                    setattr(inlinekeyboardbutton_obj,k,v)
+                case _:
+                    setattr(inlinekeyboardbutton_obj,k,v)
+        return inlinekeyboardbutton_obj
+
+    def _parse_poll(self,key:str,val:dict) -> Poll:
+        poll_obj = None
+        
+        if (key == "poll"):
+            poll_obj = Poll()
+            for k,v in val.items():
+                match k:
+                    case "options":
+                        options = []
+                        for option in v:
+                            options.append(self._parse_polloption(k,option))
+                        setattr(poll_obj,k,options)
+                    case _:
+                        setattr(poll_obj,k,v)
+        elif (key == "poll_answer"):
+            poll_obj = PollAnswer()
+            for k,v in val.items():
+                match k:
+                    case "poll_id"|"user"|"option_ids":
+                        setattr(poll_obj,k,v)
+                    case _:
+                        setattr(poll_obj,k,v)
+        elif (key == "poll_option"):
+            poll_obj = PollOption()
+            for k,v in val.items():
+                match k:
+                    case "text":
+                        setattr(poll_obj,k,v)
+                    case _:
+                        setattr(poll_obj,k,v)
+        return poll_obj
