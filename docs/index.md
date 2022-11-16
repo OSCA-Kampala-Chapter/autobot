@@ -1,6 +1,15 @@
 # Welcome to autobot Documentation
 
+theme:
+    name: mkdocs-material
+    hljs_languages:
+        - yaml
+        - pyhton
+        - markdown
+        
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+
+[Subscribe to our newsletter](#){ .md-button .md-button--primary }
 
 ## Commands
 
@@ -15,3 +24,4 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
     docs/
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
+
