@@ -9,6 +9,7 @@ The events system of autobot contains
 The event system is also back-pressured and implements a 
 custom back-pressure protocol centered around state of the processor
 """
+from .events import Event
 
 class OverLoadedError(Exception):
     """

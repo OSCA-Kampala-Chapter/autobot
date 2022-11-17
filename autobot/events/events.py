@@ -9,8 +9,8 @@ __all__ = ("Event")
 
 class Event:
     
-    __slots__ = ("type","param")
+    __slots__ = ("event_type","event_values")
     
-    def __init__ (self,event_type:str = None, event_param:tuple = None):
+    def __init__ (self,event_type:str = None, event_values:tuple = None):
         self.event_type = event_type
-        self.event_param = event_param
+        self.event_values = event_values
