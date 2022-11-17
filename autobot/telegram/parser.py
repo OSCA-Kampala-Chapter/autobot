@@ -705,12 +705,6 @@ class Parser:
                 case "thumb":
                     thumb = self._parse_photosize(k,v)
                     setattr(animation_obj,k,thumb)
-
-                case "file_name"|"mime_type":
-                    setattr(animation_obj,k,v)
-
-                case "file_size":
-                    setattr(animation_obj,k,int(v))
                 case _:
                     setattr(animation_obj,k,v)
         return animation_obj
