@@ -819,11 +819,7 @@ class Parser:
     def _parse_inlinekeyboardbutton(self,key:str,val:dict) -> InlineKeyboardButton:
         inlinekeyboardbutton_obj = InlineKeyboardButton()
         for k,v in val.items():
-            match k:
-                case "text"|"url"|"callback_data"|"switch_inline_query"|"switch_inline_query_current_chat"|"callback_game"|"pay":
-                    setattr(inlinekeyboardbutton_obj,k,v)
-                case _:
-                    setattr(inlinekeyboardbutton_obj,k,v)
+            setattr(inlinekeyboardbutton_obj,k,v)
         return inlinekeyboardbutton_obj
 
     def _parse_poll(self,key:str,val:dict) -> Poll:
