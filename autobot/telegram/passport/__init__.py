@@ -1,4 +1,5 @@
 from .objects import (PassportData,
+                    PassportElementError,
                     PassportElementErrorDataField,
                     PassportElementErrorFile,
                     PassportElementErrorFiles,
@@ -15,6 +16,7 @@ from .objects import (PassportData,
 
 __all__ = (
     "PassportData",
+    "PassportElementError",
     "PassportElementErrorDataField",
     "PassportElementErrorFile",
     "PassportElementErrorFiles",
