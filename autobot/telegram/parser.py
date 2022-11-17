@@ -698,7 +698,7 @@ class Parser:
         return sticker_obj
 
 
-    def _parse_animations(self,key:str,val:dict) -> Animation:
+    def _parse_animation(self,key:str,val:dict) -> Animation:
         animation_obj = Animation()
         for k,v in val.items():
             match k:
