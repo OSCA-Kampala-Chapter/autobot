@@ -4,7 +4,6 @@ theme:
     name: mkdocs-material
     hljs_languages:
         - yaml
-        - pyhton
         - markdown
         
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
