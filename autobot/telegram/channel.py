@@ -1,25 +1,24 @@
 from typing import Protocol
 from abc import abstractmethod
-import httpx
 
-__all__ = ("Connection","Connector")
+__all__ = ("BaseChannel","Channel")
 
-class Connection (Protocol):
+class BaseChannel (Protocol):
     """
-    Base class for the Connector object. It provides
+    Base class for the Channel object. It provides
     two methods `get` and `post` which should be implemented
     by the concrete classes
     """
     
     @abstractmethod
-    def get (self,url,header,body):
+    def get (self):
         raise NotImplementedError
      
     @abstractmethod
-    def post (self,url,header,body):
+    def post (self,resp):
         raise NotImplementedError
         
         
-class Connector (Connection):
+class Channel (BaseChannel):
     pass
     
