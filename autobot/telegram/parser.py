@@ -777,11 +777,7 @@ class Parser:
     def _parse_location(self,key:str,val:dict) -> Location:
         location_obj = Location()
         for k,v in val.items():
-            match k:
-                case "longitude"|"latitude":
-                    setattr(location_obj,k,v)
-                case _:
-                    setattr(location_obj,k,v)
+            setattr(location_obj,k,v)
         return location_obj
 
 
