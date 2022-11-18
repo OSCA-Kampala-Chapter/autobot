@@ -839,11 +839,7 @@ class Parser:
     def _parse_polloption(self,key:str,val:dict) -> PollOption:
         polloption_obj = PollOption()
         for k,v in val.items():
-            match k:
-                case "text":
-                    setattr(polloption_obj,k,v)
-                case _:
-                    setattr(polloption_obj,k,v)
+            setattr(polloption_obj,k,v)
         return polloption_obj
 
     def _parse_document(self,key:str,val:dict) -> Document:
@@ -860,11 +856,7 @@ class Parser:
     def _parse_webapp(self,key:str,val:dict) -> WebAppData:
         webapp_obj = WebAppData()
         for k,v in val.items():
-            match k:
-                case "url"|"title"|"hide_url"|"description"|"thumb_url"|"thumb_width"|"thumb_height":
-                    setattr(webapp_obj,k,v)
-                case _:
-                    setattr(webapp_obj,k,v)
+            setattr(webapp_obj,k,v)
         return webapp_obj
 
     def _parse_callbackquery(self,key:str,val:dict) -> CallBackQuery:
