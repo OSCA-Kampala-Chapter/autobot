@@ -724,21 +724,39 @@ class Parser:
         return audio_obj
 
 
-    def _parse_video(self,key:str,val:dict) -> Video:
-        video_obj = Video()
-        for k,v in val.items():
-            match k:
-                case "thumb":
-                    thumb = self._parse_photosize(k,v)
-                    setattr(video_obj,k,thumb)
+    def _parse_video(self,key:str,val:dict) -> Video|VideoChatEnded|VideoChatStarted|VideoChatScheduled|VideoChatParticipantsInvited:
+        video_obj = None
 
-                case "file_name"|"mime_type":
-                    setattr(video_obj,k,v)
+        if (key == "video"):
+            video_obj = Video()
+            for k,v in val.items():
+                match k:
+                    case "thumb":
+                        thumb = self._parse_photosize(k,v)
+                        setattr(video_obj,k,thumb)
+                    case _:
+                        setattr(video_obj,k,v)
 
-                case "file_size":
-                    setattr(video_obj,k,int(v))
-                case _:
-                    setattr(video_obj,k,v)
+        elif (key == "video_chat_ended"):
+            video_obj = VideoChatEnded()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
+        elif (key == "video_chat_started"):
+            video_obj = VideoChatStarted()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
+        elif (key == "video_chat_scheduled"):
+            video_obj = VideoChatScheduled()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
+        elif (key == "video_chat_participants_invited"):
+            video_obj = VideoChatParticipantsInvited()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
         return video_obj
 
     def _parse_venue(self,key:str,val:dict) -> Venue:
