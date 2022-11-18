@@ -803,11 +803,7 @@ class Parser:
     def _parse_maskposition(self,key:str,val:dict) -> MaskPosition:
         maskposition_obj = MaskPosition()
         for k,v in val.items():
-            match k:
-                case "point"|"x_shift"|"y_shift"|"scale":
-                    setattr(maskposition_obj,k,v)
-                case _:
-                    setattr(maskposition_obj,k,v)
+            setattr(maskposition_obj,k,v)
         return maskposition_obj
 
     def _parse_inlinekeyboardbutton(self,key:str,val:dict) -> InlineKeyboardButton:
