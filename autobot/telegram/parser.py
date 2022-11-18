@@ -1174,51 +1174,27 @@ class Parser:
         elif (key == "input_media"):
             inputfile_obj = InputMedia()
             for k,v in val.items():
-                match k:
-                    case "type":
-                        setattr(inputfile_obj,k,v)
-                    case _:
-                        setattr(inputfile_obj,k,v)
+                setattr(inputfile_obj,k,v)
         elif (key == "input_media_animation"):
             inputfile_obj = InputMediaAnimation()
             for k,v in val.items():
-                match k:
-                    case "type":
-                        setattr(inputfile_obj,k,v)
-                    case _:
-                        setattr(inputfile_obj,k,v)
+                setattr(inputfile_obj,k,v)
         elif (key == "input_media_document"):
             inputfile_obj = InputMediaDocument()
             for k,v in val.items():
-                match k:
-                    case "type":
-                        setattr(inputfile_obj,k,v)
-                    case _:
-                        setattr(inputfile_obj,k,v)
+                setattr(inputfile_obj,k,v)
         elif (key == "input_media_audio"):
             inputfile_obj = InputMediaAudio()
             for k,v in val.items():
-                match k:
-                    case "type":
-                        setattr(inputfile_obj,k,v)
-                    case _:
-                        setattr(inputfile_obj,k,v)
+                setattr(inputfile_obj,k,v)
         elif (key == "input_media_photo"):
             inputfile_obj = InputMediaPhoto()
             for k,v in val.items():
-                match k:
-                    case "type":
-                        setattr(inputfile_obj,k,v)
-                    case _:
-                        setattr(inputfile_obj,k,v)
+                setattr(inputfile_obj,k,v)
         elif (key == "input_media_video"):
             inputfile_obj = InputMediaVideo()
             for k,v in val.items():
-                match k:
-                    case "type":
-                        setattr(inputfile_obj,k,v)
-                    case _:
-                        setattr(inputfile_obj,k,v)
+                setattr(inputfile_obj,k,v)
         return inputfile_obj
 
     def _parse_file(self,key:str,val:dict) -> File:
@@ -1230,9 +1206,5 @@ class Parser:
     def _parse_forcereply(self,key:str,val:dict) -> ForceReply:
         forcereply_obj = ForceReply()
         for k,v in val.items():
-            match k:
-                case "resize_keyboard"|"one_time_keyboard"|"selective":
-                    setattr(forcereply_obj,k,v)
-                case _:
-                    setattr(forcereply_obj,k,v)
+            setattr(forcereply_obj,k,v)
         return forcereply_obj
