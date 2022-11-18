@@ -8,6 +8,7 @@ from autobot.telegram.stickers.objects import *
 
 InlineQueryResults = list[InlineQueryResult, InlineQueryResultArticle, InlineQueryResultAudio, InlineQueryResultCachedAudio, InlineQueryResultCachedDocument, InlineQueryResultCachedGif, InlineQueryResultCachedMpeg4Gif, InlineQueryResultCachedPhoto, InlineQueryResultCachedSticker, InlineQueryResultCachedVideo, InlineQueryResultCachedVoice, InlineQueryResultContact, InlineQueryResultDocument, InlineQueryResultGame, InlineQueryResultGif, InlineQueryResultLocation, InlineQueryResultMpeg4Gif, InlineQueryResultPhoto, InlineQueryResultVenue, InlineQueryResultVideo, InlineQueryResultVoice]
 ChatMembers = list[ChatMember, ChatMemberUpdated, ChatAdministratorRights, ChatMemberBanned, ChatMemberLeft, ChatMemberMember, ChatMemberAdministrator, ChatMemberOwner, ChatMemberRestricted]
+BotCommands = list[BotCommand, BotCommandScope, BotCommandScopeAllChatAdministrators, BotCommandScopeAllGroupChats, BotCommandScopeAllPrivateChats, BotCommandScope, BotCommandScopeChat, BotCommandScopeChatMember, BotCommandScopeDefault]
 class Parser:
     
     # methods to parse general telegram objects
@@ -669,7 +670,7 @@ class Parser:
     
     
     # methods to parse sticker objects
-    def _parse_sticker (self,key:str,val:dict) -> Sticker|StickerSet:
+    def _parse_stickers (self,key:str,val:dict) -> Sticker|StickerSet:
         sticker_obj = None
 
         if (key == "sticker"):
@@ -952,7 +953,7 @@ class Parser:
                 case "stickers":
                     stickers = []
                     for sticker in v:
-                        stickers.append(self._parse_sticker(k,sticker))
+                        stickers.append(self._parse_stickers(k,sticker))
                     setattr(stickerset_obj,k,stickers)
                 case _:
                     setattr(stickerset_obj,k,v)
@@ -1142,3 +1143,150 @@ class Parser:
         for k,v in val.items():
             setattr(dice_obj,k,v)
         return dice_obj
+
+    def _parse_botcommand(self,key:str,val:dict) -> BotCommands:
+        botcommand_obj = None
+        if (key == "bot_command"):
+            botcommand_obj = BotCommand()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope"):
+            botcommand_obj = BotCommandScope()
+            for k,v in val.items():
+                match k:
+                    case "chat_id"|"user_id":
+                        setattr(botcommand_obj,k,v)
+                    case _:
+                        setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_all_chat_administrators"):
+            botcommand_obj = BotCommandScopeAllChatAdministrators()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_all_group_chats"):
+            botcommand_obj = BotCommandScopeAllGroupChats()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_all_private_chats"):
+            botcommand_obj = BotCommandScopeAllPrivateChats()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_chat"):
+            botcommand_obj = BotCommandScopeChat()
+            for k,v in val.items():
+                match k:
+                    case "chat_id":
+                        setattr(botcommand_obj,k,v)
+                    case _:
+                        setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_chat_member"):
+            botcommand_obj = BotCommandScopeChatMember()
+            for k,v in val.items():
+                match k:
+                    case "chat_id"|"user_id":
+                        setattr(botcommand_obj,k,v)
+                    case _:
+                        setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_default"):
+            botcommand_obj = BotCommandScopeDefault()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        return botcommand_obj
+
+    def _parse_responseparameters(self,key:str,val:dict) -> ResponseParameters:
+        responseparameters_obj = ResponseParameters()
+        for k,v in val.items():
+            setattr(responseparameters_obj,k,v)
+        return responseparameters_obj
+
+    def _parse_replykeyboard(self,key:str,val:dict) -> ReplyKeyboardMarkup|ReplyKeyboardRemove:
+        replykeyboard_obj = None
+        if (key == "reply_keyboard_markup"):
+            replykeyboard_obj = ReplyKeyboardMarkup()
+            for k,v in val.items():
+                match k:
+                    case "resize_keyboard"|"one_time_keyboard"|"selective":
+                        setattr(replykeyboard_obj,k,v)
+                    case _:
+                        setattr(replykeyboard_obj,k,v)
+        elif (key == "reply_keyboard_remove"):
+            replykeyboard_obj = ReplyKeyboardRemove()
+            for k,v in val.items():
+                match k:
+                    case "resize_keyboard"|"one_time_keyboard"|"selective":
+                        setattr(replykeyboard_obj,k,v)
+                    case _:
+                        setattr(replykeyboard_obj,k,v)
+        return replykeyboard_obj
+
+
+    def _parse_inputfile(self,key:str,val:dict) -> InputFile|InputMedia|InputMediaAnimation|InputMediaDocument|InputMediaAudio|InputMediaPhoto|InputMediaVideo:
+        inputfile_obj = None
+        if (key == "input_file"):
+            inputfile_obj = InputFile()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        elif (key == "input_media"):
+            inputfile_obj = InputMedia()
+            for k,v in val.items():
+                match k:
+                    case "type":
+                        setattr(inputfile_obj,k,v)
+                    case _:
+                        setattr(inputfile_obj,k,v)
+        elif (key == "input_media_animation"):
+            inputfile_obj = InputMediaAnimation()
+            for k,v in val.items():
+                match k:
+                    case "type":
+                        setattr(inputfile_obj,k,v)
+                    case _:
+                        setattr(inputfile_obj,k,v)
+        elif (key == "input_media_document"):
+            inputfile_obj = InputMediaDocument()
+            for k,v in val.items():
+                match k:
+                    case "type":
+                        setattr(inputfile_obj,k,v)
+                    case _:
+                        setattr(inputfile_obj,k,v)
+        elif (key == "input_media_audio"):
+            inputfile_obj = InputMediaAudio()
+            for k,v in val.items():
+                match k:
+                    case "type":
+                        setattr(inputfile_obj,k,v)
+                    case _:
+                        setattr(inputfile_obj,k,v)
+        elif (key == "input_media_photo"):
+            inputfile_obj = InputMediaPhoto()
+            for k,v in val.items():
+                match k:
+                    case "type":
+                        setattr(inputfile_obj,k,v)
+                    case _:
+                        setattr(inputfile_obj,k,v)
+        elif (key == "input_media_video"):
+            inputfile_obj = InputMediaVideo()
+            for k,v in val.items():
+                match k:
+                    case "type":
+                        setattr(inputfile_obj,k,v)
+                    case _:
+                        setattr(inputfile_obj,k,v)
+        return inputfile_obj
+
+    def _parse_file(self,key:str,val:dict) -> File:
+        file_obj = File()
+        for k,v in val.items():
+            setattr(file_obj,k,v)
+        return file_obj
+
+    def _parse_forcereply(self,key:str,val:dict) -> ForceReply:
+        forcereply_obj = ForceReply()
+        for k,v in val.items():
+            match k:
+                case "resize_keyboard"|"one_time_keyboard"|"selective":
+                    setattr(forcereply_obj,k,v)
+                case _:
+                    setattr(forcereply_obj,k,v)
+        return forcereply_obj
