@@ -87,4 +87,4 @@ plugins:
 # Copyright Section: In this section, it's almost the same as adding a copyright tag in the 
 #html languange. All waht it does is to add a copyright infomation message within the footer section.
 copyright: |
-  &copy; 2022 <a href="https://github.com/OSCA-Kampala-Chapter"  target="_blank" rel="noopener">Kisakye Moses</a>
+  &copy; 2022 <a href="https://github.com/OSCA-Kampala-Chapter/autobot"  target="_blank" rel="noopener">Autobot</a>
