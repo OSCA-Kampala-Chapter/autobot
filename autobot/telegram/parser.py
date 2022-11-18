@@ -812,7 +812,7 @@ class Parser:
             setattr(inlinekeyboardbutton_obj,k,v)
         return inlinekeyboardbutton_obj
 
-    def _parse_poll(self,key:str,val:dict) -> Poll:
+    def _parse_poll(self,key:str,val:dict) -> Poll|PollAnswer|PollOption:
         poll_obj = None
         
         if (key == "poll"):
@@ -829,19 +829,11 @@ class Parser:
         elif (key == "poll_answer"):
             poll_obj = PollAnswer()
             for k,v in val.items():
-                match k:
-                    case "poll_id"|"user"|"option_ids":
-                        setattr(poll_obj,k,v)
-                    case _:
-                        setattr(poll_obj,k,v)
+                setattr(poll_obj,k,v)
         elif (key == "poll_option"):
             poll_obj = PollOption()
             for k,v in val.items():
-                match k:
-                    case "text":
-                        setattr(poll_obj,k,v)
-                    case _:
-                        setattr(poll_obj,k,v)
+                setattr(poll_obj,k,v)
         return poll_obj
 
     def _parse_polloption(self,key:str,val:dict) -> PollOption:
