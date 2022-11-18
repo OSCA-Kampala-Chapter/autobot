@@ -796,11 +796,7 @@ class Parser:
     def _parse_login_url(self,key:str,val:dict) -> LoginUrl:
         loginurl_obj = LoginUrl()
         for k,v in val.items():
-            match k:
-                case "url"|"forward_text"|"bot_username"|"request_write_access":
-                    setattr(loginurl_obj,k,v)
-                case _:
-                    setattr(loginurl_obj,k,v)
+            setattr(loginurl_obj,k,v)
         return loginurl_obj
 
 
