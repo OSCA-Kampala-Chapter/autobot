@@ -713,14 +713,7 @@ class Parser:
     def _parse_audio(self,key:str,val:dict) -> Audio:
         audio_obj = Audio()
         for k,v in val.items():
-            match k:
-                case "performer"|"title":
-                    setattr(audio_obj,k,v)
-
-                case "file_size":
-                    setattr(audio_obj,k,int(v))
-                case _:
-                    setattr(audio_obj,k,v)
+            setattr(audio_obj,k,v)
         return audio_obj
 
 
