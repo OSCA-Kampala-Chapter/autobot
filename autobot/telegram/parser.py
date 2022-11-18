@@ -7,7 +7,8 @@ from autobot.telegram.stickers.objects import *
 
 
 InlineQueryResults = list[InlineQueryResult, InlineQueryResultArticle, InlineQueryResultAudio, InlineQueryResultCachedAudio, InlineQueryResultCachedDocument, InlineQueryResultCachedGif, InlineQueryResultCachedMpeg4Gif, InlineQueryResultCachedPhoto, InlineQueryResultCachedSticker, InlineQueryResultCachedVideo, InlineQueryResultCachedVoice, InlineQueryResultContact, InlineQueryResultDocument, InlineQueryResultGame, InlineQueryResultGif, InlineQueryResultLocation, InlineQueryResultMpeg4Gif, InlineQueryResultPhoto, InlineQueryResultVenue, InlineQueryResultVideo, InlineQueryResultVoice]
-
+ChatMembers = list[ChatMember, ChatMemberUpdated, ChatAdministratorRights, ChatMemberBanned, ChatMemberLeft, ChatMemberMember, ChatMemberAdministrator, ChatMemberOwner, ChatMemberRestricted]
+BotCommands = list[BotCommand, BotCommandScope, BotCommandScopeAllChatAdministrators, BotCommandScopeAllGroupChats, BotCommandScopeAllPrivateChats, BotCommandScope, BotCommandScopeChat, BotCommandScopeChatMember, BotCommandScopeDefault]
 class Parser:
     
     # methods to parse general telegram objects
@@ -157,7 +158,7 @@ class Parser:
                         setattr(msg_obj,k,pht)
 
                     case "sticker":
-                        stkr = self._parse_stickers(k,v)
+                        stkr = self._parse_sticker(k,v)
                         setattr(msg_obj,k,stkr)
 
                     case "video"|"video_note"|"video_chat_scheduled"|"video_chat_started"|"video_chat_ended"|"video_chat_participants_invited":
@@ -428,7 +429,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inlin
+                        rep = self._parse_inlinekeyboardbutton(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -583,11 +584,7 @@ class Parser:
         if (key == "inline_keyboard_button"):
             inline_obj = InlineKeyboardButton()
             for k,v in val.items():
-                match k:
-                    case "text"|"url"|"callback_data"|"switch_inline_query"|"switch_inline_query_current_chat"|"callback_game"|"pay":
-                        setattr(inline_obj,k,v)
-                    case _:
-                        setattr(inline_obj,k,v)
+                setattr(inline_obj,k,v)
         elif (key == "inline_keyboard_markup"):
             inline_obj = InlineKeyboardMarkup()
             for k,v in val.items():
@@ -697,3 +694,402 @@ class Parser:
 
         return sticker_obj
 
+
+    def _parse_animation(self,key:str,val:dict) -> Animation:
+        animation_obj = Animation()
+        for k,v in val.items():
+            match k:
+                case "thumb":
+                    thumb = self._parse_photosize(k,v)
+                    setattr(animation_obj,k,thumb)
+                case _:
+                    setattr(animation_obj,k,v)
+        return animation_obj
+
+    
+    def _parse_audio(self,key:str,val:dict) -> Audio:
+        audio_obj = Audio()
+        for k,v in val.items():
+            setattr(audio_obj,k,v)
+        return audio_obj
+
+
+    def _parse_video(self,key:str,val:dict) -> Video|VideoChatEnded|VideoChatStarted|VideoChatScheduled|VideoChatParticipantsInvited:
+        video_obj = None
+
+        if (key == "video"):
+            video_obj = Video()
+            for k,v in val.items():
+                match k:
+                    case "thumb":
+                        thumb = self._parse_photosize(k,v)
+                        setattr(video_obj,k,thumb)
+                    case _:
+                        setattr(video_obj,k,v)
+
+        elif (key == "video_chat_ended"):
+            video_obj = VideoChatEnded()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
+        elif (key == "video_chat_started"):
+            video_obj = VideoChatStarted()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
+        elif (key == "video_chat_scheduled"):
+            video_obj = VideoChatScheduled()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
+        elif (key == "video_chat_participants_invited"):
+            video_obj = VideoChatParticipantsInvited()
+            for k,v in val.items():
+                setattr(video_obj,k,v)
+
+        return video_obj
+
+    def _parse_venue(self,key:str,val:dict) -> Venue:
+        venue_obj = Venue()
+        for k,v in val.items():
+            match k:
+                case "location":
+                    loc = self._parse_location(k,v)
+                    setattr(venue_obj,k,loc)
+                case _:
+                    setattr(venue_obj,k,v)
+        return venue_obj
+
+    def _parse_photosize(self,key:str,val:dict) -> PhotoSize:
+        photosize_obj = PhotoSize()
+        for k,v in val.items():
+            match k:
+                case "file_size":
+                    setattr(photosize_obj,k,int(v))
+                case _:
+                    setattr(photosize_obj,k,v)
+        return photosize_obj
+
+    def _parse_location(self,key:str,val:dict) -> Location:
+        location_obj = Location()
+        for k,v in val.items():
+            setattr(location_obj,k,v)
+        return location_obj
+
+
+    def _parse_contact(self,key:str,val:dict) -> Contact:
+        contact_obj = Contact()
+        for k,v in val.items():
+            setattr(contact_obj,k,v)
+        return contact_obj
+
+    def _parse_proximityalerttriggered(self,key:str,val:dict) -> ProximityAlertTriggered:
+        proximityalerttriggered_obj = ProximityAlertTriggered()
+        for k,v in val.items():
+            setattr(proximityalerttriggered_obj,k,v)
+        return proximityalerttriggered_obj
+
+    def _parse_login_url(self,key:str,val:dict) -> LoginUrl:
+        loginurl_obj = LoginUrl()
+        for k,v in val.items():
+            setattr(loginurl_obj,k,v)
+        return loginurl_obj
+
+
+    def _parse_maskposition(self,key:str,val:dict) -> MaskPosition:
+        maskposition_obj = MaskPosition()
+        for k,v in val.items():
+            setattr(maskposition_obj,k,v)
+        return maskposition_obj
+
+    def _parse_inlinekeyboardbutton(self,key:str,val:dict) -> InlineKeyboardButton:
+        inlinekeyboardbutton_obj = InlineKeyboardButton()
+        for k,v in val.items():
+            setattr(inlinekeyboardbutton_obj,k,v)
+        return inlinekeyboardbutton_obj
+
+    def _parse_poll(self,key:str,val:dict) -> Poll|PollAnswer|PollOption:
+        poll_obj = None
+        
+        if (key == "poll"):
+            poll_obj = Poll()
+            for k,v in val.items():
+                match k:
+                    case "options":
+                        options = []
+                        for option in v:
+                            options.append(self._parse_poll(k,option))
+                        setattr(poll_obj,k,options)
+                    case _:
+                        setattr(poll_obj,k,v)
+        elif (key == "poll_answer"):
+            poll_obj = PollAnswer()
+            for k,v in val.items():
+                setattr(poll_obj,k,v)
+        elif (key == "poll_option"):
+            poll_obj = PollOption()
+            for k,v in val.items():
+                setattr(poll_obj,k,v)
+        return poll_obj
+
+    def _parse_polloption(self,key:str,val:dict) -> PollOption:
+        polloption_obj = PollOption()
+        for k,v in val.items():
+            setattr(polloption_obj,k,v)
+        return polloption_obj
+
+    def _parse_document(self,key:str,val:dict) -> Document:
+        document_obj = Document()
+        for k,v in val.items():
+            match k:
+                case "thumb":
+                    thumb = self._parse_photosize(k,v)
+                    setattr(document_obj,k,thumb)
+                case _:
+                    setattr(document_obj,k,v)
+        return document_obj
+
+    def _parse_webapp(self,key:str,val:dict) -> WebAppData:
+        webapp_obj = WebAppData()
+        for k,v in val.items():
+            setattr(webapp_obj,k,v)
+        return webapp_obj
+
+    def _parse_callbackquery(self,key:str,val:dict) -> CallBackQuery:
+        callbackquery_obj = CallBackQuery()
+        for k,v in val.items():
+            setattr(callbackquery_obj,k,v)
+        return callbackquery_obj
+
+    def _parse_inputmessagecontent(self,key:str,val:dict) -> InputMessageContent:
+        inputmessagecontent_obj = None
+        if (key == "input_text_message_content"):
+            inputmessagecontent_obj = InputTextMessageContent()
+            for k,v in val.items():
+                setattr(inputmessagecontent_obj,k,v)
+        elif (key == "input_location_message_content"):
+            inputmessagecontent_obj = InputLocationMessageContent()
+            for k,v in val.items():
+                setattr(inputmessagecontent_obj,k,v)
+        elif (key == "input_venue_message_content"):
+            inputmessagecontent_obj = InputVenueMessageContent()
+            for k,v in val.items():
+                setattr(inputmessagecontent_obj,k,v)
+        return inputmessagecontent_obj
+
+    def _parse_inlinekeyboardbutton(self,key:str,val:dict) -> InlineKeyboardButton:
+        inlinekeyboardbutton_obj = InlineKeyboardButton()
+        for k,v in val.items():
+            setattr(inlinekeyboardbutton_obj,k,v)
+        return inlinekeyboardbutton_obj
+
+
+    def _parse_stickerset(self,key:str,val:dict) -> StickerSet:
+        stickerset_obj = StickerSet()
+        for k,v in val.items():
+            setattr(stickerset_obj,k,v)
+        return stickerset_obj
+
+    def _parse_passportelementerror(self,key:str,val:dict) -> PassportElementError:
+        passportelementerror_obj = None
+        if (key == "passport_element_error_data_field"):
+            passportelementerror_obj = PassportElementErrorDataField()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_file"):
+            passportelementerror_obj = PassportElementErrorFile()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_files"):
+            passportelementerror_obj = PassportElementErrorFiles()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_front_side"):
+            passportelementerror_obj = PassportElementErrorFrontSide()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_reverse_side"):
+            passportelementerror_obj = PassportElementErrorReverseSide()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_selfie"):
+            passportelementerror_obj = PassportElementErrorSelfie()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_translation_file"):
+            passportelementerror_obj = PassportElementErrorTranslationFile()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_translation_files"):
+            passportelementerror_obj = PassportElementErrorTranslationFiles()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        elif (key == "passport_element_error_unspecified"):
+            passportelementerror_obj = PassportElementErrorUnspecified()
+            for k,v in val.items():
+                setattr(passportelementerror_obj,k,v)
+        return passportelementerror_obj
+
+    def _parse_forumtopic(self,key:str,val:dict) -> ForumTopicCreated|ForumTopicClosed|ForumTopicReopened:
+        forumtopic_obj = None
+        if (key == "forum_topic_created"):
+            forumtopic_obj = ForumTopicCreated()
+            for k,v in val.items():
+                setattr(forumtopic_obj,k,v)
+        elif (key == "forum_topic_closed"):
+            forumtopic_obj = ForumTopicClosed()
+            for k,v in val.items():
+                setattr(forumtopic_obj,k,v)
+        elif (key == "forum_topic_reopened"):
+            forumtopic_obj = ForumTopicReopened()
+            for k,v in val.items():
+                setattr(forumtopic_obj,k,v)
+        return forumtopic_obj
+
+    def _parse_chatmember(self,key:str,val:dict) -> ChatMembers:
+        chatmember_obj = None
+        if (key == "chat_member_updated"):
+            chatmember_obj = ChatMemberUpdated()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        elif (key == "chat_administrator_rights"):
+            chatmember_obj = ChatAdministratorRights()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        elif (key == "chat_member_banned"):
+            chatmember_obj = ChatMemberBanned()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        elif (key == "chat_member_left"):
+            chatmember_obj = ChatMemberLeft()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        elif (key == "chat_member_member"):
+            chatmember_obj = ChatMemberMember()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        elif (key == "chat_member_administrator"):
+            chatmember_obj = ChatMemberAdministrator()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        elif (key == "chat_member_owner"):
+            chatmember_obj = ChatMemberOwner()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        elif (key == "chat_member_restricted"):
+            chatmember_obj = ChatMemberRestricted()
+            for k,v in val.items():
+                setattr(chatmember_obj,k,v)
+        return chatmember_obj
+
+
+    def _parse_voice(self,key:str,val:dict) -> Voice:
+        voice_obj = Voice()
+        for k,v in val.items():
+            setattr(voice_obj,k,v)
+        return voice_obj
+
+    def _parse_dice(self,key:str,val:dict) -> Dice:
+        dice_obj = Dice()
+        for k,v in val.items():
+            setattr(dice_obj,k,v)
+        return dice_obj
+
+    def _parse_botcommand(self,key:str,val:dict) -> BotCommands:
+        botcommand_obj = None
+        if (key == "bot_command"):
+            botcommand_obj = BotCommand()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope"):
+            botcommand_obj = BotCommandScope()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_all_chat_administrators"):
+            botcommand_obj = BotCommandScopeAllChatAdministrators()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_all_group_chats"):
+            botcommand_obj = BotCommandScopeAllGroupChats()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_all_private_chats"):
+            botcommand_obj = BotCommandScopeAllPrivateChats()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_chat"):
+            botcommand_obj = BotCommandScopeChat()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_chat_member"):
+            botcommand_obj = BotCommandScopeChatMember()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        elif (key == "bot_command_scope_default"):
+            botcommand_obj = BotCommandScopeDefault()
+            for k,v in val.items():
+                setattr(botcommand_obj,k,v)
+        return botcommand_obj
+
+    def _parse_responseparameters(self,key:str,val:dict) -> ResponseParameters:
+        responseparameters_obj = ResponseParameters()
+        for k,v in val.items():
+            setattr(responseparameters_obj,k,v)
+        return responseparameters_obj
+
+    def _parse_replykeyboard(self,key:str,val:dict) -> ReplyKeyboardMarkup|ReplyKeyboardRemove:
+        replykeyboard_obj = None
+        if (key == "reply_keyboard_markup"):
+            replykeyboard_obj = ReplyKeyboardMarkup()
+            for k,v in val.items():
+                setattr(replykeyboard_obj,k,v)
+        elif (key == "reply_keyboard_remove"):
+            replykeyboard_obj = ReplyKeyboardRemove()
+            for k,v in val.items():
+                setattr(replykeyboard_obj,k,v)
+        return replykeyboard_obj
+
+
+    def _parse_inputfile(self,key:str,val:dict) -> InputFile|InputMedia|InputMediaAnimation|InputMediaDocument|InputMediaAudio|InputMediaPhoto|InputMediaVideo:
+        inputfile_obj = None
+        if (key == "input_file"):
+            inputfile_obj = InputFile()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        elif (key == "input_media"):
+            inputfile_obj = InputMedia()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        elif (key == "input_media_animation"):
+            inputfile_obj = InputMediaAnimation()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        elif (key == "input_media_document"):
+            inputfile_obj = InputMediaDocument()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        elif (key == "input_media_audio"):
+            inputfile_obj = InputMediaAudio()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        elif (key == "input_media_photo"):
+            inputfile_obj = InputMediaPhoto()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        elif (key == "input_media_video"):
+            inputfile_obj = InputMediaVideo()
+            for k,v in val.items():
+                setattr(inputfile_obj,k,v)
+        return inputfile_obj
+
+    def _parse_file(self,key:str,val:dict) -> File:
+        file_obj = File()
+        for k,v in val.items():
+            setattr(file_obj,k,v)
+        return file_obj
+
+    def _parse_forcereply(self,key:str,val:dict) -> ForceReply:
+        forcereply_obj = ForceReply()
+        for k,v in val.items():
+            setattr(forcereply_obj,k,v)
+        return forcereply_obj

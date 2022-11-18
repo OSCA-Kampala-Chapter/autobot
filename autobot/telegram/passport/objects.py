@@ -1,6 +1,21 @@
 from autobot.telegram.objects import BaseObject
 from typing import Optional
 
+
+class PassportElementError(BaseObject):
+    """This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of:
+    - PassportElementErrorDataField
+    - PassportElementErrorFrontSide
+    - PassportElementErrorReverseSide
+    - PassportElementErrorSelfie
+    - PassportElementErrorFile
+    - PassportElementErrorFiles
+    - PassportElementErrorTranslationFile
+    - PassportElementErrorTranslationFiles
+    - PassportElementErrorUnspecified
+    """
+    pass
+
 class PassportFile(BaseObject):
     """
     This object represents a file uploaded to Telegram Passport. Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
