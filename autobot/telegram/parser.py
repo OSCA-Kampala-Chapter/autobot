@@ -760,8 +760,6 @@ class Parser:
                 case "location":
                     loc = self._parse_location(k,v)
                     setattr(venue_obj,k,loc)
-                case "title"|"address"|"foursquare_id":
-                    setattr(venue_obj,k,v)
                 case _:
                     setattr(venue_obj,k,v)
         return venue_obj
