@@ -1057,19 +1057,11 @@ class Parser:
         if (key == "reply_keyboard_markup"):
             replykeyboard_obj = ReplyKeyboardMarkup()
             for k,v in val.items():
-                match k:
-                    case "resize_keyboard"|"one_time_keyboard"|"selective":
-                        setattr(replykeyboard_obj,k,v)
-                    case _:
-                        setattr(replykeyboard_obj,k,v)
+                setattr(replykeyboard_obj,k,v)
         elif (key == "reply_keyboard_remove"):
             replykeyboard_obj = ReplyKeyboardRemove()
             for k,v in val.items():
-                match k:
-                    case "resize_keyboard"|"one_time_keyboard"|"selective":
-                        setattr(replykeyboard_obj,k,v)
-                    case _:
-                        setattr(replykeyboard_obj,k,v)
+                setattr(replykeyboard_obj,k,v)
         return replykeyboard_obj
 
 
