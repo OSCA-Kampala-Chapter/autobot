@@ -946,27 +946,15 @@ class Parser:
         if (key == "forum_topic_created"):
             forumtopic_obj = ForumTopicCreated()
             for k,v in val.items():
-                match k:
-                    case "forum_id"|"title":
-                        setattr(forumtopic_obj,k,v)
-                    case _:
-                        setattr(forumtopic_obj,k,v)
+                setattr(forumtopic_obj,k,v)
         elif (key == "forum_topic_closed"):
             forumtopic_obj = ForumTopicClosed()
             for k,v in val.items():
-                match k:
-                    case "forum_id"|"title":
-                        setattr(forumtopic_obj,k,v)
-                    case _:
-                        setattr(forumtopic_obj,k,v)
+                setattr(forumtopic_obj,k,v)
         elif (key == "forum_topic_reopened"):
             forumtopic_obj = ForumTopicReopened()
             for k,v in val.items():
-                match k:
-                    case "forum_id"|"title":
-                        setattr(forumtopic_obj,k,v)
-                    case _:
-                        setattr(forumtopic_obj,k,v)
+                setattr(forumtopic_obj,k,v)
         return forumtopic_obj
 
     def _parse_chatmember(self,key:str,val:dict) -> ChatMembers:
@@ -982,59 +970,31 @@ class Parser:
         elif (key == "chat_administrator_rights"):
             chatmember_obj = ChatAdministratorRights()
             for k,v in val.items():
-                match k:
-                    case "can_be_edited"|"can_change_info"|"can_post_messages"|"can_edit_messages"|"can_delete_messages"|"can_invite_users"|"can_restrict_members"|"can_pin_messages"|"can_promote_members":
-                        setattr(chatmember_obj,k,v)
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         elif (key == "chat_member_banned"):
             chatmember_obj = ChatMemberBanned()
             for k,v in val.items():
-                match k:
-                    case "can_be_edited"|"can_change_info"|"can_post_messages"|"can_edit_messages"|"can_delete_messages"|"can_invite_users"|"can_restrict_members"|"can_pin_messages"|"can_promote_members":
-                        setattr(chatmember_obj,k,v)
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         elif (key == "chat_member_left"):
             chatmember_obj = ChatMemberLeft()
             for k,v in val.items():
-                match k:
-                    case "can_be_edited"|"can_change_info"|"can_post_messages"|"can_edit_messages"|"can_delete_messages"|"can_invite_users"|"can_restrict_members"|"can_pin_messages"|"can_promote_members":
-                        setattr(chatmember_obj,k,v)
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         elif (key == "chat_member_member"):
             chatmember_obj = ChatMemberMember()
             for k,v in val.items():
-                match k:
-                    case "can_be_edited"|"can_change_info"|"can_post_messages"|"can_edit_messages"|"can_delete_messages"|"can_invite_users"|"can_restrict_members"|"can_pin_messages"|"can_promote_members":
-                        setattr(chatmember_obj,k,v)
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         elif (key == "chat_member_administrator"):
             chatmember_obj = ChatMemberAdministrator()
             for k,v in val.items():
-                match k:
-                    case "can_be_edited"|"can_change_info"|"can_post_messages"|"can_edit_messages"|"can_delete_messages"|"can_invite_users"|"can_restrict_members"|"can_pin_messages"|"can_promote_members":
-                        setattr(chatmember_obj,k,v)
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         elif (key == "chat_member_owner"):
             chatmember_obj = ChatMemberOwner()
             for k,v in val.items():
-                match k:
-                    case "can_be_edited"|"can_change_info"|"can_post_messages"|"can_edit_messages"|"can_delete_messages"|"can_invite_users"|"can_restrict_members"|"can_pin_messages"|"can_promote_members":
-                        setattr(chatmember_obj,k,v)
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         elif (key == "chat_member_restricted"):
             chatmember_obj = ChatMemberRestricted()
             for k,v in val.items():
-                match k:
-                    case "can_be_edited"|"can_change_info"|"can_post_messages"|"can_edit_messages"|"can_delete_messages"|"can_invite_users"|"can_restrict_members"|"can_pin_messages"|"can_promote_members":
-                        setattr(chatmember_obj,k,v)
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         return chatmember_obj
 
 
@@ -1059,11 +1019,7 @@ class Parser:
         elif (key == "bot_command_scope"):
             botcommand_obj = BotCommandScope()
             for k,v in val.items():
-                match k:
-                    case "chat_id"|"user_id":
-                        setattr(botcommand_obj,k,v)
-                    case _:
-                        setattr(botcommand_obj,k,v)
+                setattr(botcommand_obj,k,v)
         elif (key == "bot_command_scope_all_chat_administrators"):
             botcommand_obj = BotCommandScopeAllChatAdministrators()
             for k,v in val.items():
@@ -1079,19 +1035,11 @@ class Parser:
         elif (key == "bot_command_scope_chat"):
             botcommand_obj = BotCommandScopeChat()
             for k,v in val.items():
-                match k:
-                    case "chat_id":
-                        setattr(botcommand_obj,k,v)
-                    case _:
-                        setattr(botcommand_obj,k,v)
+                setattr(botcommand_obj,k,v)
         elif (key == "bot_command_scope_chat_member"):
             botcommand_obj = BotCommandScopeChatMember()
             for k,v in val.items():
-                match k:
-                    case "chat_id"|"user_id":
-                        setattr(botcommand_obj,k,v)
-                    case _:
-                        setattr(botcommand_obj,k,v)
+                setattr(botcommand_obj,k,v)
         elif (key == "bot_command_scope_default"):
             botcommand_obj = BotCommandScopeDefault()
             for k,v in val.items():
