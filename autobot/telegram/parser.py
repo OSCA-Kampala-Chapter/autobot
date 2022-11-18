@@ -814,7 +814,14 @@ class Parser:
         if (key == "poll"):
             poll_obj = Poll()
             for k,v in val.items():
-                setattr(poll_obj,k,v)
+                match k:
+                    case "options":
+                        options = []
+                        for option in v:
+                            options.append(self._parse_poll(k,option))
+                        setattr(poll_obj,k,options)
+                    case _:
+                        setattr(poll_obj,k,v)
         elif (key == "poll_answer"):
             poll_obj = PollAnswer()
             for k,v in val.items():
