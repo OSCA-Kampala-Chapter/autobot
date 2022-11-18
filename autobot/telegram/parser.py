@@ -784,11 +784,7 @@ class Parser:
     def _parse_contact(self,key:str,val:dict) -> Contact:
         contact_obj = Contact()
         for k,v in val.items():
-            match k:
-                case "phone_number"|"first_name"|"last_name":
-                    setattr(contact_obj,k,v)
-                case _:
-                    setattr(contact_obj,k,v)
+            setattr(contact_obj,k,v)
         return contact_obj
 
     def _parse_proximityalerttriggered(self,key:str,val:dict) -> ProximityAlertTriggered:
