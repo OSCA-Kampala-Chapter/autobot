@@ -862,11 +862,7 @@ class Parser:
     def _parse_callbackquery(self,key:str,val:dict) -> CallBackQuery:
         callbackquery_obj = CallBackQuery()
         for k,v in val.items():
-            match k:
-                case "message"|"inline_message_id"|"chat_instance"|"data"|"game_short_name":
-                    setattr(callbackquery_obj,k,v)
-                case _:
-                    setattr(callbackquery_obj,k,v)
+            setattr(callbackquery_obj,k,v)
         return callbackquery_obj
 
     def _parse_inputmessagecontent(self,key:str,val:dict) -> InputMessageContent:
