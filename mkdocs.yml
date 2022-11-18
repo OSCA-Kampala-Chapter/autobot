@@ -49,8 +49,8 @@ repo_url: https://github.com/OSCA-Kampala-Chapter/autobot
 # These appeal to the footer section of the file and are linked to direct following handles
 extra:
   social:
-    - icon: fontawesome/brands/github-alt
-      link: https://github.com/OSCA-Kampala-Chapter
+    - icon: fontawesome/brands/github
+      link: https://github.com/OSCA-Kampala-Chapter/autobot
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/oscakampala
     - icon: fontawesome/brands/linkedin
