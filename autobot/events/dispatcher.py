@@ -7,7 +7,9 @@ them to the registered listeners
 from __future__ import annotations
 
 import asyncio
-from collections.abc import Callable
+from collections.abc import Coroutine
+from inspect import iscoroutine
+from collections import deque
 from autobot.events import OverLoadedError
 from autobot.events.events import Event
 
@@ -45,38 +47,51 @@ class ProcState:
     and helps participate in the backpressure protocol
     """
 
-    def __init__ (self,listener:Callable[[Event],None]) -> None:
+    def __init__ (self,listener:Coroutine) -> None:
 
-        self.listener = listener
-        self.pending_events = []
+        self.pending_events = deque()
+        self.listener = None
+        try:
+            listener.send(None)
+        except:
+            if not iscoroutine(listener):
+                raise ValueError(f"<{listener}> is not a coroutine")
+            raise ValueError(f"<{listener}> failed to initialize")
+        else:
+            self.listener = listener
 
    
-    def __call__ (self,event:Event) -> None:
+    async def call (self) -> None:
 
-        try:
-            self.listener(event)
-        except OverLoadedError:
-            self.pending_events.append(event)
-            loop = asyncio.get_running_loop()
-            loop.call_soon(self.resume_pending)
+        while True:
+
+            try:
+                event = self.pending_events.popleft()
+            except IndexError:
+                break
+            else:
+                try:
+                    self.listener.send(event)
+                except OverLoadedError:
+                    self.pending_events.appendleft(event)
+                    task = asyncio.create_task(self.resume_pending())
+                    await task
             
-    def resume_pending (self):
+    async def resume_pending (self):
         
         try:
             self.process_pending()
         except OverLoadedError:
-            loop = asyncio.get_running_loop()
-            loop.call_soon(self.resume_pending)
+            task = asyncio.create_task(self.resume_pending())
+            await task
 
     def process_pending (self):
-        if len(self.pending_events):
-            for event in self.pending_events:
-                try:
-                    self.listener(event)
-                except OverLoadedError:
-                    loop = asyncio.get_running_loop()
-                    loop.call_soon(self.resume_pending)
-                    break
+        try:
+            while (event := self.pending_events.popleft()):
+                self.listener.send(event)
+        except IndexError:
+            return
+
 
 class _EventProxy:
     """
@@ -90,7 +105,7 @@ class _EventProxy:
         self.__strict_mode = False
 
 
-    def _set_event_handler (self,val:tuple[EVENT_NAME,ID,Callable[[Event],None]]) -> None:
+    def _set_event_handler (self,val:tuple[EVENT_NAME,ID,Coroutine]) -> None:
         """
         Set a function to hanlde this event
         """
@@ -197,7 +212,7 @@ class EventDispatcher:
 
     def listen (self,
         event_type:EVENT_NAME, 
-        callback:Callable[[Event],None]
+        callback:Coroutine
         ) -> ID:
         """
         add a listener callback which listens to a specific even. The callback
@@ -232,7 +247,7 @@ class EventDispatcher:
         """
         self.listeners._register(event)
 
-    def dispatch (self,event:Event) -> None:
+    async def dispatch (self,event:Event) -> None:
         """
         distribute the event among the listeners
         """
@@ -243,10 +258,17 @@ class EventDispatcher:
             raise EventNotRegistered(f"event <{event_type}> is not registered in dispatcher")
         else:
             for listener in listeners_table.values():
-                listener(event)
+                listener.pending_events.append(event)
+            await self._dispatch(listeners_table)
+
+    async def _dispatch (self,table:dict):
+
+        for listener in table.values():
+            await listener.call()
 
     def __repr__ (self):
         return self.__class__.__name__
 
     def __str__ (self):
         return self.listeners.__repr__()
+
