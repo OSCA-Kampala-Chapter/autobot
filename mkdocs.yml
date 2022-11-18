@@ -1,4 +1,90 @@
-site_name: autobot Docs
+# AutoBot Information
+site_name: AutoBot Documentation
 
+# Configuration
 theme:
-  name: "material"
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - header.autohide #the header is automatically hidden when the user scrolls past a certain threshold, leaving more space for content. Add the following lines to mkdocs.yml:
+    - search.suggest
+    - search.share
+    - search.highlight
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: deep orange
+      accent: blue
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: red
+      accent: blue 
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  
+    
+
+# defines the order of the markdown-
+nav:
+  - Home: index.md
+  - Reference: reference.md
+  - FAQS: faqs.md
+
+site_author: Tobais
+site_description: >-
+  DESCRIPTION
+
+# Repository
+repo_name: OSCA-Kampala-Chapter/autobot
+repo_url: https://github.com/OSCA-Kampala-Chapter/autobot
+
+# These appeal to the footer section of the file and are linked to direct following handles
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/OSCA-Kampala-Chapter/autobot
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/oscakampala
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/oscakampala
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/oscakampala
+
+# These are markdown extensions: `They are used up in highliting of 
+#codes and even make the page to look more cute`
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+
+  # Plugins: This is a plugin that enables the search engine
+  #in the markdown file.
+plugins:
+  - search
+
+plugins:
+  - search:
+      separator: '[\s\-\.]' 
+
+
+# Copyright Section: In this section, it's almost the same as adding a copyright tag in the 
+#html languange. All waht it does is to add a copyright infomation message within the footer section.
+copyright: |
+  &copy; 2022 <a href="https://github.com/OSCA-Kampala-Chapter/autobot"  target="_blank" rel="noopener">Autobot</a>
