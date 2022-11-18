@@ -870,27 +870,15 @@ class Parser:
         if (key == "input_text_message_content"):
             inputmessagecontent_obj = InputTextMessageContent()
             for k,v in val.items():
-                match k:
-                    case "message_text"|"parse_mode"|"disable_web_page_preview":
-                        setattr(inputmessagecontent_obj,k,v)
-                    case _:
-                        setattr(inputmessagecontent_obj,k,v)
+                setattr(inputmessagecontent_obj,k,v)
         elif (key == "input_location_message_content"):
             inputmessagecontent_obj = InputLocationMessageContent()
             for k,v in val.items():
-                match k:
-                    case "latitude"|"longitude"|"live_period":
-                        setattr(inputmessagecontent_obj,k,v)
-                    case _:
-                        setattr(inputmessagecontent_obj,k,v)
+                setattr(inputmessagecontent_obj,k,v)
         elif (key == "input_venue_message_content"):
             inputmessagecontent_obj = InputVenueMessageContent()
             for k,v in val.items():
-                match k:
-                    case "latitude"|"longitude"|"title"|"address"|"foursquare_id"|"foursquare_type":
-                        setattr(inputmessagecontent_obj,k,v)
-                    case _:
-                        setattr(inputmessagecontent_obj,k,v)
+                setattr(inputmessagecontent_obj,k,v)
         return inputmessagecontent_obj
 
     def _parse_inlinekeyboardbuttons(self,key:str,val:dict) -> InlineKeyboardButton:
