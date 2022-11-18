@@ -158,7 +158,7 @@ class Parser:
                         setattr(msg_obj,k,pht)
 
                     case "sticker":
-                        stkr = self._parse_stickers(k,v)
+                        stkr = self._parse_sticker(k,v)
                         setattr(msg_obj,k,stkr)
 
                     case "video"|"video_note"|"video_chat_scheduled"|"video_chat_started"|"video_chat_ended"|"video_chat_participants_invited":
@@ -429,7 +429,7 @@ class Parser:
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
                     case "reply_markup":
-                        rep = self._parse_inlinekeyboardbuttons(k,v)
+                        rep = self._parse_inlinekeyboardbutton(k,v)
                         setattr(inline_obj,k,rep)
                     case _:
                         setattr(inline_obj,k,v)
@@ -666,7 +666,7 @@ class Parser:
     
     
     # methods to parse sticker objects
-    def _parse_stickers (self,key:str,val:dict) -> Sticker|StickerSet:
+    def _parse_sticker (self,key:str,val:dict) -> Sticker|StickerSet:
         sticker_obj = None
 
         if (key == "sticker"):
@@ -877,28 +877,17 @@ class Parser:
                 setattr(inputmessagecontent_obj,k,v)
         return inputmessagecontent_obj
 
-    def _parse_inlinekeyboardbuttons(self,key:str,val:dict) -> InlineKeyboardButton:
+    def _parse_inlinekeyboardbutton(self,key:str,val:dict) -> InlineKeyboardButton:
         inlinekeyboardbutton_obj = InlineKeyboardButton()
         for k,v in val.items():
-            match k:
-                case "text"|"url"|"callback_data"|"switch_inline_query"|"switch_inline_query_current_chat"|"callback_game"|"pay":
-                    setattr(inlinekeyboardbutton_obj,k,v)
-                case _:
-                    setattr(inlinekeyboardbutton_obj,k,v)
+            setattr(inlinekeyboardbutton_obj,k,v)
         return inlinekeyboardbutton_obj
 
 
     def _parse_stickerset(self,key:str,val:dict) -> StickerSet:
         stickerset_obj = StickerSet()
         for k,v in val.items():
-            match k:
-                case "stickers":
-                    stickers = []
-                    for sticker in v:
-                        stickers.append(self._parse_stickers(k,sticker))
-                    setattr(stickerset_obj,k,stickers)
-                case _:
-                    setattr(stickerset_obj,k,v)
+            setattr(stickerset_obj,k,v)
         return stickerset_obj
 
     def _parse_passportelementerror(self,key:str,val:dict) -> PassportElementError:
@@ -962,11 +951,7 @@ class Parser:
         if (key == "chat_member_updated"):
             chatmember_obj = ChatMemberUpdated()
             for k,v in val.items():
-                match k:
-                    case "old_chat_member"|"new_chat_member":
-                        setattr(chatmember_obj,k,self._parse_chatmember(k,v))
-                    case _:
-                        setattr(chatmember_obj,k,v)
+                setattr(chatmember_obj,k,v)
         elif (key == "chat_administrator_rights"):
             chatmember_obj = ChatAdministratorRights()
             for k,v in val.items():
