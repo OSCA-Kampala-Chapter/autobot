@@ -790,11 +790,7 @@ class Parser:
     def _parse_proximityalerttriggered(self,key:str,val:dict) -> ProximityAlertTriggered:
         proximityalerttriggered_obj = ProximityAlertTriggered()
         for k,v in val.items():
-            match k:
-                case "traveler"|"watcher"|"distance":
-                    setattr(proximityalerttriggered_obj,k,v)
-                case _:
-                    setattr(proximityalerttriggered_obj,k,v)
+            setattr(proximityalerttriggered_obj,k,v)
         return proximityalerttriggered_obj
 
     def _parse_login_url(self,key:str,val:dict) -> LoginUrl:
