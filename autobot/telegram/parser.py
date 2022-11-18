@@ -584,11 +584,7 @@ class Parser:
         if (key == "inline_keyboard_button"):
             inline_obj = InlineKeyboardButton()
             for k,v in val.items():
-                match k:
-                    case "text"|"url"|"callback_data"|"switch_inline_query"|"switch_inline_query_current_chat"|"callback_game"|"pay":
-                        setattr(inline_obj,k,v)
-                    case _:
-                        setattr(inline_obj,k,v)
+                setattr(inline_obj,k,v)
         elif (key == "inline_keyboard_markup"):
             inline_obj = InlineKeyboardMarkup()
             for k,v in val.items():
@@ -910,75 +906,39 @@ class Parser:
         if (key == "passport_element_error_data_field"):
             passportelementerror_obj = PassportElementErrorDataField()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"field_name"|"data_hash"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_file"):
             passportelementerror_obj = PassportElementErrorFile()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"file_hash"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_files"):
             passportelementerror_obj = PassportElementErrorFiles()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"file_hashes"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_front_side"):
             passportelementerror_obj = PassportElementErrorFrontSide()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"file_hash"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_reverse_side"):
             passportelementerror_obj = PassportElementErrorReverseSide()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"file_hash"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_selfie"):
             passportelementerror_obj = PassportElementErrorSelfie()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"file_hash"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_translation_file"):
             passportelementerror_obj = PassportElementErrorTranslationFile()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"file_hash"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _: 
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_translation_files"):
             passportelementerror_obj = PassportElementErrorTranslationFiles()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"file_hashes"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         elif (key == "passport_element_error_unspecified"):
             passportelementerror_obj = PassportElementErrorUnspecified()
             for k,v in val.items():
-                match k:
-                    case "source"|"type"|"element_hash"|"message":
-                        setattr(passportelementerror_obj,k,v)
-                    case _:
-                        setattr(passportelementerror_obj,k,v)
+                setattr(passportelementerror_obj,k,v)
         return passportelementerror_obj
 
     def _parse_forumtopic(self,key:str,val:dict) -> ForumTopicCreated|ForumTopicClosed|ForumTopicReopened:
