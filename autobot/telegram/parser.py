@@ -317,8 +317,6 @@ class Parser:
             inline_obj = InlineQueryResult()
             for k,v in val.items():
                 match k:
-                    case "photo_url"|"thumb_url"|"gif_url"|"mpeg4_url"|"video_url"|"audio_url"|"voice_url"|"document_url"|"sticker_url"|"photo_file_id"|"gif_file_id"|"mpeg4_file_id"|"video_file_id"|"audio_file_id"|"voice_file_id"|"document_file_id"|"sticker_file_id":
-                        setattr(inline_obj,k,v)
                     case "input_message_content":
                         imc = self._parse_inputmessagecontent(k,v)
                         setattr(inline_obj,k,imc)
