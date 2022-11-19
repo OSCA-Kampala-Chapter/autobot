@@ -830,7 +830,7 @@ class Parser:
             setattr(proximityalerttriggered_obj,k,v)
         return proximityalerttriggered_obj
 
-    def _parse_login_url(self,key:str,val:dict) -> LoginUrl:
+    def _parse_loginurl(self,key:str,val:dict) -> LoginUrl:
         loginurl_obj = LoginUrl()
         for k,v in val.items():
             setattr(loginurl_obj,k,v)
@@ -872,12 +872,6 @@ class Parser:
             for k,v in val.items():
                 setattr(poll_obj,k,v)
         return poll_obj
-
-    def _parse_polloption(self,key:str,val:dict) -> PollOption:
-        polloption_obj = PollOption()
-        for k,v in val.items():
-            setattr(polloption_obj,k,v)
-        return polloption_obj
 
     def _parse_document(self,key:str,val:dict) -> Document:
         document_obj = Document()
