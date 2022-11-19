@@ -6,9 +6,52 @@ from autobot.telegram.payments.objects import *
 from autobot.telegram.stickers.objects import *
 
 
-InlineQueryResults = list[InlineQueryResult, InlineQueryResultArticle, InlineQueryResultAudio, InlineQueryResultCachedAudio, InlineQueryResultCachedDocument, InlineQueryResultCachedGif, InlineQueryResultCachedMpeg4Gif, InlineQueryResultCachedPhoto, InlineQueryResultCachedSticker, InlineQueryResultCachedVideo, InlineQueryResultCachedVoice, InlineQueryResultContact, InlineQueryResultDocument, InlineQueryResultGame, InlineQueryResultGif, InlineQueryResultLocation, InlineQueryResultMpeg4Gif, InlineQueryResultPhoto, InlineQueryResultVenue, InlineQueryResultVideo, InlineQueryResultVoice]
-ChatMembers = list[ChatMember, ChatMemberUpdated, ChatAdministratorRights, ChatMemberBanned, ChatMemberLeft, ChatMemberMember, ChatMemberAdministrator, ChatMemberOwner, ChatMemberRestricted]
-BotCommands = list[BotCommand, BotCommandScope, BotCommandScopeAllChatAdministrators, BotCommandScopeAllGroupChats, BotCommandScopeAllPrivateChats, BotCommandScope, BotCommandScopeChat, BotCommandScopeChatMember, BotCommandScopeDefault]
+InlineQueryResults = list[InlineQueryResult, 
+                          InlineQueryResultArticle, 
+                          InlineQueryResultAudio, 
+                          InlineQueryResultCachedAudio, 
+                          InlineQueryResultCachedDocument, 
+                          InlineQueryResultCachedGif, 
+                          InlineQueryResultCachedMpeg4Gif, 
+                          InlineQueryResultCachedPhoto, 
+                          InlineQueryResultCachedSticker, 
+                          InlineQueryResultCachedVideo, 
+                          InlineQueryResultCachedVoice, 
+                          InlineQueryResultContact, 
+                          InlineQueryResultDocument, 
+                          InlineQueryResultGame, 
+                          InlineQueryResultGif, 
+                          InlineQueryResultLocation, 
+                          InlineQueryResultMpeg4Gif, 
+                          InlineQueryResultPhoto, 
+                          InlineQueryResultVenue, 
+                          InlineQueryResultVideo, 
+                          InlineQueryResultVoice
+                         ]
+
+ChatMembers = list[ChatMember, 
+                   ChatMemberUpdated, 
+                   ChatAdministratorRights, 
+                   ChatMemberBanned, 
+                   ChatMemberLeft, 
+                   ChatMemberMember, 
+                   ChatMemberAdministrator, 
+                   ChatMemberOwner, 
+                   ChatMemberRestricted
+                  ]
+
+BotCommands = list[BotCommand, 
+                   BotCommandScope, 
+                   BotCommandScopeAllChatAdministrators, 
+                   BotCommandScopeAllGroupChats, 
+                   BotCommandScopeAllPrivateChats, 
+                   BotCommandScope, 
+                   BotCommandScopeChat, 
+                   BotCommandScopeChatMember, 
+                   BotCommandScopeDefault
+                  ]
+
+
 class Parser:
     
     # methods to parse general telegram objects
