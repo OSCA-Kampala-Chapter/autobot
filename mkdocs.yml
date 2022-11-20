@@ -90,7 +90,6 @@ markdown_extensions:
 plugins:
   - search:
       separator: '[\s\-\.]' 
-  - mkdocstrings:
   
 
 
