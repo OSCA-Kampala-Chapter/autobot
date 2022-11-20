@@ -14,21 +14,32 @@ theme:
     - search.share
     - search.highlight
   language: en
+  
   palette:
-    - scheme: default
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: deep orange
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: deep orange
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
         name: Switch to dark mode
       primary: deep orange
-      accent: blue
-    - scheme: slate 
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode    
-      primary: red
-      accent: blue 
   logo: assets/logo.png
-  favicon: assets/logo.png
+  favicon: assets.png
   
     
 
@@ -47,6 +58,7 @@ repo_name: OSCA-Kampala-Chapter/autobot
 repo_url: https://github.com/OSCA-Kampala-Chapter/autobot
 
 # These appeal to the footer section of the file and are linked to direct following handles
+
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -76,12 +88,11 @@ markdown_extensions:
 
   # Plugins: This is a plugin that enables the search engine
   #in the markdown file.
-plugins:
-  - search
 
 plugins:
   - search:
       separator: '[\s\-\.]' 
+  
 
 
 # Copyright Section: In this section, it's almost the same as adding a copyright tag in the 
