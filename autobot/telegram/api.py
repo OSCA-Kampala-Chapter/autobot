@@ -2,6 +2,7 @@
 This module contains a class having methods representing the bot api methods
 """
 from autobot.telegram.objects.chat import ChatPermissions
+from autobot.telegram.objects.forcereply import ForceReply
 from autobot.telegram.objects.inlinekeyboard import InlineKeyboardMarkup
 from autobot.telegram.objects.inputfile import (
     InputFile,
@@ -12,7 +13,6 @@ from autobot.telegram.objects.inputfile import (
 )
 from autobot.telegram.objects.message import MessageEntity
 from autobot.telegram.objects.replykeyboard import (
-    ForceReply,
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
 )
@@ -550,7 +550,7 @@ class BotAPI:
         """
         pass
 
-    def setChatAdministratorCustomTitle(self, chat_id: int | str, user_id: int, custom_title: str) -> bool:
+    def set_chat_administrator_custom_title(self, chat_id: int | str, user_id: int, custom_title: str) -> bool:
         """Use this method to set a custom title for an administrator in a supergroup promoted by the bot.
 
         Args:
