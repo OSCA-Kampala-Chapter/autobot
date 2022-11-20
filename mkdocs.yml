@@ -9,28 +9,38 @@ theme:
     - navigation.sections
     - toc.integrate
     - navigation.top
-    - header.autohide #the header is automatically hidden when the user scrolls past a certain threshold, leaving more space for content. Add the following lines to mkdocs.yml:
     - search.suggest
     - search.share
     - search.highlight
   language: en
+
   palette:
-    - scheme: default
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: deep orange
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: deep orange
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
         name: Switch to dark mode
       primary: deep orange
-      accent: blue
-    - scheme: slate 
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode    
-      primary: red
-      accent: blue 
   logo: assets/logo.png
-  favicon: assets/logo.png
-  
-    
+  favicon: assets.png
+
+
 
 # defines the order of the markdown-
 nav:
@@ -76,12 +86,12 @@ markdown_extensions:
 
   # Plugins: This is a plugin that enables the search engine
   #in the markdown file.
-plugins:
-  - search
 
 plugins:
   - search:
       separator: '[\s\-\.]' 
+  - mkdocstrings:
+  
 
 
 # Copyright Section: In this section, it's almost the same as adding a copyright tag in the 
