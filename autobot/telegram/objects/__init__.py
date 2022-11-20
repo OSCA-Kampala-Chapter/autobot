@@ -60,7 +60,7 @@ from .message import Message, MessageAutoDeleteTimerChanged, MessageEntity, Mess
 from .photosize import PhotoSize
 from .poll import Poll, PollAnswer, PollOption
 from .proximityalerttriggered import ProximityAlertTriggered
-from .replykeyboard import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from .replykeyboard import ForceReply, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from .responseparameters import ResponseParameters
 from .update import Update
 from .user import User, UserProfilePhotos
