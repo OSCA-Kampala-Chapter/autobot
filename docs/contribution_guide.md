@@ -1,8 +1,8 @@
-# Contributing Guide
+# **Contributing Guide**
 
 First off, thanks for taking the time to contribute! :rocket:
 
-## The Basics
+## **The Basics**
 
 If you are looking to help with a code contribution, this project uses [MKDocs](https://www.mkdocs.org/) for documentation generation, [Python](https://www.python.org/) for the plugin, along with a splattering of [Markdown](https://www.markdownguide.org/) and [yaml](https://yaml.org/).  I've included my [VSCode](https://code.visualstudio.com/) workspace and a [Docker](https://docs.docker.com/) development container.  Read about [how I develop using VSCode and Docker](https://www.allisonthackston.com/articles/docker-development.html). If you don't feel ready to make autobot code contribution yet, no problem! You can also check out the issues we have in the [Github issue tracker](https://github.com/OSCA-Kampala-Chapter/autobot/issues).
 
@@ -13,7 +13,7 @@ If you are interested in making autobot code contribution and would like to lear
 can use to learn what they need to know to contribute to your project]_ i will put them here if provided
 -->
 
-### How to Contribute
+### **How to Contribute**
 
 Never made an open-source contribution before? Wondering how contributions work in this project? Here's a quick rundown!
 
@@ -65,7 +65,10 @@ Never made an open-source contribution before? Wondering how contributions work 
 
 14. Celebrate your success after your pull request is merged!
 
-## Getting Help
+## **Pull Request Template**
+Please, read this [pull request document](pull-request-information.md) before making a pull request
+
+## **Getting Help**
 
 If you need help, you can ask questions on the [issue tracker](https://github.com/OSCA-Kampala-Chapter/autobot/issues)
 
