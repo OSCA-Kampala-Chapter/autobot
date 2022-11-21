@@ -24,7 +24,7 @@ class ForceReply(BaseObject):
         'input_field_placeholder'
     )
 
-    def __init__(self, force_reply: bool) -> None:
+    def __init__(self, force_reply: bool = None) -> None:
         self.force_reply = force_reply
         self.selective: Optional[bool] = None
         self.input_field_placeholder: Optional[str] = None
