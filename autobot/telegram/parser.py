@@ -54,7 +54,11 @@ BotCommands = list[BotCommand,
 
 class Parser:
     
+#######################################################################################################
+    
     # methods to parse general telegram objects
+
+######################################################################################################
     
     def _parse_update (self,key:int,val:dict) -> Update:
         update_obj = Update()
@@ -432,10 +436,19 @@ class Parser:
                     setattr(document_obj,k,v)
         return document_obj
 
-    def _parse_webapp(self,key:str,val:dict) -> WebAppData:
-        webapp_obj = WebAppData()
-        for k,v in val.items():
-            setattr(webapp_obj,k,v)
+    def _parse_webapp(self,key:str,val:dict) -> WebAppData|WebAppInfo:
+        webapp_obj = None
+
+        if (key == "web_app_data"):
+            webapp_obj = WebAppData()
+            for k,v in val.items():
+                setattr(webapp_obj,k,v)
+
+        elif (key == "web_app"):
+            webapp_obj = WebAppInfo()
+            for k,v in val.items():
+                setattr(webapp_obj,k,v)
+
         return webapp_obj
 
     def _parse_callbackquery(self,key:str,val:dict) -> CallBackQuery:
@@ -607,7 +620,12 @@ class Parser:
             setattr(forcereply_obj,k,v)
         return forcereply_obj
 
+#######################################################################################################
+
     # methods to parse games objects
+
+######################################################################################################
+
     def _parse_game (self,key:str,val:dict) -> Game|GameHighScore:
         game_obj = None
 
@@ -631,8 +649,12 @@ class Parser:
 
         return game_obj
     
-    
+#######################################################################################################
+
     # methods to parse inline objects
+
+#######################################################################################################
+
     def _parse_inlinequeryresults (self,key:str,val:dict) -> InlineQueryResults:
         inline_obj = None
 
@@ -996,7 +1018,12 @@ class Parser:
                 setattr(inputmessagecontent_obj,k,v)
         return inputmessagecontent_obj
      
+#######################################################################################################
+
     # methods to parse passport objects
+
+######################################################################################################
+
     def _parse_passport (self,key:str,val:dict) -> PassportData:
         passport_obj = PassportData()
         for k,v in val.items():
@@ -1051,8 +1078,12 @@ class Parser:
                 setattr(passportelementerror_obj,k,v)
         return passportelementerror_obj
     
-    
+#######################################################################################################
+
     # methods to parse payment objects
+
+#######################################################################################################
+
     def _parse_payments (self,key:str,val:dict) -> Invoice|SuccessfulPayment:
         payment_obj = None
 
@@ -1068,8 +1099,12 @@ class Parser:
 
         return payment_obj
     
-    
+#######################################################################################################
+
     # methods to parse sticker objects
+
+#######################################################################################################
+
     def _parse_sticker (self,key:str,val:dict) -> Sticker|StickerSet:
         sticker_obj = None
 
@@ -1104,3 +1139,17 @@ class Parser:
             setattr(maskposition_obj,k,v)
         return maskposition_obj
 
+
+    ###################################################################################################
+
+        # The public parse method
+
+    ##################################################################################################
+
+    def parse (self,json_data:dict):
+        """
+        The parse method takes in a dictionary representing the results from a telegram bot
+        and initiates the parsing process. It returns a single update object
+        """
+        for k,v in json_data.items():
+            self._parse_update(k,v)
