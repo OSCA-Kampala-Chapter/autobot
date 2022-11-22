@@ -1139,3 +1139,17 @@ class Parser:
             setattr(maskposition_obj,k,v)
         return maskposition_obj
 
+
+    ###################################################################################################
+
+        # The public parse method
+
+    ##################################################################################################
+
+    def parse (self,json_data:dict):
+        """
+        The parse method takes in a dictionary representing the results from a telegram bot
+        and initiates the parsing process. It returns a single update object
+        """
+        for k,v in json_data.items():
+            self._parse_update(k,v)
