@@ -13,10 +13,6 @@ class ResponseParameters(BaseObject):
         retry_after (int): Optional. In case of exceeding flood control, the number of seconds left to wait before the request can be repeated
     """
 
-    __slots__ = (
-        'migrate_to_chat_id', 
-        'retry_after'
-        )
     
     
     def __init__(self):

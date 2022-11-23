@@ -18,16 +18,6 @@ class Video(BaseObject):
         file_size (int): Optional. File size
     """
 
-    __slots__ = (
-        'file_id',
-        'file_unique_id',
-        'width',
-        'height',
-        'duration',
-        'thumb', 
-        'mime_type', 
-        'file_size'
-        )
 
     
     def __init__(self, file_id: str = None, file_unique_id: str = None, width: int = None, height: int = None, duration: int = None) -> None:

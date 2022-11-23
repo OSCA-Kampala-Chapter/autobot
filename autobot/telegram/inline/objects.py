@@ -297,15 +297,7 @@ class InlineQueryResultCachedAudio (InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "audio_file_id",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, audio_file_id: str = None, type: str = "audio") -> None:
         self.id = id
         self.audio_file_id = audio_file_id
@@ -345,17 +337,7 @@ class InlineQueryResultCachedDocument (InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "title",
-                "document_file_id",
-                "description",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, title: str = None, document_file_id: str = None, type: str = "document") -> None:
         self.id = id
         self.title = title
@@ -396,16 +378,7 @@ class InlineQueryResultCachedGif (InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "gif_file_id",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, gif_file_id: str = None, type: str = "gif") -> None:
         self.id = id
         self.type = type
@@ -445,16 +418,7 @@ class InlineQueryResultCachedMpeg4Gif (InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "mpeg4_file_id",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, mpeg4_file_id: str = None, type: str = "mpeg4_gif") -> None:
         self.id = id
         self.type = type
@@ -484,12 +448,7 @@ class InlineQueryResultCachedSticker (InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "sticker_file_id",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, sticker_file_id: str = None, type: str = "sticker") -> None:
         self.id = id
         self.type = type
@@ -529,17 +488,7 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "photo_file_id",
-                "title",
-                "description",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, photo_file_id: str = None, type: str = "photo") -> None:
         self.id = id
         self.type = type
@@ -583,17 +532,7 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "video_file_id",
-                "title",
-                "description",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, video_file_id: str = None, type: str = "video") -> None:
         self.id = id
         self.type = type
@@ -635,16 +574,7 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "voice_file_id",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, voice_file_id: str = None, title: str = None, type: str = "voice") -> None:
         self.id = id
         self.type = type
@@ -684,18 +614,7 @@ class InlineQueryResultArticle(InlineQueryResult):
 
         thumb_height (:obj:`int`, optional): Thumbnail height.
     """
-    __slots__ = ("type",
-                "id",
-                "title",
-                "input_message_content",
-                "reply_markup",
-                "url",
-                "hide_url",
-                "description",
-                "thumb_url",
-                "thumb_width",
-                "thumb_height",
-                )
+    
     def __init__ (self, id: str = None, title: str = None, input_message_content: InputMessageContent = None, type: str = "article") -> None:
         self.id = id
         self.type = type
@@ -745,20 +664,7 @@ class InlineQueryResultPhoto(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "photo_url",
-                "thumb_url",
-                "photo_width",
-                "photo_height",
-                "title",
-                "description",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, photo_url: str = None, thumb_url: str = None, type: str = "photo") -> None:
         self.id = id
         self.type = type
@@ -816,21 +722,7 @@ class InlineQueryResultGif(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "gif_url",
-                "gif_width",
-                "gif_height",
-                "gif_duration",
-                "thumb_url",
-                "thumb_mime_type",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
     def __init__ (self, id: str = None, gif_url: str = None, thumb_url: str = None, type: str = "gif") -> None:
         self.id = id
         self.type = type
@@ -887,21 +779,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "mpeg4_url",
-                "mpeg4_width",
-                "mpeg4_height",
-                "mpeg4_duration",
-                "thumb_url",
-                "thumb_mime_type",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "input_message_content",
-                "reply_markup",
-                )
+    
 
     def __init__ (self, id: str = None, mpeg4_url: str = None, thumb_url: str = None, type: str = "mpeg4_gif") -> None:
         self.id = id
@@ -963,22 +841,7 @@ class InlineQueryResultVideo(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "video_url",
-                "mime_type",
-                "thumb_url",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "video_width",
-                "video_height",
-                "video_duration",
-                "description",
-                "input_message_content",
-                "reply_markup",
-                )
+    
 
     def __init__ (self, id: str = None, video_url: str = None, mime_type: str = None, thumb_url: str = None, title: str = None, type: str = "video") -> None:
         self.id = id
@@ -1028,18 +891,7 @@ class InlineQueryResultAudio(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "audio_url",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "performer",
-                "audio_duration",
-                "input_message_content",
-                "reply_markup",
-                )
+    
 
     def __init__ (self, id: str = None, audio_url: str = None, title: str = None, type: str = "audio") -> None:
         self.id = id
@@ -1084,17 +936,7 @@ class InlineQueryResultVoice(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "voice_url",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "voice_duration",
-                "input_message_content",
-                "reply_markup",
-                )
+    
 
     def __init__ (self, id: str = None, voice_url: str = None, title: str = None, type: str = "voice") -> None:
         self.id = id
@@ -1145,21 +987,7 @@ class InlineQueryResultDocument(InlineQueryResult):
 
         thumb_height (:obj:`int`, optional): Thumbnail height.
     """
-    __slots__ = ("type",
-                "id",
-                "title",
-                "caption",
-                "parse_mode",
-                "caption_entities",
-                "document_url",
-                "mime_type",
-                "description",
-                "input_message_content",
-                "reply_markup",
-                "thumb_url",
-                "thumb_width",
-                "thumb_height",
-                )
+    
 
     def __init__ (self, id: str = None, title: str = None, document_url: str = None, mime_type: str = None, type: str = "document") -> None:
         self.id = id
@@ -1215,21 +1043,7 @@ class InlineQueryResultLocation(InlineQueryResult):
 
         thumb_height (:obj:`int`, optional): Thumbnail height.
     """
-    __slots__ = ("type",
-                "id",
-                "latitude",
-                "longitude",
-                "title",
-                "horizontal_accuracy",
-                "live_period",
-                "heading",
-                "proximity_alert_radius",
-                "input_message_content",
-                "reply_markup",
-                "thumb_url",
-                "thumb_width",
-                "thumb_height",
-                )
+    
 
     def __init__ (self, id: str = None, latitude: float = None, longitude: float = None, title: str = None, type: str = "location") -> None:
         self.id = id
@@ -1286,22 +1100,7 @@ class InlineQueryResultVenue(InlineQueryResult):
 
         thumb_height (:obj:`int`, optional): Thumbnail height.
     """
-    __slots__ = ("type",
-                "id",
-                "latitude",
-                "longitude",
-                "title",
-                "address",
-                "foursquare_id",
-                "foursquare_type",
-                "google_place_id",
-                "google_place_type",
-                "input_message_content",
-                "reply_markup",
-                "thumb_url",
-                "thumb_width",
-                "thumb_height",
-                )
+    
 
     def __init__ (self, id: str = None, latitude: float = None, longitude: float = None, title: str = None, address: str = None, type: str = "venue") -> None:
         self.id = id
@@ -1350,18 +1149,7 @@ class InlineQueryResultContact(InlineQueryResult):
 
         thumb_height (:obj:`int`, optional): Thumbnail height.
     """
-    __slots__ = ("type",
-                "id",
-                "phone_number",
-                "first_name",
-                "last_name",
-                "vcard",
-                "input_message_content",
-                "reply_markup",
-                "thumb_url",
-                "thumb_width",
-                "thumb_height",
-                )
+    
 
     def __init__ (self, id: str = None, phone_number: str = None, first_name: str = None, type: str = "contact") -> None:
         self.id = id
@@ -1390,11 +1178,7 @@ class InlineQueryResultGame(InlineQueryResult):
 
         reply_markup (:obj:`InlineKeyboardMarkup`, optional): Inline keyboard attached to the message.
     """
-    __slots__ = ("type",
-                "id",
-                "game_short_name",
-                "reply_markup",
-                )
+    
 
     def __init__ (self, id: str = None, game_short_name: str = None, type: str = "game") -> None:
         self.id = id
@@ -1420,12 +1204,7 @@ class ChosenInlineResult(InlineQueryResult):
 
         query (:obj:`str`): The query that was used to obtain the result.
     """
-    __slots__ = ("result_id",
-                "from_user",
-                "location",
-                "inline_message_id",
-                "query",
-                )
+    
 
     def __init__ (self, result_id: str =None, from_user: User =None, query: str =None) -> None:
         self.result_id = result_id

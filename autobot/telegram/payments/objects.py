@@ -16,10 +16,6 @@ class LabeledPrice(BaseObject):
 
     """
 
-    __slots__ = (
-        "label", 
-        "amount",
-        )
 
     def __init__(self, label: str = None, amount: int = None) -> None:
         self.label = label
@@ -46,12 +42,6 @@ class Invoice(BaseObject):
 
     """
 
-    __slots__ = ("title",
-                "description",
-                "start_parameter",
-                "currency",
-                "total_amount", 
-                )
 
     def __init__(self, title: str = None, description: str = None, start_parameter: str = None, currency: str = None, total_amount: int = None) -> None:
         self.title = title
@@ -82,13 +72,6 @@ class ShippingAddress(BaseObject):
     
     """
 
-    __slots__ = ("country_code",
-                "state",
-                "city",
-                "street_line1",
-                "street_line2",
-                "post_code", 
-                )
 
     def __init__(self, country_code: str = None, state: str = None, city: str = None, street_line1: str = None, street_line2: str = None, post_code: str = None) -> None:
         self.country_code = country_code
@@ -114,11 +97,6 @@ class OrderInfo(BaseObject):
 
     """
 
-    __slots__ = ("name",
-                "phone_number",
-                "email",
-                "shipping_address",    
-                )
 
     def __init__(self):
         self.name: Optional[str] = None
@@ -142,11 +120,6 @@ class ShippingOption(BaseObject):
             prices (:obj :list[`LabeledPrice`] ) : list of price portions
     """
 
-    __slots__ = (
-        "id", 
-        "title", 
-        "prices",
-        )
 
     def __init__(self, id: str = None, title: str = None, prices: list[LabeledPrice] = None) -> None:
         self.id = id
@@ -177,14 +150,6 @@ class SuccessfulPayment(BaseObject):
     
     """
 
-    __slots__ = ("currency",
-                "total_amount",
-                "invoice_payload",
-                "shipping_option_id",
-                "order_info",
-                "telegram_payment_charge_id",
-                "provider_payment_charge_id",
-                )
 
     def __init__(self, currency: str = None, total_amount: int = None, invoice_payload: str = None, telegram_payment_charge_id: str = None, provider_payment_charge_id: str = None) -> None:
         self.currency = currency
@@ -220,11 +185,6 @@ class ShippingQuery(BaseObject):
     
     """
 
-    __slots__ = ("id",
-                "sent_from",
-                "invoice_payload",
-                "shipping_address",
-                )
 
     def __init__(self, id: str = None, sent_from: User = None, invoice_payload: str = None, shipping_address: ShippingAddress = None) -> None:
         self.id = id
@@ -265,15 +225,6 @@ class PreCheckoutQuery(BaseObject):
             Used `sent_from` as an alias to `from`
 
     """
-
-    __slots__ = ("id",
-                "sent_from",
-                "currency",
-                "total_amount",
-                "invoice_payload",
-                "shipping_option_id",
-                "order_info",
-                )
 
     def __init__(self, id: str = None, sent_from: User = None, currency: str = None, total_amount: int = None, invoice_payload: str = None) -> None:
         self.id = id

@@ -15,8 +15,6 @@ class PollOption(BaseObject):
 
     """
 
-    __slots__ = ("text", "voter_count",)
-
     def __init__(self, text:str = None, voter_count:int = None) -> None:
         self.text = text
         self.voter_count = voter_count
@@ -59,13 +57,6 @@ class Poll(BaseObject):
 
     """
 
-    __slots__ = (
-        'correct_option_id',
-        'explanation',
-        'explanation_entities',
-        'open_period',
-        'close_date',
-    )
 
     def __init__(
         self,
@@ -105,8 +96,6 @@ class PollAnswer(BaseObject):
         option_ids (list[int]): 0-based identifiers of answer options, chosen by the user. 
         May be empty if the user retracted their vote.
     """
-
-    __slots__ = ("poll_id", "user", "option_ids",)
 
     def __init__(self, poll_id: str = None, user: User = None, option_ids: list[int] = None) -> None:
         self.poll_id = poll_id

@@ -16,12 +16,6 @@ class PhotoSize(BaseObject):
         file_size (int) : Optional. File size in bytes
     """
 
-    __slots__ = ("file_id",
-                "file_unique_id",
-                "width",
-                "height",
-                "file_size",
-                )
 
     def __init__(self, 
                 file_id:str = None,

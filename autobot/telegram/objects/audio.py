@@ -27,15 +27,6 @@ class Audio(BaseObject):
         thumb (:obj:`PhotoSize`, optional): Optional. Thumbnail of the album cover to which the music file belongs
     """
 
-    __slots__ = (
-        'duration', 
-        'performer', 
-        'title', 
-        'file_name', 
-        'mime_type', 
-        'file_size', 
-        'thumb'
-    )
 
     def __init__(self, file_id: str = None, file_unique_id: str = None) -> None:
         self.file_id = file_id

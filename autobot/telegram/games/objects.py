@@ -25,14 +25,6 @@ class Game(BaseObject):
 
         `animation (Optional[Animation])`: Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
     """
-    
-    __slots__ = ("title",
-                "description",
-                "photo",
-                "text",
-                "text_entities",
-                "animation",
-                )
 
     def __init__(self, title: str = None, description: str = None, photo: list[PhotoSize] = None) -> None:
         self.title = title
@@ -56,10 +48,6 @@ class GameHighScore(BaseObject):
         `score (int)`: Score
     """
     
-    __slots__ = ("position",
-                "user",
-                "score",
-                )
 
     def __init__(self, position: int = None, user: User = None, score: int = None) -> None:
         self.position = position

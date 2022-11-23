@@ -21,13 +21,6 @@ class InputMedia(BaseObject):
         caption_entities (List[:obj:`MessageEntity`]): Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     """
     
-    __slots__ = (
-        'type',
-        'media',
-        'caption', 
-        'parse_mode', 
-        'caption_entities',
-    )
     
     def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
@@ -54,17 +47,6 @@ class InputMediaAnimation(BaseObject):
             duration (int): Optional . Animation duration in seconds 
     """
 
-    __slots__ = (
-        "type",
-        "media",
-        "thumb",
-        "caption",
-        "parse_mode",
-        "caption_entities",
-        "width",
-        "height",
-        "duration"
-    )   
 
     def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
@@ -91,17 +73,6 @@ class InputMediaAudio(BaseObject):
             title (str): Optional. Title of the audio
     """
 
-    __slots__ = (
-        "type",
-        "media",
-        "thumb",
-        "caption",
-        "parse_mode",
-        "caption_entities",
-        "duration",
-        "performer",
-        "title"
-    )   
 
     def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
@@ -126,15 +97,6 @@ class InputMediaDocument(BaseObject):
         disable_content_type_detection (boolean): Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album.
     """
 
-    __slots__ = (
-        "type",
-        "media",
-        "thumb",
-        "caption",
-        "parse_mode",
-        "caption_entities",
-        "disable_content_type_detection"
-    )
 
     def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
@@ -155,13 +117,6 @@ class InputMediaPhoto(BaseObject):
             caption_entities (list): Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
     """
 
-    __slots__ = (
-        "type",
-        "media",
-        "caption",
-        "parse_mode",
-        "caption_entities"
-    )
 
     def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
@@ -185,18 +140,6 @@ class InputMediaVideo(BaseObject):
             supporting_streaming (bool): Optional. Pass True if the uploaded video is suitable for streaming  
     """
     
-    __slots__ = (
-        "type",
-        "media",
-        "thumb",
-        "caption",
-        "parse_mode",
-        "caption_entities",
-        "width",
-        "height",
-        "duration",
-        "support_streaming"
-    )
 
     def __init__(self, type: str = None, media: str = None) -> None:
         self.type = type
