@@ -60,7 +60,7 @@ class Parser:
 
 ######################################################################################################
     
-    def _parse_update (self,key:int,val:dict) -> Update:
+    def _parse_update (self,val:dict) -> Update:
         update_obj = Update()
         
         for k,v in val.items():
@@ -1151,5 +1151,4 @@ class Parser:
         The parse method takes in a dictionary representing the results from a telegram bot
         and initiates the parsing process. It returns a single update object
         """
-        for k,v in json_data.items():
-            self._parse_update(k,v)
+        return self._parse_update(json_data)
