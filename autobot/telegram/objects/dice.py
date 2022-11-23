@@ -12,7 +12,6 @@ class Dice(BaseObject):
 
     """
 
-    __slots__ = ("emoji", "value",)
 
     def __init__(self, emoji:str = None, value:int = None) -> None:
         self.emoji = emoji

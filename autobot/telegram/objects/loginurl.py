@@ -17,12 +17,6 @@ class LoginUrl(BaseObject):
         request_write_access (bool): Optional. Pass True to request the permission for your bot to send messages to the user.
     """
 
-    __slots__ = (
-        'url',
-        'forward_text', 
-        'bot_username', 
-        'request_write_access'
-        )
     
     
     def __init__(self, url:str = None) -> None:

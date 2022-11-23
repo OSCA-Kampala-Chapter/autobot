@@ -18,17 +18,6 @@ class User(BaseObject):
             supports_inline_queries (Optional[bool]): Optional. True, if the bot supports inline queries. Returned only in getMe.
         """
     
-    __slots__ = (
-            'id',
-            'is_bot',
-            'first_name',
-            'last_name', 
-            'username', 
-            'language_code', 
-            'can_join_groups', 
-            'can_read_all_group_messages', 
-            'supports_inline_queries'
-            )
         
         
     def __init__(self, id: int = None, is_bot: bool = None, first_name: str = None) -> None:

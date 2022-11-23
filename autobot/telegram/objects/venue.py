@@ -23,15 +23,6 @@ class Venue(BaseObject):
         google_place_type (Optional[str]): Optional. Google Places type of the venue. (See supported types.)
     """
 
-    __slots__ = (
-        'location', 
-        'title', 
-        'address', 
-        'foursquare_id', 
-        'foursquare_type', 
-        'google_place_id', 
-        'google_place_type'
-        )
     
     
     def __init__(self, location: Location = None, title: str = None, address: str = None) -> None:

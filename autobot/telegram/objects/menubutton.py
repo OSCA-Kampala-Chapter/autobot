@@ -21,8 +21,6 @@ class MenuButtonCommands(BaseObject):
             type (str) : Type of the button, must be commands
     """ 
 
-    __slots__ = ("type",)
-
     def __init__(self, type: str = None) -> None:
         self.type = type
 
@@ -39,11 +37,6 @@ class MenuButtonWebApp(BaseObject):
             The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery.
     """ 
 
-    __slots__ = (
-        "type", 
-        "text", 
-        "web_app",
-        )
 
     def __init__(self, type: str = None, text: str = None, web_app: WebAppInfo = None) -> None:
         self.type = type
@@ -58,8 +51,6 @@ class MenuButtonDefault(BaseObject):
         Args:
             type (str) : Type of the button, must be default
     """
-
-    __slots__ = ("type",)
 
     def __init__(self, type: str = None) -> None:
         self.type = type

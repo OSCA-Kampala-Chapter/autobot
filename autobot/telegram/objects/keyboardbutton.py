@@ -18,14 +18,6 @@ class KeyboardButton(BaseObject):
         web_app (str): Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only
 """
 
-    __slots__ = (
-        "text",
-        "type",
-        "request_contact",
-        "request_location",
-        "request_poll",
-        "web_app",
-    )
     
     def __init__(self, text: str = None, type: str = None) -> None:
         self.text = text
@@ -47,7 +39,6 @@ class KeyboardButtonPollType(BaseObject):
         If regular is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type.
     """
 
-    __slots__ = ("type",)
 
     def __init__(self, type: str = None) -> None:
         self.type = type

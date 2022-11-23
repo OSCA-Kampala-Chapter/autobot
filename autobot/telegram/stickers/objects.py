@@ -96,14 +96,6 @@ class StickerSet(BaseObject):
 
     """
 
-    __slots__ = ("name",
-                "title",
-                "sticker_type",
-                "is_animated",
-                "is_video",
-                "stickers",
-                "thumb",
-                )
 
     def __init__(self, name: str = None, title: str = None, sticker_type: str = None, is_animated: bool = None, is_video: bool = None, stickers: List[Sticker] = None) -> None:
         self.name = name
@@ -135,11 +127,6 @@ class MaskPosition(BaseObject):
 
     """
 
-    __slots__ = ("point",
-                "x_shift",
-                "y_shift",
-                "scale",
-                )
 
     def __init__(self, point: str = None, x_shift: float = None, y_shift: float = None, scale: float = None) -> None:
         self.point = point
