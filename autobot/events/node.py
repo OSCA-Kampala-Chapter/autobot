@@ -72,6 +72,8 @@ class EventManager(asyncio.Queue):
         super().task_done()
         await asyncio.sleep(0)
 
+    get_task = _relay
+
 
 
 class Node (EventManager):
@@ -110,7 +112,7 @@ class Node (EventManager):
         return async_runner
 
 
-    async def action (self,val:EVENT_VALUE):
+    async def action (self):
         """
         The action method should be implemented by the BaseNode subclass.
         """
@@ -121,6 +123,9 @@ class Node (EventManager):
         Get event from the task manager and pass its value to the action method
         for processing.
         """
+
+        action = self.action()
+        action.send(None)
         while True:
 
             try:
@@ -128,7 +133,9 @@ class Node (EventManager):
             except asyncio.QueueEmpty:
                 break
             else:
-                await self.action(event.event_value)
+                action.send(event.event_value)
+
+        action.close()
 
     async def call_dispatcher(self,event:Event) -> None:
         """
