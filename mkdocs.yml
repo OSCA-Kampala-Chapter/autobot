@@ -1,5 +1,6 @@
 # AutoBot Information
 site_name: AutoBot Documentation
+edit_uri: blob/main/docs/
 
 # Configuration
 theme:
@@ -13,8 +14,6 @@ theme:
     - search.suggest
     - search.share
     - search.highlight
-    - navigation.instant #with this feature, all internal links will be intercepted and dispatched via XHR without fully reloading the page.
-
   language: en
   
   palette:
@@ -92,13 +91,16 @@ markdown_extensions:
   # Plugins: This is a plugin that enables the search engine
   #in the markdown file.
 
-  # this option removes the edit buttton
-edit_uri: ""
-
 plugins:
   - search:
         separator: '[\s\-\.]'
-  - mkdocstrings
+  - mkdocstrings:
+      custom_templates: templates
+      default_handler: python
+      handlers:
+        python:
+          options:
+           show_source: false
 
 
 # Copyright Section: In this section, it's almost the same as adding a copyright tag in the 
