@@ -65,3 +65,6 @@ what you need to run autobot
 | urlib3 | 1.26.12 | urllib3 is one of the most downloaded packages on PyPI and is a dependency of many popular Python packages like Requests, Pip, and more! urllib3 is powerful and easy to use:[installation-guide-here](https://urllib3.readthedocs.io/en/stable/)|
 | watchdog | 2.1.9 | Python API and shell utilities to monitor file system events Works on 3.6+. If you want to use Python 2.6, you should stick with watchdog < 0.10.0 If you want to use Python 2.7, 3.4 or 3.5, you should stick with watchdog < 1.0.0,[installation-guide here](https://pypi.org/project/watchdog/)|
 | zipp | 3.10.0 | A pathlib-compatible Zipfile object wrapper. Official backport of the standard library Path object. [installation-guide-here](https://pypi.org/project/zipp/)|
+
+## **Contribution Guide**
+You want to see how you can contribute to this [project read here](contribution_guide.md)

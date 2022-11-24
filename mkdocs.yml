@@ -48,6 +48,7 @@ nav:
   - Home: index.md
   - Reference: reference.md
   - FAQS: faqs.md
+  - Contribution: contribution_guide.md
 
 site_author: Tobais
 site_description: >-
