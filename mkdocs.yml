@@ -90,6 +90,9 @@ markdown_extensions:
   # Plugins: This is a plugin that enables the search engine
   #in the markdown file.
 
+  # this option removes the edit buttton
+edit_uri: ""
+
 plugins:
   - search:
         separator: '[\s\-\.]'
