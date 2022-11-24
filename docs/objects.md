@@ -12,3 +12,10 @@
     options:
         show_root_heading: false
         show_source: false
+
+## **Documentation for `Botcommand`**
+
+::: autobot.telegram.objects.botcommand
+    options:
+        show_root_heading: false
+        show_source: false
