@@ -5,6 +5,7 @@ from autobot.telegram.passport.objects import *
 from autobot.telegram.payments.objects import *
 from autobot.telegram.stickers.objects import *
 
+__all__ = ("Parser","Composer")
 
 InlineQueryResults = list[InlineQueryResult, 
                           InlineQueryResultArticle, 
@@ -279,7 +280,7 @@ class Parser:
                         setattr(ent_obj,k,v)
                 return ent_obj
 
-            msg_obj = [_entity_parser(entity) for entity in val.values()]
+            msg_obj = [_entity_parser(entity) for entity in val]
 
         elif (key == "message_auto_delete_timer_changed"):
             msg_obj = MessageAutoDeleteTimerChanged()
@@ -1152,3 +1153,34 @@ class Parser:
         and initiates the parsing process. It returns a single update object
         """
         return self._parse_update(json_data)
+
+
+
+#######################################################################################################
+
+    # Composer class
+
+#######################################################################################################
+
+class Composer:
+
+    def compose (self,cls):
+
+        response_obj = {}
+        for k,v in vars(cls).items():
+            try:
+                if isinstance(v,list):
+                    obj_list = []
+                    for obj in v:
+                        resp_obj = self.compose(obj)
+                        obj_list.append(resp_obj)
+                    response_obj[k] = obj_list
+                else:
+                    resp_obj = self.compose(v)
+            except TypeError:
+                response_obj[k] = v
+                continue
+            else:
+                response_obj[k] = resp_obj
+
+        return response_obj
