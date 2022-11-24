@@ -210,7 +210,7 @@ class EventDispatcher:
     def strict_mode (self,val:bool) -> None:
         self.listeners._strict_mode = val
 
-    def listen (self,
+    def add_listener (self,
         event_type:EVENT_NAME, 
         callback:Coroutine
         ) -> ID:
@@ -223,7 +223,7 @@ class EventDispatcher:
         self.listeners._set_event_handler((event_type,callback_id,ProcState(callback)))
         return callback_id
 
-    def stop_listening(self,
+    def remove_listener(self,
         event_type:EVENT_NAME,
         listener_id:ID
         ) -> None:
