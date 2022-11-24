@@ -1183,4 +1183,19 @@ class Composer:
             else:
                 response_obj[k] = resp_obj
 
-        return response_obj
+        return self._clean(response_obj)
+
+    def _clean (self,resp:dict) -> dict:
+        
+        clean_resp = {}
+
+        for k,v in resp.items():
+            try:
+                res = self._clean(v)
+            except AttributeError:
+                if v is not None:
+                    clean_resp[k] = v
+            else:
+                clean_resp[k] = res
+
+        return clean_resp
