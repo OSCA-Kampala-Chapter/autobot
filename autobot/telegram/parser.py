@@ -1178,10 +1178,16 @@ class Composer:
                 else:
                     resp_obj = self.compose(v)
             except TypeError:
-                response_obj[k] = v
+                if (k == "from_"):
+                    response_obj["from"] = v
+                else:
+                    response_obj[k] = v
                 continue
             else:
-                response_obj[k] = resp_obj
+                if (k == "from_"):
+                    response_obj["from"] = resp_obj
+                else:
+                    response_obj[k] = resp_obj
 
         return self._clean(response_obj)
 
