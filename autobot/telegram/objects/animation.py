@@ -26,17 +26,6 @@ class Animation (BaseObject):
                             But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
     """
 
-    __slots__ = (
-        "file_id",
-        "file_unique_id",
-        "width",
-        "height",
-        "duration",
-        "thumb",
-        "file_name",
-        "mime_type",
-        "file_size"
-    )
 
     def __init__(self, 
                  file_id:str = None, 

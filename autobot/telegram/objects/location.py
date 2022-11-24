@@ -9,7 +9,6 @@ class Location(BaseObject):
         latitude (float): Latitude as defined by sender
     """
     
-    __slots__ = ("longitude","latitude")
     
     def __init__(self, longitude: float = None, latitude: float = None) -> None:
         self.longitude = longitude

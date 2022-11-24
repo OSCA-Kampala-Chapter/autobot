@@ -40,33 +40,6 @@ class Chat(BaseObject):
         message_auto_delete_time (int): Optional. True, if the group has a discussion group for administrators. Returned only in getChat.
     """
 
-    __slots__ = (
-        'id',
-        'type',
-        'title',
-        'username',
-        'first_name',
-        'last_name',
-        'all_members_are_administrators',
-        'photo',
-        'description',
-        'invite_link',
-        'pinned_message',
-        'sticker_set_name',
-        'can_set_sticker_set',
-        'linked_chat_id',
-        'location',
-        'bio',
-        'has_private_forwards',
-        'has_restricted_voice_and_video_messages',
-        'join_to_send_messages',
-        'join_by_request',
-        'permissions',
-        'slow_mode_delay',
-        'message_auto_delete_time',
-        'has_protected_content'
-
-    )
 
     def __init__(self, id: int = None, type: str = None) -> None:
         self.id = id
@@ -118,20 +91,6 @@ class ChatAdministratorRights(BaseObject):
         can_manage_topics (bool): Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
     """
 
-    __slots__ = (
-        'is_anonymous',
-        'can_manage_chat',
-        'can_delete_messages',
-        'can_manage_video_chats',
-        'can_restrict_members',
-        'can_promote_members',
-        'can_change_info',
-        'can_invite_users',
-        'can_post_messages',
-        'can_edit_messages',
-        'can_pin_messages',
-        'can_manage_topics'
-    )
 
     def __init__(self, is_anonymous: bool = None, can_manage_chat: bool = None, can_delete_messages: bool = None, can_manage_video_chats: bool = None, can_restrict_members: bool = None, can_promote_members: bool = None, can_change_info: bool = None, can_invite_users: bool = None) -> None:
         self.is_anonymous: Optional[bool] = is_anonymous
@@ -162,14 +121,6 @@ class ChatInviteLink(BaseObject):
         member_limit (int): Optional. Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
     """
 
-    __slots__ = (
-        'invite_link',
-        'creator',
-        'is_primary',
-        'is_revoked',
-        'expire_date',
-        'member_limit'
-    )
 
     def __init__(self, invite_link: str = None, creator: User = None, is_primary: bool = None, is_revoked: bool = None) -> None:
         self.invite_link: Optional[str] = invite_link
@@ -190,10 +141,6 @@ class ChatJoinRequest(BaseObject):
         status (str): Optional. The member's status in the chat. Can be “creator”, “administrator”, “member”, “restricted”, “left” or “kicked”
     """
 
-    __slots__ = (
-        'user',
-        'status'
-    )
 
     def __init__(self, user: User = None) -> None:
         self.user: Optional[User] = user
@@ -210,10 +157,6 @@ class ChatLocation(BaseObject):
         address (str): Location address; 1-64 characters, as defined by the chat owner
     """
 
-    __slots__ = (
-        'location',
-        'address'
-    )
 
     def __init__(self, location: Location = None, address: str = None) -> None:
         self.location: Optional[Location] = location
@@ -236,16 +179,6 @@ class ChatPermissions(BaseObject):
         can_pin_messages (bool): Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
     """
 
-    __slots__ = (
-        'can_send_messages',
-        'can_send_media_messages',
-        'can_send_polls',
-        'can_send_other_messages',
-        'can_add_web_page_previews',
-        'can_change_info',
-        'can_invite_users',
-        'can_pin_messages'
-    )
 
     def __init__(self) -> None:
         self.can_send_messages: Optional[bool] = None
@@ -271,12 +204,6 @@ class ChatPhoto(BaseObject):
         big_file_unique_id (str): Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
     """
 
-    __slots__ = (
-        'small_file_id',
-        'small_file_unique_id',
-        'big_file_id',
-        'big_file_unique_id'
-    )
 
     def __init__(self, small_file_id: str = None, small_file_unique_id: str = None, big_file_id: str = None, big_file_unique_id: str = None) -> None:
         self.small_file_id: Optional[str] = small_file_id

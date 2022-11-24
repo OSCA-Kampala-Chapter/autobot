@@ -20,12 +20,6 @@ class Document(BaseObject):
                             But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
     """
 
-    __slots__ = (
-        "thumb",
-        "file_name",
-        "mime_type",
-        "file_size"
-    )
 
     def __init__(self, file_id:str = None, file_unique_id:str = None) -> None:
         self.file_id = file_id

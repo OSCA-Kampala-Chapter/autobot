@@ -5,6 +5,7 @@ from autobot.telegram.passport.objects import *
 from autobot.telegram.payments.objects import *
 from autobot.telegram.stickers.objects import *
 
+__all__ = ("Parser","Composer")
 
 InlineQueryResults = list[InlineQueryResult, 
                           InlineQueryResultArticle, 
@@ -60,7 +61,7 @@ class Parser:
 
 ######################################################################################################
     
-    def _parse_update (self,key:int,val:dict) -> Update:
+    def _parse_update (self,val:dict) -> Update:
         update_obj = Update()
         
         for k,v in val.items():
@@ -279,7 +280,7 @@ class Parser:
                         setattr(ent_obj,k,v)
                 return ent_obj
 
-            msg_obj = [_entity_parser(entity) for entity in val.values()]
+            msg_obj = [_entity_parser(entity) for entity in val]
 
         elif (key == "message_auto_delete_timer_changed"):
             msg_obj = MessageAutoDeleteTimerChanged()
@@ -1151,5 +1152,50 @@ class Parser:
         The parse method takes in a dictionary representing the results from a telegram bot
         and initiates the parsing process. It returns a single update object
         """
-        for k,v in json_data.items():
-            self._parse_update(k,v)
+        return self._parse_update(json_data)
+
+
+
+#######################################################################################################
+
+    # Composer class
+
+#######################################################################################################
+
+class Composer:
+
+    def compose (self,cls):
+
+        response_obj = {}
+        for k,v in vars(cls).items():
+            try:
+                if isinstance(v,list):
+                    obj_list = []
+                    for obj in v:
+                        resp_obj = self.compose(obj)
+                        obj_list.append(resp_obj)
+                    response_obj[k] = obj_list
+                else:
+                    resp_obj = self.compose(v)
+            except TypeError:
+                response_obj[k] = v
+                continue
+            else:
+                response_obj[k] = resp_obj
+
+        return self._clean(response_obj)
+
+    def _clean (self,resp:dict) -> dict:
+        
+        clean_resp = {}
+
+        for k,v in resp.items():
+            try:
+                res = self._clean(v)
+            except AttributeError:
+                if v is not None:
+                    clean_resp[k] = v
+            else:
+                clean_resp[k] = res
+
+        return clean_resp

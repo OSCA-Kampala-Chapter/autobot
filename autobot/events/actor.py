@@ -17,7 +17,7 @@ EVENT_VALUE = Any
 if TYPE_CHECKING:
     from autobot.events.dispatcher import EventDispatcher
 
-__all__ = ("BaseNode")
+__all__ = ("Actor")
 
 class EventManager(asyncio.Queue):
     """
@@ -76,7 +76,7 @@ class EventManager(asyncio.Queue):
 
 
 
-class Node (EventManager):
+class Actor (EventManager):
     """
     Base class for an event handler
     """
@@ -86,7 +86,7 @@ class Node (EventManager):
         dispatcher:EventDispatcher = None
         ):
 
-        super(Node,self).__init__(queue_size)
+        super(Actor,self).__init__(queue_size)
         self.dispatcher = dispatcher if dispatcher else self._get_dispatcher()
 
     def _get_dispatcher (self):
@@ -114,9 +114,9 @@ class Node (EventManager):
 
     async def action (self):
         """
-        The action method should be implemented by the BaseNode subclass.
+        The action method should be implemented by the BaseActor subclass.
         """
-        raise NotImplementedError("Node action is not implemented")
+        raise NotImplementedError("Actor action is not implemented")
 
     async def run (self):
         """

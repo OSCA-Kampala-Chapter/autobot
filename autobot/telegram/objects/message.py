@@ -86,62 +86,6 @@ class Message(BaseObject):
         video_chat_participants_invited (:class:`telegram.VideoChatParticipantsInvited`): Optional. Service message: new participants invited to a voice chat
         reply_markup (:class:`telegram.InlineKeyboardMarkup`): Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
     """
-    __slots__ = (
-        'message_id',
-        'from_user',
-        'date',
-        'chat',
-        'forward_from',
-        'forward_from_chat',
-        'forward_from_message_id',
-        'forward_signature',
-        'forward_sender_name',
-        'forward_date',
-        'reply_to_message',
-        'via_bot',
-        'edit_date',
-        'media_group_id',
-        'author_signature',
-        'text',
-        'entities',
-        'caption_entities',
-        'audio',
-        'document',
-        'animation',
-        'game',
-        'photo',
-        'sticker',
-        'video',
-        'voice',
-        'video_note',
-        'caption',
-        'contact',
-        'location',
-        'venue',
-        'poll',
-        'dice',
-        'new_chat_members',
-        'left_chat_member',
-        'new_chat_title',
-        'new_chat_photo',
-        'delete_chat_photo',
-        'group_chat_created',
-        'supergroup_chat_created',
-        'channel_chat_created',
-        'migrate_to_chat_id',
-        'migrate_from_chat_id',
-        'pinned_message',
-        'invoice',
-        'successful_payment',
-        'connected_website',
-        'passport_data',
-        'proximity_alert_triggered',
-        'video_chat_scheduled',
-        'video_chat_started',
-        'video_chat_ended',
-        'video_chat_participants_invited',
-        'reply_markup'
-    )
     
     def __init__ (self, message_id: int = None) -> None:
         self.message_id = message_id
@@ -212,7 +156,6 @@ class MessageAutoDeleteTimerChanged(BaseObject):
 
     """
 
-    __slots__ = ("message","message_auto_delete_time")
     
     def __init__(self, message: Message = None, message_auto_delete_time: MessageAutoDeleteTimerChanged = None) -> None:
         self.message = message
@@ -237,14 +180,6 @@ class MessageEntity(BaseObject):
 
     """
 
-    __slots__ = (
-        'type',
-        'offset',
-        'length',
-        'url', 
-        'user', 
-        'language'
-        )
 
     def __init__(self, type: str = None, offset: int = None, length: int = None) -> None:
         self.type = type
@@ -263,7 +198,6 @@ class MessageId(BaseObject):
 
     """
     
-    __slots__ = ("message_id")
     
     def __init__(self, message_id: int = None) -> None:
         self.message_id = message_id

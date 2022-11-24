@@ -15,12 +15,6 @@ class File(BaseObject):
         file_path (str): Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
     """
 
-    __slots__ = (
-        'file_size', 
-        'file_path',
-        'file_size',
-        'file_path',
-        )
     
     
     def __init__(self, file_id:str = None, file_unique_id:str = None) -> None:

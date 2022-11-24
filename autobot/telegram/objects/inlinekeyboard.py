@@ -42,16 +42,6 @@ class InlineKeyboardButton(BaseObject):
                 Note: This type of button must always be the first button in the first row and can only be used in invoice messages.
     """
     
-    __slots__ = ("text",
-                "url",
-                "callback_data",
-                "web_app",
-                "login_url",
-                "switch_inline_query",
-                "switch_inline_query_current_chat",
-                "callback_game",
-                "pay",
-                )
 
     def __init__(self, text: str = None) -> None:
         self.text = text
@@ -76,7 +66,6 @@ class InlineKeyboardMarkup(BaseObject):
     
     """
     
-    __slots__ = ("inline_keyboard",)
 
     def __init__(self, inline_keyboard: list[InlineKeyboardButton] = None) -> None:
         self.inline_keyboard = inline_keyboard

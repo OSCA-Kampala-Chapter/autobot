@@ -53,23 +53,6 @@ class Update (BaseObject):
         chat_join_request (Optional[telegram.objects.chat_join_request.ChatJoinRequest]): Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.
     """
 
-    __slots__ = (
-        'update_id',
-        'message', 
-        'edited_message', 
-        'channel_post', 
-        'edited_channel_post', 
-        'inline_query', 
-        'chosen_inline_result', 
-        'callback_query', 
-        'shipping_query', 
-        'pre_checkout_query', 
-        'poll', 
-        'poll_answer', 
-        'my_chat_member', 
-        'chat_member', 
-        'chat_join_request'
-        )
     
     
     def __init__(self, update_id: int = None) -> None:
