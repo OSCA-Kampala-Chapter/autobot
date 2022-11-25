@@ -5,7 +5,7 @@ from autobot.telegram.objects import BaseObject
 
 class ForumTopic(BaseObject):
     
-    def __init__(self, message_thread_id: int, name:str, icon_color:int) -> None:
+    def __init__(self, message_thread_id: int = None, name:str = None, icon_color:int=None) -> None:
         
         __slots__  = (
             "message_thread_id",
