@@ -1,20 +1,23 @@
 # AutoBot Information
 site_name: AutoBot Documentation
+site_author: Tobais
 edit_uri: blob/main/docs/
+
+# Repository
+repo_name: OSCA-Kampala-Chapter/autobot
+repo_url: https://github.com/OSCA-Kampala-Chapter/autobot
 
 # Configuration
 theme:
   name: material
   features:
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
-    - navigation.top
     - header.autohide #the header is automatically hidden when the user scrolls past a certain threshold, leaving more space for content. Add the following lines to mkdocs.yml:
     - search.suggest
     - search.share
     - search.highlight
   language: en
+  
   
   palette:
     # Palette toggle for automatic mode
@@ -43,25 +46,18 @@ theme:
   favicon: assets.png
   
     
-
-# defines the order of the markdown-
+# defines the order of the markdown
 nav:
   - Home: index.md
   - Objects: objects.md
   - Reference: reference.md
   - FAQS: faqs.md
 
-site_author: Tobais
-site_description: >-
-  DESCRIPTION
-
-# Repository
-repo_name: OSCA-Kampala-Chapter/autobot
-repo_url: https://github.com/OSCA-Kampala-Chapter/autobot
 
 # These appeal to the footer section of the file and are linked to direct following handles
-
 extra:
+  extra_css:
+  - stylesheets/extra.css
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/OSCA-Kampala-Chapter/autobot
@@ -72,9 +68,9 @@ extra:
     - icon: fontawesome/brands/instagram
       link: https://www.instagram.com/oscakampala
 
+
 # These are markdown extensions: `They are used up in highliting of 
 #codes and even make the page to look more cute`
-
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -88,13 +84,13 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.mark
 
+
   # Plugins: This is a plugin that enables the search engine
   #in the markdown file.
-
 plugins:
-  - search:
-        separator: '[\s\-\.]'
-  - mkdocstrings:
+- search:
+    separator: '[\s\-\.]'
+- mkdocstrings:
       custom_templates: templates
       default_handler: python
       handlers:
