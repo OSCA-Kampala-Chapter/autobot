@@ -1,8 +1,16 @@
 """
 This module contains a class having methods representing the bot api methods
 """
-from autobot.telegram.objects.chat import ChatPermissions
+from autobot.telegram.objects.botcommand import BotCommand, BotCommandScope
+from autobot.telegram.objects.chat import (
+    Chat,
+    ChatAdministratorRights,
+    ChatInviteLink,
+    ChatPermissions,
+)
+from autobot.telegram.objects.chatmember import ChatMember
 from autobot.telegram.objects.forcereply import ForceReply
+from autobot.telegram.objects.forumtopic import ForumTopic
 from autobot.telegram.objects.inlinekeyboard import InlineKeyboardMarkup
 from autobot.telegram.objects.inputfile import (
     InputFile,
@@ -11,11 +19,13 @@ from autobot.telegram.objects.inputfile import (
     InputMediaPhoto,
     InputMediaVideo,
 )
+from autobot.telegram.objects.menubutton import MenuButton
 from autobot.telegram.objects.message import MessageEntity
 from autobot.telegram.objects.replykeyboard import (
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
 )
+from autobot.telegram.stickers.objects import Sticker
 
 
 class BotAPI:
@@ -562,3 +572,446 @@ class BotAPI:
             bool: Returns True on success.
         """
         return True
+
+    def ban_chat_sender_chat(self, chat_id: str | int, sender_chat_id: int) -> bool:
+        """Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won't be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights.
+
+        Args:
+            chat_id (str | int): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            sender_chat_id (int):  	Unique identifier of the target sender chat.
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def unban_chat_sender_chat(self, chat_id: str | int, sender_chat_id: int) -> bool:
+        """Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an administrator for this to work and must have the appropriate administrator rights.
+
+        Args:
+            chat_id (str | int): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            sender_chat_id (int):  	Unique identifier of the target sender chat.
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def set_chat_permissions(self, chat_id: str | int, permissions: ChatPermissions) -> bool:
+        """Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights.
+
+        Args:
+            chat_id (str | int): Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername).
+            permissions (ChatPermissions): A JSON-serialized object for new default chat permissions.
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def export_chat_invite_link(self, chat_id: str | int) -> str:
+        """Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+
+        Args:
+            chat_id (str | int):  	Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+
+        Returns:
+            str: Returns the new invite link as String on success.
+        """
+        return "https"
+
+    def create_chat_invite_link(self, chat_id: str | int, name: str | None = None, expire_date: str | None = None,
+                                member_limit: int | None = None, creates_join_request: bool | None = None) -> ChatInviteLink:
+        """Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
+
+        Args:
+            chat_id (str | int): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            name (str | None, optional): Invite link name; 0-32 characters. Defaults to None.
+            expire_date (str | None, optional): Point in time (Unix timestamp) when the link will expire. Defaults to None.
+            member_limit (int | None, optional): The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999. Defaults to None.
+            creates_join_request (bool | None, optional): True, if users joining the chat via the link need to be approved by chat administrators. If True, member_limit can't be specified. Defaults to None.
+
+        Returns:
+            ChatInviteLink: Returns the new invite link as ChatInviteLink object.
+        """
+
+    def edit_chat_invite_link(self, chat_id: str | int, invite_link: str, name: str | None = None, expire_date: str | None = None,
+                              member_limit: int | None = None, creates_join_request: bool | None = None) -> ChatInviteLink:
+        """Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
+
+        Args:
+            chat_id (str | int): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            invite_link (str): The invite link to edit
+            name (str | None, optional): Invite link name; 0-32 characters. Defaults to None.
+            expire_date (str | None, optional): Point in time (Unix timestamp) when the link will expire. Defaults to None.
+            member_limit (int | None, optional): The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999. Defaults to None.
+            creates_join_request (bool | None, optional): True, if users joining the chat via the link need to be approved by chat administrators. If True, member_limit can't be specified. Defaults to None.
+
+        Returns:
+            ChatInviteLink: Returns the edited invite link as ChatInviteLink object.
+        """
+
+    def revoke_chat_invite_link(self, chat_id: int | str, invite_link: str) -> ChatInviteLink:
+        """Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+
+        Args:
+            chat_id (int | str):  	Unique identifier of the target chat or username of the target channel (in the format @channelusername).
+            invite_link (str):  	The invite link to revoke.
+
+        Returns:
+            ChatInviteLink: Returns the revoked invite link as ChatInviteLink object.
+        """
+
+    def approve_chat_join_request(self, chat_id: int | str, user_id: str) -> bool:
+        """Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            user_id (str):  	Unique identifier of the target user.
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def decline_chat_join_request(self, chat_id: int | str, user_id: str) -> bool:
+        """Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            user_id (str):  	Unique identifier of the target user.
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def set_chat_photo(self, chat_id: int | str, photo: InputFile) -> bool:
+        """Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+            photo (InputFile):  	New chat photo, uploaded using multipart/form-data
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def delete_chat_photo(self, chat_id: int | str) -> bool:
+        """se this method to delete a chat photo. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. 
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def set_chat_title(self, chat_id: int | str, title: str) -> bool:
+        """Use this method to change the title of a chat. Titles can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+            title (str): New chat title, 1-128 characters
+
+        Returns:
+            bool: Returns True on success.
+        """
+        return True
+
+    def set_chat_description(self, chat_id: int | str, description: str | None = None) -> bool:
+        """Use this method to change the description of a group, a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            description (str | None, optional): New chat description, 0-255 characters. Defaults to None.
+
+        Returns:
+            bool:  Returns True on success.
+        """
+        return True
+
+    def pin_chat_message(self, chat_id: int | str, message_id: int, disable_notification: bool | None = None) -> bool:
+        """Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            message_id (int):  	Identifier of a message to pin
+            disable_notification (bool | None, optional): Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats. Defaults to None.
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def unpin_chat_message(self, chat_id: int | str, message_id: int | None = None) -> bool:
+        """Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+            message_id (int | None, optional): Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned. Defaults to None.
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def unpin_all_chat_message(self, chat_id: int | str) -> bool:
+        """Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+
+        Returns:
+            bool: Returns True on success.
+
+        """
+
+    def leave_chat(self, chat_id: int | str) -> bool:
+        """Use this method for your bot to leave a group, supergroup or channel.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+
+        Returns:
+            bool: Returns True on success.
+
+        """
+
+    def get_chat(self, chat_id: int | str) -> Chat:
+        """Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.)
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+
+        Returns:
+            Chat: Returns True on success.
+
+        """
+
+    def get_chat_administrators(self, chat_id: int | str) -> list[ChatMember]:
+        """Use this method to get a list of administrators in a chat, which aren't bots
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+
+        Returns:
+            list[ChatMember]: Returns an Array of ChatMember objects.
+
+        """
+
+    def get_chat_member_count(self, chat_id: int | str) -> int:
+        """Use this method to get the number of members in a chat
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+
+        Returns:
+            int:  Returns Int on success.
+        """
+
+    def getChatMember(self, chat_id: int | str, user_id: int) -> ChatMember:
+        """Use this method to get information about a member of a chat
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+            user_id (int): Unique identifier of the target user
+
+        Returns:
+            ChatMember: Returns a ChatMember object on success.
+        """
+
+    def set_chat_sticker_set(self, chat_id: int | str, sticker_set_name: str) -> bool:
+        """Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+            sticker_set_name (str): Name of the sticker set to be set as the group sticker set
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def delete_chat_sticker_set(self, chat_id: int | str) -> bool:
+        """Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. 
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername).
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def get_forum_topic_icon_stickers(self) -> list[Sticker]:
+        """Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. 
+
+        Returns:
+            list[Sticker]: Returns an Array of Sticker objects.
+        """
+
+    def create_forum_topic(self, chat_id: int | str, name: str, icon_color: int | None = None,
+                           icon_custom_emoji_id: str | None = None) -> ForumTopic:
+        """Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+            name (str): Topic name, 1-128 characters
+            icon_color (int | None, optional): Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F). Defaults to None.
+            icon_custom_emoji_id (str | None, optional): Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Defaults to None.
+
+        Returns:
+            ForumTopic: Returns information about the created topic as a ForumTopic object.
+        """
+
+    def edit_forum_topic(self, chat_id: int | str, message_thread_id: int, name:
+                         str, icon_color: int | None = None, icon_custom_emoji_id: str | None = None) -> bool:
+        """Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic.
+
+        Args:
+            chat_id (int | str): Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+            message_thread_id (str): Unique identifier for the target message thread of the forum topic.
+            name (str): Topic name, 1-128 characters
+            icon_custom_emoji_id (str | None, optional): Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers. Defaults to None.
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def close_forum_topic(self, chat_id: int | str, message_thread_id: int) -> bool:
+        """Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+            message_thread_id (int): Unique identifier for the target message thread of the forum topic
+
+        Returns:
+            bool: Returns True on success
+
+        """
+
+    def reopen_forum_topic(self, chat_id: int | str, message_thread_id: int) -> bool:
+        """Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+            message_thread_id (int): Unique identifier for the target message thread of the forum topic
+
+        Returns:
+            bool: Returns True on success
+
+        """
+
+    def delete_forum_topic(self, chat_id: int | str, message_thread_id: int) -> bool:
+        """Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+            message_thread_id (int): Unique identifier for the target message thread of the forum topic
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def unpin_all_forum_topic_messages(self, chat_id: int | str, message_thread_id: int) -> bool:
+        """Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
+
+        Args:
+            chat_id (int | str):  	Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+            message_thread_id (int): Unique identifier for the target message thread of the forum topic
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def answer_callback_query(self, callback_query_id: str, text: str | None = None, show_alert: bool | None = None,
+                              url: str | None = None, cache_time: int | None = None) -> bool:
+        """Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
+
+        Args:
+            callback_query_id (str): Unique identifier for the query to be answered.
+            text (str | None, optional): Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters. Defaults to None.
+            show_alert (bool | None, optional): If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.. Defaults to None.
+            url (str | None, optional): URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @BotFather, specify the URL that opens your game - note that this will only work if the query comes from a callback_game button. Defaults to None.
+            cache_time (int | None, optional): The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0. Defaults to None.
+
+        Returns:
+            bool: On success, True is returned.
+        """
+
+    def set_my_commands(self, commands: list[BotCommand], scope: BotCommandScope | None = None,
+                        language_code: str | None = None) -> bool:
+        """Use this method to change the list of the bot's commands.
+
+        Args:
+            commands (list[BotCommand]): A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
+            scope (BotCommandScope | None, optional): A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault. Defaults to None.
+            language_code (str | None, optional): A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands. Defaults to None.
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def delete_my_commands(self, scope: BotCommandScope | None = None, language_code: str | None = None) -> bool:
+        """Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. 
+
+        Args:
+            scope (BotCommandScope | None, optional): A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+            language_code (str | None, optional): A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands. Defaults to None.
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def get_my_commands(self, scope: BotCommandScope | None = None, language_code: str | None = None) -> list[BotCommand] | list:
+        """Use this method to get the current list of the bot's commands for the given scope and user language.
+
+        Args:
+            scope (BotCommandScope | None, optional): A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault.
+            language_code (str | None, optional): A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands. Defaults to None.
+
+        Returns:
+            list[BotCommand] | list: Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned.
+        """
+
+    def set_chat_menu_button(self, chat_id: int | None = None, menu_button: MenuButton | None = None) -> bool:
+        """Use this method to change the bot's menu button in a private chat, or the default menu button.
+
+        Args:
+            chat_id (int | None, optional): Unique identifier for the target private chat. If not specified, default bot's menu button will be changed. Defaults to None.
+            menu_button (MenuButton | None, optional): A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault. Defaults to None.
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def get_chat_menu_button(self, chat_id: int | None = None) -> MenuButton:
+        """Use this method to get the current value of the bot's menu button in a private chat, or the default menu butto
+
+        Args:
+            chat_id (int | None, optional):  	Unique identifier for the target private chat. If not specified, default bot's menu button will be returned. Defaults to None.
+
+        Returns:
+            MenuButton: Returns MenuButton on success.
+        """
+
+    def set_my_default_administrator_rights(self, rights: ChatAdministratorRights | None = None,
+                                            for_channels: bool | None = None) -> bool:
+        """Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot
+
+        Args:
+            rights (ChatAdministratorRights | None, optional): A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared. Defaults to None.
+            for_channels (bool | None, optional): Pass True to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed. Defaults to None.
+
+        Returns:
+            bool: Returns True on success.
+        """
+
+    def getMyDefaultAdministratorRights(self, for_channels: bool | None = None) -> ChatAdministratorRights:
+        """Use this method to get the current default administrator rights of the bot.
+
+        Args:
+            for_channels (bool | None, optional): Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned. Defaults to None.
+
+        Returns:
+            ChatAdministratorRights: Returns ChatAdministratorRights on success.
+        """

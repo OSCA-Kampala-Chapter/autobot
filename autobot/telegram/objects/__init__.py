@@ -35,7 +35,8 @@ from .dice import Dice
 from .document import Document
 from .file import File
 from .forcereply import ForceReply
-from .forumtopic import (ForumTopicClosed,
+from .forumtopic import (ForumTopic,
+                        ForumTopicClosed,
                         ForumTopicCreated,
                         ForumTopicReopened,
                         )
@@ -91,10 +92,7 @@ from .voice import Voice
 from .webapp import (WebAppData,
                     WebAppInfo,
                     )
-from .forumtopic import (ForumTopicCreated,
-                        ForumTopicClosed,
-                        ForumTopicReopened
-                        )
+
 __all__ = ("Animation",
             "Audio",
             "BaseObject",
@@ -128,6 +126,7 @@ __all__ = ("Animation",
             "Document",
             "File",
             "ForceReply",
+            "ForumTopic",
             "ForumTopicClosed",
             "ForumTopicCreated",
             "ForumTopicReopened",
