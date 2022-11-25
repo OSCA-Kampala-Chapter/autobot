@@ -1,7 +1,5 @@
 <!---The image (logo) will only appear in light mode but not dark mode-->
-![Logo](assets/autobot.png#only-light)
-<!---The image (logo2) will only appear in dark mode but not light mode-->
-![logo2](assets/logo.png#only-dark)
+![Logo](assets/autobot.png)
 
 ## **Welcome To Autobot Documentation!**
 > 1 min read
