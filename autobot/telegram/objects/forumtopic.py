@@ -6,13 +6,6 @@ from autobot.telegram.objects import BaseObject
 class ForumTopic(BaseObject):
     
     def __init__(self, message_thread_id: int = None, name:str = None, icon_color:int=None) -> None:
-        
-        __slots__  = (
-            "message_thread_id",
-            "name",
-            "icon_color",
-            "icon_custom_emoji_id"
-        )
         """This object represents a forum topic.
 
         Args:
