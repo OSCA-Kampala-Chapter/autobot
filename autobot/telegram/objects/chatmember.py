@@ -43,24 +43,6 @@ class ChatMemberAdministrator(BaseObject):
         is_anonymous (:obj:`bool`): True, if the administrator's presence in the chat is hidden.
     """
 
-    __slots__ = (
-        "status",
-        "user",
-        "custom_title",
-        "is_anonymous",
-        "can_be_edited",
-        "can_manage_chat",
-        "can_post_messages",
-        "can_edit_messages",
-        "can_delete_messages",
-        "can_manage_voice_chats",
-        "can_restrict_members",
-        "can_promote_members",
-        "can_change_info",
-        "can_invite_users",
-        "can_pin_messages",
-        "can_manage_topics",
-    )
 
     def __init__(self, status: str = None, user: User = None, can_be_edited: bool = None, can_manage_chat: bool = None, can_delete_messages: bool = None, can_manage_voice_chats: bool = None, can_restrict_members: bool = None, can_promote_members: bool = None, can_change_info: bool = None, can_invite_users: bool = None, is_anonymous: bool = None) -> None:
         self.status = status
@@ -92,16 +74,12 @@ class ChatMemberBanned(BaseObject):
         until_date (:obj:`int`): Date when restrictions will be lifted for this user; unix time.
     """
 
-    __slots__ = (
-        "status", 
-        "user", 
-        "until_date"
-        )
 
     def __init__(self, status: str = None, user: User = None, until_date: int = None) -> None:
         self.status = status
         self.user = user
         self.until_date = until_date
+
 class ChatMemberLeft(BaseObject):
     """
     Represents a chat member that isn't currently a member of the chat, but may join it themselves.
@@ -112,11 +90,6 @@ class ChatMemberLeft(BaseObject):
         status (:obj:`str`): The member's status in the chat, always “left”.
         user (:obj:`User`): Information about the user.
     """
-
-    __slots__ = (
-        "status", 
-        "user"
-        )
 
     def __init__(self, status: str = None, user: User = None) -> None:
         self.status = status
@@ -133,10 +106,6 @@ class ChatMemberMember(BaseObject):
         user (:obj:`User`): Information about the user.
     """
 
-    __slots__ = (
-        "status", 
-        "user"
-        )
 
     def __init__(self, status: str = None, user: User = None) -> None:
         self.status = status
@@ -155,12 +124,6 @@ class ChatMemberOwner(BaseObject):
         custom_title (:obj:`str`): Optional Owner's custom title for the chat.
     """
 
-    __slots__ = (
-        "status",
-        "user",
-        "is_anonymous",
-        "custom_title",
-    )
 
     def __init__(self, status: str = None, user: User = None, is_anonymous: bool = None) -> None:
         self.status = status
@@ -189,20 +152,6 @@ class ChatMemberRestricted(BaseObject):
         until_date (:obj:`int`): Date when restrictions will be lifted for this user; unix time.
     """
 
-    __slots__ = (
-        "status",
-        "user",
-        "is_member",
-        "can_change_info",
-        "can_invite_users",
-        "can_pin_messages",
-        "can_send_messages",
-        "can_send_media_messages",
-        "can_send_polls",
-        "can_send_other_messages",
-        "can_add_web_page_previews",
-        "until_date",
-    )
 
     def __init__(self, status: str = None, user: User = None, is_member: bool = None, can_change_info: bool = None, can_invite_users: bool = None, can_pin_messages: bool = None, can_send_messages: bool = None, can_send_media_messages: bool = None, can_send_polls: bool = None, can_send_other_messages: bool = None, can_add_web_page_previews: bool = None, until_date: int = None) -> None:
         self.status = status
@@ -233,14 +182,6 @@ class ChatMemberUpdated(BaseObject):
         invite_link (:obj:`ChatInviteLink`): Optional Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
     """
 
-    __slots = (
-        "chat",
-        "from",
-        "date",
-        "old_chat_member",
-        "new_chat_member",
-        "invite_link",
-    )
 
     def __init__(self, chat: Chat = None, from_: User = None, date: int = None, old_chat_member: ChatMember = None, new_chat_member: ChatMember = None) -> None:
         self.chat = chat

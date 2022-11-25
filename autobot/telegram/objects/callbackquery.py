@@ -20,15 +20,6 @@ class CallBackQuery(BaseObject):
         game_short_name (Optional[str]): Optional. Short name of a Game to be returned, serves as the unique identifier for the game
     """
 
-    __slots__ = (
-        'id',
-        'from',
-        'message',
-        'inline_message_id',
-        'chat_instance',
-        'data',
-        'game_short_name'
-    )
 
     def __init__(self, id: str = None, from_: User = None, chat_instance: str = None) -> None:
         self.id = id

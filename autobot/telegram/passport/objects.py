@@ -29,12 +29,6 @@ class PassportFile(BaseObject):
         file_date (int): Unix time when the file was uploaded (Optional)
     """
 
-    __slots__ = (
-        'file_id',
-        'file_unique_id',
-        'file_size',
-        'file_date',
-    )
 
     def __init__(self, file_id: str = None, file_unique_id: str = None) -> None:
         self.file_id = file_id
@@ -60,18 +54,6 @@ class EncryptedPassportElement(BaseObject):
         hash (:obj:`str`): Base64-encoded element hash for using in PassportElementErrorUnspecified
     """
 
-    __slots__ = (
-        'type',
-        'data',
-        'phone_number',
-        'email',
-        'files',
-        'front_side',
-        'reverse_side',
-        'selfie',
-        'translation',
-        'hash',
-    )
 
     def __init__(self, type: str = None) -> None:
         self.type = type

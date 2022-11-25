@@ -21,12 +21,6 @@ class Contact(BaseObject):
 
     """
     
-    __slots__ = ("phone_number",
-                "first_name",
-                "last_name",
-                "user_id",
-                "vcard",
-                )
 
     def __init__(self, phone_number:str = None, first_name:str = None) -> None:
         self.phone_number = phone_number

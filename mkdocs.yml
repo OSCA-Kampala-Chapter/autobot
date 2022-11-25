@@ -46,6 +46,7 @@ theme:
 # defines the order of the markdown-
 nav:
   - Home: index.md
+  - Objects: objects.md
   - Reference: reference.md
   - FAQS: faqs.md
 

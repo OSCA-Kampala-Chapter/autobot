@@ -2,10 +2,6 @@ from autobot.telegram.objects.base import BaseObject
 
 class BotCommand(BaseObject):
     
-    __slots__ = (
-        "command",
-        "description",
-    )
     
     def __init__ (self,command:str = None,description:str = None) -> None:
         self.command = command
@@ -13,7 +9,6 @@ class BotCommand(BaseObject):
 
 class BotCommandScope(BaseObject):
    
-    __slots__ = ("type")
     def __init__ (self,type:str = None) -> None:
         self.type = type
 
@@ -28,8 +23,6 @@ class BotCommandScopeAllChatAdministrators(BaseObject):
 
     """
     
-    __slots__ = ("type",)
-
     def __init__ (self,type:str = None) -> None:
             self.type = type
 
@@ -45,8 +38,6 @@ class BotCommandScopeAllGroupChats(BaseObject):
 
     """
     
-    __slots__ = ("type",)
-
     def __init__ (self,type:str = None) -> None:
             self.type = type
 
@@ -61,7 +52,6 @@ class BotCommandScopeAllPrivateChats(BaseObject):
 
     """
     
-    __slots__ = ("type",)
 
     def __init__ (self,type:str = None) -> None:
             self.type = type
@@ -77,10 +67,6 @@ class BotCommandScopeChat(BaseObject):
         chat_id (:obj:`int`): Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername).
     """
 
-    __slots__ = (
-        "type",
-        "chat_id",
-    )    
 
     def __init__ (self,type:str = None,chat_id:int = None) -> None:
         self.type = type
@@ -97,10 +83,6 @@ class BotCommandScopeChatAdministrators(BaseObject):
         chat_id (:obj:`int`): Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername).
     """
 
-    __slots__ = (
-        "type",
-        "chat_id",
-    )    
 
     def __init__ (self,type:str = None,chat_id:int = None) -> None:
         self.type = type
@@ -118,16 +100,12 @@ class BotCommandScopeChatMember(BaseObject):
         user_id (:obj:`int`): Unique identifier of the target user.
     """
 
-    __slots__ = (
-        "type",
-        "chat_id",
-        "user_id",
-    )    
 
     def __init__ (self,type:str = None,chat_id:int = None,user_id:int = None) -> None:
         self.type = type
         self.chat_id = chat_id
         self.user_id = user_id
+
 class BotCommandScopeDefault(BaseObject):
     """
     Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user.
@@ -138,7 +116,6 @@ class BotCommandScopeDefault(BaseObject):
         type (:obj:`str`): Scope type, must be default.
     """
 
-    __slots__ = ("type",)
 
     def __init__ (self,type:str = None) -> None:
         self.type = type
