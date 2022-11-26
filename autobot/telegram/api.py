@@ -1,56 +1,32 @@
 """
 This module contains a class having methods representing the bot api methods
 """
-from autobot.telegram.objects.botcommand import BotCommand, BotCommandScope
-from autobot.telegram.objects.chat import (
-    Chat,
-    ChatAdministratorRights,
-    ChatInviteLink,
-    ChatPermissions,
-)
+from autobot.telegram.objects.botcommand import BotCommand
+from autobot.telegram.objects.chat import Chat, ChatAdministratorRights, ChatInviteLink
 from autobot.telegram.objects.chatmember import ChatMember
-from autobot.telegram.objects.forcereply import ForceReply
 from autobot.telegram.objects.forumtopic import ForumTopic
-from autobot.telegram.objects.inlinekeyboard import InlineKeyboardMarkup
-from autobot.telegram.objects.inputfile import (
-    InputFile,
-    InputMediaAudio,
-    InputMediaDocument,
-    InputMediaPhoto,
-    InputMediaVideo,
-)
 from autobot.telegram.objects.menubutton import MenuButton
-from autobot.telegram.objects.message import MessageEntity
-from autobot.telegram.objects.replykeyboard import (
-    ReplyKeyboardMarkup,
-    ReplyKeyboardRemove,
-)
 from autobot.telegram.stickers.objects import Sticker
 
 
 class BotAPI:
 
-    async def get_me(self):
+    async def get_me(self) -> None:
         """A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
         """
         pass
 
-    async def logout(self):
+    async def logout(self) -> None:
         """Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
         """
         pass
 
-    async def close(self):
+    async def close(self) -> None:
         """Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
         """
         pass
 
-    async def send_message(self, chat_id: int | str, text: str, message_thread_id: int | None = None,
-                           parse_mode: str | None = None, entities: list[MessageEntity] | None = None,
-                           disable_web_page_preview: bool | None = None, disable_notification: bool | None = None,
-                           protect_content: bool | None = None, reply_to_message_id: int | None = None,
-                           allow_sending_without_reply: bool | None = None,
-                           reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_message(self, **kwargs) -> None:
         """Use this method to send text messages. On success, the sent Message is returned.
 
         Args:
@@ -68,9 +44,7 @@ class BotAPI:
         """
         pass
 
-    async def foward_message(self, chat_id: int | str, from_chat_id: int | str, message_id: int,
-                             message_thread_id: int | None = None, disable_notification: bool | None = None,
-                             protect_content: int | None = None):
+    async def foward_message(self, **kwargs) -> None:
         """Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent Message is returned.
 
         Args:
@@ -83,12 +57,7 @@ class BotAPI:
         """
         pass
 
-    async def copy_message(self, chat_id: int | str, from_chat_id: int | str, message_id: int | str,
-                           message_thread_id: int | None = None, caption: str | None = None, parse_mode: str | None = None,
-                           caption_entities: list[MessageEntity] | None = None, disable_notification: bool | None = None,
-                           protect_content: bool | None = None, reply_to_message_id: bool | None = None,
-                           allow_sending_without_reply: bool | None = None,
-                           reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def copy_message(self, **kwargs) -> None:
         """Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
 
         Args:
@@ -107,11 +76,7 @@ class BotAPI:
         """
         pass
 
-    async def send_photo(self, chat_id: int | str, photo: InputFile | str, message_thread_id: int | None = None,
-                         caption: str | None = None, parse_mode: str | None = None, caption_entities: list[MessageEntity]
-                         | None = None, disable_notification: bool | None = None, protect_content: bool | None = None,
-                         reply_to_message_id: bool | None = None, allow_sending_without_reply: bool | None = None,
-                         reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_photo(self, **kwargs) -> None:
         """Use this method to send photos. On success, the sent Message is returned.
 
         Args:
@@ -129,13 +94,7 @@ class BotAPI:
         """
         pass
 
-    async def send_audio(self, chat_id: int | str, photo: InputFile | str, message_thread_id: int | None = None,
-                         caption: str | None = None, parse_mode: str | None = None, caption_entities: list[MessageEntity]
-                         | None = None, duration: int | None = None, performer: str | None = None, title: str | None = None,
-                         thumb: InputFile | str | None = None, disable_notification: bool | None = None,
-                         protect_content: bool | None = None, reply_to_message_id: bool | None = None,
-                         allow_sending_without_reply: bool | None = None,
-                         reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_audio(self, **kwargs) -> None:
         """Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
 
         Args:
@@ -157,13 +116,7 @@ class BotAPI:
         """
         pass
 
-    async def send_document(self, chat_id: int | str, document: InputFile | str, message_thread_id: int | None = None,
-                            caption: str | None = None,  parse_mode: str | None = None, caption_entities: list[MessageEntity]
-                            | None = None, disable_content_type_detection: bool | None = None,
-                            thumb: InputFile | str | None = None, disable_notification: bool | None = None,
-                            protect_content: bool | None = None, reply_to_message_id: bool | None = None,
-                            allow_sending_without_reply: bool | None = None,
-                            reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_document(self, **kwargs) -> None:
         """Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
 
         Args:
@@ -183,13 +136,7 @@ class BotAPI:
         """
         pass
 
-    async def send_video(self, chat_id: int | str, video: InputFile | str, message_thread_id: str | None = None,
-                         duration: int | None = None, width: int | None = None, height: int | None = None,
-                         thumb: InputFile | str | None = None, caption: str | None = None, parse_mode: str | None = None,
-                         caption_entities: list[MessageEntity] | None = None, supports_streaming: bool | None = None,
-                         disable_notification: bool | None = None, protect_content: bool | None = None,
-                         reply_to_message_id: int | None = None, allow_sending_without_reply: bool | None = None,
-                         reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_video(self, **kwargs) -> None:
         """Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
 
         Args:
@@ -212,13 +159,7 @@ class BotAPI:
         """
         pass
 
-    async def send_animation(self, chat_id: int | str, animation: InputFile | str, message_thread_id: str | None = None,
-                             duration: int | None = None, width: int | None = None, height: int | None = None,
-                             thumb: InputFile | str | None = None, caption: str | None = None, parse_mode: str | None = None,
-                             caption_entities: list[MessageEntity] | None = None, supports_streaming: bool | None = None,
-                             disable_notification: bool | None = None, protect_content: bool | None = None,
-                             reply_to_message_id: int | None = None, allow_sending_without_reply: bool | None = None,
-                             reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_animation(self, **kwargs) -> None:
         """Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
 
         Args:
@@ -241,12 +182,7 @@ class BotAPI:
         """
         pass
 
-    async def send_voice(self, chat_id: int | str, voice: InputFile | str, message_thread_id: str | None = None,
-                         duration: int | None = None, caption: str | None = None, parse_mode: str | None = None,
-                         caption_entities: list[MessageEntity] | None = None, disable_notification: bool | None = None,
-                         protect_content: bool | None = None, reply_to_message_id: int | None = None,
-                         allow_sending_without_reply: bool | None = None,
-                         reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_voice(self, **kwargs) -> None:
         """Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
 
         Args:
@@ -265,13 +201,7 @@ class BotAPI:
         """
         pass
 
-    async def send_video_note(self, chat_id: int | str, video_note: InputFile | str, message_thread_id: str | None = None,
-                              duration: int | None = None, height: int | None = None,
-                              thumb: InputFile | str | None = None, caption: str | None = None, parse_mode: str | None = None,
-                              caption_entities: list[MessageEntity] | None = None, supports_streaming: bool | None = None,
-                              disable_notification: bool | None = None, protect_content: bool | None = None,
-                              reply_to_message_id: int | None = None, allow_sending_without_reply: bool | None = None,
-                              reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_video_note(self, **kwargs) -> None:
         """As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
 
         Args:
@@ -292,10 +222,7 @@ class BotAPI:
         """
         pass
 
-    async def send_media_group(self, chat_id: int | str, media: list[InputMediaAudio | InputMediaDocument | InputMediaPhoto | InputMediaVideo],
-                               message_thread_id: str | None = None, disable_notification: bool | None = None,
-                               protect_content: bool | None = None, reply_to_message_id: int | None = None,
-                               allow_sending_without_reply: bool | None = None):
+    async def send_media_group(self, **kwargs) -> None:
         """Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned.
 
         Args:
@@ -309,12 +236,7 @@ class BotAPI:
         """
         pass
 
-    async def send_location(self, chat_id: int | str, latitude: float, longitude: float, message_thread_id: int | None = None,
-                            horizontal_accuracy: float | None = None, live_period: int | None = None, heading: int | None = None,
-                            proximity_alert_radius: int | None = None, disable_notification: bool | None = None,
-                            protect_content: bool | None = None, reply_to_message_id: int | None = None,
-                            allow_sending_without_reply: bool | None = None,
-                            reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_location(self, **kwargs) -> None:
         """Use this method to send point on the map. On success, the sent Message is returned.
 
         Args:
@@ -334,10 +256,7 @@ class BotAPI:
         """
         pass
 
-    async def edit_message_live_location(self, chat_id: int | str, latitude: float, longitude: float, message_id: int | None = None,
-                                         inline_message_id: str | None = None, horizontal_accuracy: float | None = None,
-                                         heading: int | None = None, proximity_alert_radius: int | None = None,
-                                         reply_markup: InlineKeyboardMarkup | None = None):
+    async def edit_message_live_location(self, **kwargs) -> None:
         """Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
 
         Args:
@@ -353,8 +272,7 @@ class BotAPI:
         """
         pass
 
-    async def stop_message_live_location(self, chat_id: int | None = None, message_id: int | None = None, inline_message_id: int | None = None,
-                                         reply_markup: InlineKeyboardMarkup | None = None):
+    async def stop_message_live_location(self, **kwargs) -> None:
         """Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.
 
         Args:
@@ -365,12 +283,7 @@ class BotAPI:
         """
         pass
 
-    async def send_venue(self, chat_id: int, latitude: float, longitude: float, title: str, address: str,
-                         message_thread_id: int | None = None, foursquare_id: str | None = None, foursquare_type: str | None = None,
-                         google_place_id: str | None = None, google_place_type: str | None = None,
-                         disable_notification: bool | None = None, protect_content: bool | None = None,
-                         reply_to_message_id: int | None = None, allow_sending_without_reply: bool | None = None,
-                         reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_venue(self, **kwargs) -> None:
         """Use this method to send information about a venue. On success, the sent Message is returned.
 
         Args:
@@ -392,11 +305,7 @@ class BotAPI:
         """
         pass
 
-    async def send_contact(self, chat_id: int, phone_number: int, first_name: str, last_name: str | None = None,
-                           message_thread_id: int | None = None, vcard: str | None = None, disable_notification: bool | None = None,
-                           protect_content: bool | None = None, reply_to_messge_id: bool | None = None,
-                           allow_sending_without_reply: bool | None = None,
-                           reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_contact(self, **kwargs) -> None:
         """Use this method to send phone contacts. On success, the sent Message is returned.
 
         Args:
@@ -414,13 +323,7 @@ class BotAPI:
         """
         pass
 
-    async def send_poll(self, chat_id: int, question: str, options: list[str], message_thread_id: int | None = None,
-                        is_anonymous: bool | None = None, type: str = "regular", allows_multiple_answers: bool | None = None,
-                        correct_option_id: int | None = None, explanation: str | None = None, explanation_parse_mode: str | None = None,
-                        explanation_entities: list[MessageEntity] | None = None, open_period: int | None = None, close_date: int | None = None,
-                        is_closed: bool | None = None, disable_notification: bool | None = None, protect_content: bool | None = None,
-                        reply_to_message_id: bool | None = None, allow_sending_without_reply: bool | None = None,
-                        reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_poll(self, **kwargs) -> None:
         """Use this method to send a native poll. On success, the sent Message is returned.
 
         Args:
@@ -446,9 +349,7 @@ class BotAPI:
         """
         pass
 
-    async def send_dice(self, chat_id: int, message_thread_id: int | None = None, emoji: str | None = None, disable_notification: bool | None = None,
-                        protect_content: bool | None = None, reply_to_message_id: int | None = None, allow_sending_without_reply: bool | None = None,
-                        reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None = None):
+    async def send_dice(self, **kwargs) -> None:
         """Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
 
         Args:
@@ -463,7 +364,7 @@ class BotAPI:
         """
         pass
 
-    async def send_chat_action(self, chat_id: int, action: str):
+    async def send_chat_action(self, **kwargs) -> None:
         """Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.
 
         Args:
@@ -472,7 +373,7 @@ class BotAPI:
         """
         pass
 
-    async def get_user_profile_photos(self, user_id: int, offset: int | None = None, limit: int | None = None):
+    async def get_user_profile_photos(self, **kwargs) -> None:
         """Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
 
         Args:
@@ -482,7 +383,7 @@ class BotAPI:
         """
         pass
 
-    async def get_file(self, file_id: int) -> None:
+    async def get_file(self, **kwargs) -> None:
         """Use this method to get basic information about a file and prepare it for downloading.
 
         Args:
@@ -490,7 +391,7 @@ class BotAPI:
         """
         pass
 
-    async def ban_chat_member(self, chat_id: int | str, user_id: int, until_date: str | None = None, revoke_messages: bool | None = None) -> bool:
+    async def ban_chat_member(self, **kwargs) -> bool:
         """Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -503,7 +404,7 @@ class BotAPI:
         """
         return True
 
-    async def unban_chat_member(self, chat_id: int | str, user_id: int, only_if_banned: bool | None = None) -> bool:
+    async def unban_chat_member(self, **kwargs) -> bool:
         """Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned.
 
         Args:
@@ -516,7 +417,7 @@ class BotAPI:
         """
         return True
 
-    async def restrict_chat_member(self, chat_id: int | str, user_id: int, permissions: ChatPermissions, until_date: str | None = None) -> bool:
+    async def restrict_chat_member(self, **kwargs) -> bool:
         """Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to work and must have the appropriate administrator rights. Pass True for all permissions to lift restrictions from a user.
 
         Args:
@@ -530,13 +431,7 @@ class BotAPI:
         """
         pass
 
-    async def promote_chat_member(self, chat_id: int, user_id: int, is_anonymous: bool | None = None,
-                                  can_manage_chat: bool | None = None, can_post_messages: bool | None = None,
-                                  can_edit_messages: bool | None = None, can_delete_messages: bool | None = None,
-                                  can_manage_video_chats: bool | None = None, can_restrict_members: bool | None = None,
-                                  can_promote_members: bool | None = None, can_change_info: bool | None = None,
-                                  can_invite_users: bool | None = None, can_pin_messages: bool | None = None,
-                                  can_manage_topics: bool | None = None) -> bool:
+    async def promote_chat_member(self, **kwargs) -> bool:
         """Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user.
 
         Args:
@@ -560,7 +455,7 @@ class BotAPI:
         """
         pass
 
-    async def set_chat_administrator_custom_title(self, chat_id: int | str, user_id: int, custom_title: str) -> bool:
+    async def set_chat_administrator_custom_title(self, **kwargs) -> bool:
         """Use this method to set a custom title for an administrator in a supergroup promoted by the bot.
 
         Args:
@@ -573,7 +468,7 @@ class BotAPI:
         """
         return True
 
-    async def ban_chat_sender_chat(self, chat_id: str | int, sender_chat_id: int) -> bool:
+    async def ban_chat_sender_chat(self, **kwargs) -> bool:
         """Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won't be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -585,7 +480,7 @@ class BotAPI:
         """
         return True
 
-    async def unban_chat_sender_chat(self, chat_id: str | int, sender_chat_id: int) -> bool:
+    async def unban_chat_sender_chat(self, **kwargs) -> bool:
         """Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an administrator for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -597,7 +492,7 @@ class BotAPI:
         """
         return True
 
-    async def set_chat_permissions(self, chat_id: str | int, permissions: ChatPermissions) -> bool:
+    async def set_chat_permissions(self, **kwargs) -> bool:
         """Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights.
 
         Args:
@@ -609,7 +504,7 @@ class BotAPI:
         """
         return True
 
-    async def export_chat_invite_link(self, chat_id: str | int) -> str:
+    async def export_chat_invite_link(self, **kwargs) -> str:
         """Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -620,8 +515,7 @@ class BotAPI:
         """
         return "https"
 
-    async def create_chat_invite_link(self, chat_id: str | int, name: str | None = None, expire_date: str | None = None,
-                                      member_limit: int | None = None, creates_join_request: bool | None = None) -> ChatInviteLink:
+    async def create_chat_invite_link(self, **kwargs) -> ChatInviteLink:
         """Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
 
         Args:
@@ -635,8 +529,7 @@ class BotAPI:
             ChatInviteLink: Returns the new invite link as ChatInviteLink object.
         """
 
-    async def edit_chat_invite_link(self, chat_id: str | int, invite_link: str, name: str | None = None, expire_date: str | None = None,
-                                    member_limit: int | None = None, creates_join_request: bool | None = None) -> ChatInviteLink:
+    async def edit_chat_invite_link(self, **kwargs) -> ChatInviteLink:
         """Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
 
         Args:
@@ -651,7 +544,7 @@ class BotAPI:
             ChatInviteLink: Returns the edited invite link as ChatInviteLink object.
         """
 
-    async def revoke_chat_invite_link(self, chat_id: int | str, invite_link: str) -> ChatInviteLink:
+    async def revoke_chat_invite_link(self, **kwargs) -> ChatInviteLink:
         """Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -662,7 +555,7 @@ class BotAPI:
             ChatInviteLink: Returns the revoked invite link as ChatInviteLink object.
         """
 
-    async def approve_chat_join_request(self, chat_id: int | str, user_id: str) -> bool:
+    async def approve_chat_join_request(self, **kwargs) -> bool:
         """Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
 
         Args:
@@ -674,7 +567,7 @@ class BotAPI:
         """
         return True
 
-    async def decline_chat_join_request(self, chat_id: int | str, user_id: str) -> bool:
+    async def decline_chat_join_request(self, **kwargs) -> bool:
         """Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
 
         Args:
@@ -686,7 +579,7 @@ class BotAPI:
         """
         return True
 
-    async def set_chat_photo(self, chat_id: int | str, photo: InputFile) -> bool:
+    async def set_chat_photo(self, **kwargs) -> bool:
         """Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -698,7 +591,7 @@ class BotAPI:
         """
         return True
 
-    async def delete_chat_photo(self, chat_id: int | str) -> bool:
+    async def delete_chat_photo(self, **kwargs) -> bool:
         """se this method to delete a chat photo. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. 
 
         Args:
@@ -709,7 +602,7 @@ class BotAPI:
         """
         return True
 
-    async def set_chat_title(self, chat_id: int | str, title: str) -> bool:
+    async def set_chat_title(self, **kwargs) -> bool:
         """Use this method to change the title of a chat. Titles can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -721,7 +614,7 @@ class BotAPI:
         """
         return True
 
-    async def set_chat_description(self, chat_id: int | str, description: str | None = None) -> bool:
+    async def set_chat_description(self, **kwargs) -> bool:
         """Use this method to change the description of a group, a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
 
         Args:
@@ -733,7 +626,7 @@ class BotAPI:
         """
         return True
 
-    async def pin_chat_message(self, chat_id: int | str, message_id: int, disable_notification: bool | None = None) -> bool:
+    async def pin_chat_message(self, **kwargs) -> bool:
         """Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
 
         Args:
@@ -745,7 +638,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def unpin_chat_message(self, chat_id: int | str, message_id: int | None = None) -> bool:
+    async def unpin_chat_message(self, **kwargs) -> bool:
         """Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
 
         Args:
@@ -756,7 +649,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def unpin_all_chat_message(self, chat_id: int | str) -> bool:
+    async def unpin_all_chat_message(self, **kwargs) -> bool:
         """Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
 
         Args:
@@ -767,7 +660,7 @@ class BotAPI:
 
         """
 
-    async def leave_chat(self, chat_id: int | str) -> bool:
+    async def leave_chat(self, **kwargs) -> bool:
         """Use this method for your bot to leave a group, supergroup or channel.
 
         Args:
@@ -778,7 +671,7 @@ class BotAPI:
 
         """
 
-    async def get_chat(self, chat_id: int | str) -> Chat:
+    async def get_chat(self, **kwargs) -> Chat:
         """Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.)
 
         Args:
@@ -789,7 +682,7 @@ class BotAPI:
 
         """
 
-    async def get_chat_administrators(self, chat_id: int | str) -> list[ChatMember]:
+    async def get_chat_administrators(self, **kwargs) -> list[ChatMember]:
         """Use this method to get a list of administrators in a chat, which aren't bots
 
         Args:
@@ -800,7 +693,7 @@ class BotAPI:
 
         """
 
-    async def get_chat_member_count(self, chat_id: int | str) -> int:
+    async def get_chat_member_count(self, **kwargs) -> int:
         """Use this method to get the number of members in a chat
 
         Args:
@@ -810,7 +703,7 @@ class BotAPI:
             int:  Returns Int on success.
         """
 
-    async def get_chat_member(self, chat_id: int | str, user_id: int) -> ChatMember:
+    async def get_chat_member(self, **kwargs) -> ChatMember:
         """Use this method to get information about a member of a chat
 
         Args:
@@ -821,7 +714,7 @@ class BotAPI:
             ChatMember: Returns a ChatMember object on success.
         """
 
-    async def set_chat_sticker_set(self, chat_id: int | str, sticker_set_name: str) -> bool:
+    async def set_chat_sticker_set(self, **kwargs) -> bool:
         """Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method.
 
         Args:
@@ -832,7 +725,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def delete_chat_sticker_set(self, chat_id: int | str) -> bool:
+    async def delete_chat_sticker_set(self, **kwargs) -> bool:
         """Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. 
 
         Args:
@@ -849,8 +742,7 @@ class BotAPI:
             list[Sticker]: Returns an Array of Sticker objects.
         """
 
-    async def create_forum_topic(self, chat_id: int | str, name: str, icon_color: int | None = None,
-                                 icon_custom_emoji_id: str | None = None) -> ForumTopic:
+    async def create_forum_topic(self, **kwargs) -> ForumTopic:
         """Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
 
         Args:
@@ -863,8 +755,7 @@ class BotAPI:
             ForumTopic: Returns information about the created topic as a ForumTopic object.
         """
 
-    async def edit_forum_topic(self, chat_id: int | str, message_thread_id: int, name:
-                               str, icon_color: int | None = None, icon_custom_emoji_id: str | None = None) -> bool:
+    async def edit_forum_topic(self, **kwargs) -> bool:
         """Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic.
 
         Args:
@@ -877,7 +768,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def close_forum_topic(self, chat_id: int | str, message_thread_id: int) -> bool:
+    async def close_forum_topic(self, **kwargs) -> bool:
         """Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic
 
         Args:
@@ -889,7 +780,7 @@ class BotAPI:
 
         """
 
-    async def reopen_forum_topic(self, chat_id: int | str, message_thread_id: int) -> bool:
+    async def reopen_forum_topic(self, **kwargs) -> bool:
         """Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic
 
         Args:
@@ -901,7 +792,7 @@ class BotAPI:
 
         """
 
-    async def delete_forum_topic(self, chat_id: int | str, message_thread_id: int) -> bool:
+    async def delete_forum_topic(self, **kwargs) -> bool:
         """Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights
 
         Args:
@@ -912,7 +803,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def unpin_all_forum_topic_messages(self, chat_id: int | str, message_thread_id: int) -> bool:
+    async def unpin_all_forum_topic_messages(self, **kwargs) -> bool:
         """Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
 
         Args:
@@ -923,8 +814,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def answer_callback_query(self, callback_query_id: str, text: str | None = None, show_alert: bool | None = None,
-                                    url: str | None = None, cache_time: int | None = None) -> bool:
+    async def answer_callback_query(self, **kwargs) -> bool:
         """Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
 
         Args:
@@ -938,8 +828,7 @@ class BotAPI:
             bool: On success, True is returned.
         """
 
-    async def set_my_commands(self, commands: list[BotCommand], scope: BotCommandScope | None = None,
-                              language_code: str | None = None) -> bool:
+    async def set_my_commands(self, **kwargs) -> bool:
         """Use this method to change the list of the bot's commands.
 
         Args:
@@ -951,7 +840,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def delete_my_commands(self, scope: BotCommandScope | None = None, language_code: str | None = None) -> bool:
+    async def delete_my_commands(self, **kwargs) -> bool:
         """Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. 
 
         Args:
@@ -962,7 +851,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def get_my_commands(self, scope: BotCommandScope | None = None, language_code: str | None = None) -> list[BotCommand] | list:
+    async def get_my_commands(self, **kwargs) -> list[BotCommand] | list:
         """Use this method to get the current list of the bot's commands for the given scope and user language.
 
         Args:
@@ -973,7 +862,7 @@ class BotAPI:
             list[BotCommand] | list: Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned.
         """
 
-    async def set_chat_menu_button(self, chat_id: int | None = None, menu_button: MenuButton | None = None) -> bool:
+    async def set_chat_menu_button(self, **kwargs) -> bool:
         """Use this method to change the bot's menu button in a private chat, or the default menu button.
 
         Args:
@@ -984,7 +873,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def get_chat_menu_button(self, chat_id: int | None = None) -> MenuButton:
+    async def get_chat_menu_button(self, **kwargs) -> MenuButton:
         """Use this method to get the current value of the bot's menu button in a private chat, or the default menu butto
 
         Args:
@@ -994,8 +883,7 @@ class BotAPI:
             MenuButton: Returns MenuButton on success.
         """
 
-    async def set_my_default_administrator_rights(self, rights: ChatAdministratorRights | None = None,
-                                                  for_channels: bool | None = None) -> bool:
+    async def set_my_default_administrator_rights(self, **kwargs) -> bool:
         """Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot
 
         Args:
@@ -1006,7 +894,7 @@ class BotAPI:
             bool: Returns True on success.
         """
 
-    async def get_my_default_administrator_rights(self, for_channels: bool | None = None) -> ChatAdministratorRights:
+    async def get_my_default_administrator_rights(self, **kwargs) -> ChatAdministratorRights:
         """Use this method to get the current default administrator rights of the bot.
 
         Args:
