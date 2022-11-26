@@ -2,7 +2,7 @@
 name = "autobot"
 version = "0.0.1b1"
 dependencies = [
-    "httpcore >= 0.16.1",
+    "httpx >= 0.23.0",
 ]
 
 [build-system]
