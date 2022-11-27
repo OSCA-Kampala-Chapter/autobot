@@ -367,15 +367,15 @@ class Parser:
                     setattr(venue_obj,k,v)
         return venue_obj
 
-    def _parse_photosize(self,key:str,val:dict) -> PhotoSize:
-        photosize_obj = PhotoSize()
-        for k,v in val.items():
-            match k:
-                case "file_size":
-                    setattr(photosize_obj,k,int(v))
-                case _:
-                    setattr(photosize_obj,k,v)
-        return photosize_obj
+    def _parse_photosize(self,key:str,val:list) -> PhotoSize:
+
+        def _parse_photosize_internal(photosize):
+            photosize_obj = PhotoSize()
+            for k,v in photosize.items():
+                setattr(photosize_obj,k,v)
+            return photosize_obj
+
+        return [_parse_photosize_internal(photo_size) for photo_size in val]
 
     def _parse_location(self,key:str,val:dict) -> Location:
         location_obj = Location()
