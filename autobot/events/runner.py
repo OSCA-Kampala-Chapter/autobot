@@ -5,6 +5,7 @@ on the event loop via the scheduler
 """
 
 import asyncio
+import time
 from autobot.events.dispatcher import EventDispatcher
 
 class Scheduler:
@@ -12,7 +13,7 @@ class Scheduler:
     Scheduler base class
     """
     
-class Runner:
+class Runner (Scheduler,EventDispatcher):
     """
     Runner base class
     """
