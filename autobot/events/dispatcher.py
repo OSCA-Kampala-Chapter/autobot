@@ -163,6 +163,10 @@ class _EventProxy:
 
         return event in self.__event_listeners
 
+    def _all_registered_events (self):
+
+        return [name for name in self.__event_listeners]
+
     def __repr__ (self):
         return self.__event_listeners.__repr__()
 
@@ -256,6 +260,12 @@ class EventDispatcher:
         check is event is registered
         """
         return self.listeners._is_registered(event)
+
+    def all_registered_events (self):
+        """
+        return a list of all registered events
+        """
+        return self.listeners._all_registered_events()
 
     async def dispatch (self,event:Event) -> None:
         """
