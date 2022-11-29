@@ -17,7 +17,10 @@ class UrlManager:
         append other part onto the url string
         """
         sch,netloc,path,qry,frag = urlsplit(self.url)
-        prev,base,method = path.split("/")
+        try:
+            base,method = path.split("/")
+        except ValueError:
+            prev,base,method = path.split("/")
         path = "/".join([base,other])
         self.url = urlunsplit((sch,netloc,path,qry,frag))
         return self.url

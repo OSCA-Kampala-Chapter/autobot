@@ -32,9 +32,9 @@ class EventManager(asyncio.Queue):
         """
         method used to listen and pick up events from the dispatcher
         """
-        relay = self._relay()
         
         while True:
+            relay = self._relay()
 
             try:
                 event = await relay
