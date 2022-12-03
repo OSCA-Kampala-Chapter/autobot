@@ -1,0 +1,9 @@
+/* The width of the content area is set so the length of each line doesn't exceed 80-100 characters, 
+depending on the width of the characters. While this is a reasonable default, as longer lines tend to 
+be harder to read, it may be desirable to increase the overall width of the content area, or even make 
+it stretch to the entire available space.
+This can easily be achieved with this code below */ 
+
+.md-grid {
+    max-width: 1440px;
+  }
