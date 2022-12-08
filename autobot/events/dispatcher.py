@@ -7,6 +7,7 @@ them to the registered listeners
 from __future__ import annotations
 
 import asyncio
+import types
 from collections.abc import Coroutine
 from inspect import iscoroutine
 from collections import deque
@@ -76,6 +77,8 @@ class ProcState:
                     self.pending_events.appendleft(event)
                     task = asyncio.create_task(self.resume_pending())
                     await task
+                except StopIteration:
+                    break
             
     async def resume_pending (self):
         
@@ -156,14 +159,17 @@ class _EventProxy:
             pass
         else:
             raise LimitExceededError("number of events registered in dispatcher has exceeded the current maximum")
-
-        self._event_listeners[event_type] = {}
+        
+        if event_type in self._event_listeners:
+            pass
+        else:
+            self._event_listeners[event_type] = {}
 
     def _is_registered(self,event:EVENT_NAME) -> bool:
 
         return event in self.__event_listeners
 
-    def _all_registered_events (self):
+    def _all_event_listeners (self):
 
         return [name for name in self.__event_listeners]
 
@@ -261,11 +267,11 @@ class EventDispatcher:
         """
         return self.listeners._is_registered(event)
 
-    def all_registered_events (self):
+    def all_event_listeners (self):
         """
         return a list of all registered events
         """
-        return self.listeners._all_registered_events()
+        return self.listeners._all_event_listeners()
 
     async def dispatch (self,event:Event) -> None:
         """
@@ -292,3 +298,29 @@ class EventDispatcher:
     def __str__ (self):
         return self.listeners.__repr__()
 
+    @types.coroutine
+    def _relay (self):
+        """
+        A relay generator used to capture the values fron send and pass it back to the
+        coroutine
+        """
+        msg = None
+        while True:
+            msg = yield msg
+            return msg
+
+
+    def add_handler (self,event_name:EVENT_NAME):
+        self.register_event(event_name)
+
+        def prepare_handler (async_func):
+            async def async_func_decorator ():
+                while True:
+                    relay = self._relay()
+                    ent_val = await relay
+                    await async_func(ent_val)
+
+            callback_id = self.add_listener(event_name,async_func_decorator())
+            return callback_id
+        
+        return prepare_handler
