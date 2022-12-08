@@ -20,7 +20,7 @@ class HTTPConnection(HTTP):
         if headers:
             response = await self.client.get(url,headers = headers)
         response = await self.client.get(url)
-        return response.json()
+        return response.content
 
 
     async def post (self,url:str,headers:dict = None,body:dict = None) -> dict:
@@ -32,7 +32,7 @@ class HTTPConnection(HTTP):
                 response = await self.client.post(url,headers = headers, content = body)
             response = await self.client.post(url,json = body)
         response = await self.client.post(url)
-        return response.json()
+        return response.content
 
     async def close (self):
         """

@@ -1,7 +1,7 @@
 """
 This module handles construction of urls needed for making queries
 """
-from urllib.parse import urlsplit,urlunsplit,urljoin
+from urllib.parse import urlsplit,urlunsplit
 
 __all__ = ("UrlManager")
 
@@ -10,7 +10,7 @@ class UrlManager:
     def __init__ (self,token):
         self.token = "bot" + str(token) + "/"
         self.url_parts = ["https","api.telegram.org","","",""]
-        self.url = urljoin(urlunsplit(self.url_parts),self.token)
+        self.url = "/".join((urlunsplit(self.url_parts),self.token))
 
     def add_method (self,other):
         """

@@ -35,25 +35,25 @@ class Context(
         self.url = UrlManager(token)
         self.connection = connection if connection else HTTPConnection()
 
-    def _get (self,*,url = None,headers = None,body = None):
+    async def _get (self,*,url = None,headers = None):
         """
         The _get method adds error handling on top of the abstract get method provided by
         the get method from the HTTPConnection object. If the return value is a success, that is
         it has "ok" as True, then it returns the json string. If "ok" is False, it extracts the 
         description of the failure and raises an error with the description
         """
-        res = self.connection.get(url,headers,body)
-        self._error_handler(res)
+        res = await self.connection.get(url,headers)
+        return self._error_handler(res)
 
-    def _post (self,*,url = None,headers = None,body = None):
+    async def _post (self,*,url = None,headers = None,body = None):
         """
         The _post method adds error handling on top of the abstract get method provided by
         the get method from the HTTPConnection object. If the return value is a success, that is
         it has "ok" as True, then it returns the json string. If "ok" is False, it extracts the 
         description of the failure and raises an error with the description
         """
-        res = self.connection.post(url,headers,body)
-        self._error_handler(res)
+        res = await self.connection.post(url,headers,body)
+        return self._error_handler(res)
 
     def _error_handler(self,res):
         """

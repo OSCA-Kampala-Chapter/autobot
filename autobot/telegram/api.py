@@ -49,7 +49,7 @@ class BotAPI:
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
         url = self.url.add_method("sendMessage")
-        res = self._post(url = url,body = kwargs)
+        res = await self._post(url = url,body = kwargs)
         return self.parser.parse(res)
 
     async def foward_message(self, **kwargs) -> None:
@@ -937,6 +937,6 @@ class BotAPI:
         Returns:
             Update: Returns a list of Updates on success
         """
-
         url = self.url.add_method("getUpdates")
-        return [self.parser.parse(update) for update in self._get(url = url,body = kwargs)]
+        res = await self._get(url = url,headers = kwargs)
+        return [self.parser.parse(update) for update in res]
