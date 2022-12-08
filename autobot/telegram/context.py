@@ -10,6 +10,7 @@ from autobot.telegram.payments.api import PaymentsAPI
 from autobot.telegram.stickers.api import StickerAPI
 from autobot.network.connection import HTTPConnection
 from autobot.network.urlmanager import UrlManager
+from autobot.telegram.parser import Parser,Composer
 import json
 
 class TelegramResultError(Exception):
@@ -25,6 +26,10 @@ class Context(
     PaymentsAPI,
     StickerAPI
 ):
+    parser = Parser()
+
+    composer = Composer()
+
     def __init__ (self,
         token,*,
         connection = None,

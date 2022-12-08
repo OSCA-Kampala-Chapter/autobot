@@ -13,9 +13,6 @@ from autobot.telegram.parser import Parser,Composer
 
 class BotAPI:
 
-    parser = Parser()
-
-    composer = Composer()
 
     async def get_me(self) -> None:
         """A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
