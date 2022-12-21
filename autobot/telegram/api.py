@@ -8,7 +8,6 @@ from autobot.telegram.objects.forumtopic import ForumTopic
 from autobot.telegram.objects.menubutton import MenuButton
 from autobot.telegram.stickers.objects import Sticker
 from autobot.telegram.objects import Update
-from autobot.telegram.parser import Parser,Composer
 
 
 class BotAPI:

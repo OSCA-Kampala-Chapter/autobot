@@ -29,9 +29,8 @@ class HTTPConnection(HTTP):
         """
         if body:
             if headers:
-                response = await self.client.post(url,headers = headers, content = body)
-            response = await self.client.post(url,json = body)
-        response = await self.client.post(url)
+                response = await self.client.post(url,headers = headers, data = body)
+            response = await self.client.post(url,params = body)
         return response.content
 
     async def close (self):

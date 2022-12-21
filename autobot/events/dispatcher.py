@@ -8,7 +8,8 @@ from __future__ import annotations
 
 import asyncio
 import types
-from collections.abc import Coroutine
+from collections.abc import Coroutine,Callable
+from typing import Any
 from inspect import iscoroutine
 from collections import deque
 from autobot.events import OverLoadedError
@@ -324,3 +325,15 @@ class EventDispatcher:
             return callback_id
         
         return prepare_handler
+
+
+    def run_in_background (func:Callable[...,Any]):
+        """
+        Run a blocking synchronous operation in a background thread.
+        It is a wrapper around the asyncio.to_thread function
+        """
+        async def async_runner (*args,**kwargs):
+            result = await asyncio.to_thread(func,*args,**kwargs)
+            return result
+
+        return async_runner
