@@ -105,7 +105,7 @@ This is mainly it concerning the event system.
 The currently supported bot platform is telegram. The bot layer provides a thin pythonic layer over the telegram API. So familiarity with the telegram bot api is important before using this wrapper. The telegram bot api is documented [here](https://core.telegram.org/bots/api)
 
 First thing you need to do is create a bot account and get it's token. For details on how to do that, you can read [here](https://core.telegram.org/bots#how-do-i-create-a-bot).
-After getting you token, you can now use autobot to interact with your telegram bot. Here's how.
+After getting you token, you can now use autobot to interact with your telegram bot. Here's how, let's make a simple echo program that echos back to the sender the message they've sent to us
 ```python
 import asyncio
 from autobot.telegram.context import Context
@@ -116,13 +116,17 @@ async def main ():
     updates = await cxt.get_updates()
     for update in updates:
         if (m := update.message):
+            cid = m.chat.id
+            txt = m.text
             print(m.text)
+            await cxt.send_message(chat_id = cid, text = txt)
             
 asyncio.run(main())
 ```
 **Note: known issue where an error is raised immediately after receiving and printing**
 
-The Context is your entry point into the bot. It encapsulates the network and methods to interact with the bot. the `get_updates` method is a mirror to the `getUpdates` method of the telegram bot, and it accepts all arguments that can be passed to that of the telegram bot. An Update object is returned which has the same attributes as those listed on the bot api page under objects. You can access any of its attrbiutes via a dot operator, in this case we accessed the message object, which also has it's attributes as shown on the telegram bot api page, and it's atrributes can also be accessed via the dot operator. So we access it's text attribute and print it out.
+The Context is your entry point into the bot. It encapsulates the network and methods to interact with the bot. the `get_updates` method is a mirror to the `getUpdates` method of the telegram bot, and it accepts all arguments that can be passed to that of the telegram bot. An Update object is returned which has the same attributes as those listed on the bot api page under objects. You can access any of its attrbiutes via a dot operator, in this case we accessed the message object, which also has it's attributes as shown on the telegram bot api page, and it's atrributes can also be accessed via the dot operator. So we access it's text attribute and print it out. one of the attributes to the message object is the `chat` which also has an `id` attribute that represents the message sender. We extract that id and save it as `cid`, we also get the text from the message and save it as txt.
+Using the send_message method, we send the message we received back to the sender
 
 There's more that hasn't been documented yet, but the documentation is a work in progress, and we shall be updating the readme with relevant details as well, so keep in touch.
 You're encouraged to ask all the questions on our github discussions as the documentation is being worked on.
