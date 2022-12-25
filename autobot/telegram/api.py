@@ -16,17 +16,23 @@ class BotAPI:
     async def get_me(self) -> None:
         """A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
         """
-        pass
+        url = self.url.add_method("getMe")
+        res = await self._get(url=url)
+        return self.parser.parse(res)
 
     async def logout(self) -> None:
         """Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
         """
-        pass
+        url = self.url.add_method("logout")
+        res = await self._post(url=url)
+        return self.parser.parse(res)
 
     async def close(self) -> None:
         """Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
         """
-        pass
+        url = self.url.add_method("close")
+        res = await self._post(url=url)
+        return self.parser.parse(res)
 
     async def send_message(self, **kwargs) -> None:
         """Use this method to send text messages. On success, the sent Message is returned.
@@ -78,7 +84,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("copyMessage")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_photo(self, **kwargs) -> None:
         """Use this method to send photos. On success, the sent Message is returned.
@@ -96,7 +104,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendPhoto")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_audio(self, **kwargs) -> None:
         """Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
@@ -118,7 +128,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendAudio")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_document(self, **kwargs) -> None:
         """Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
@@ -138,7 +150,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendDocument")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_video(self, **kwargs) -> None:
         """Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
@@ -161,7 +175,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendVideo")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_animation(self, **kwargs) -> None:
         """Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
@@ -184,7 +200,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendAnimation")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_voice(self, **kwargs) -> None:
         """Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
@@ -203,7 +221,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendVoice")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_video_note(self, **kwargs) -> None:
         """As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
@@ -224,7 +244,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendVideoNote")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_media_group(self, **kwargs) -> None:
         """Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned.
@@ -238,7 +260,9 @@ class BotAPI:
             reply_to_message_id (int | None, optional): If the message is a reply, ID of the original message. Defaults to None.
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendMediaGroup")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_location(self, **kwargs) -> None:
         """Use this method to send point on the map. On success, the sent Message is returned.
@@ -258,7 +282,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendLocation")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def edit_message_live_location(self, **kwargs) -> None:
         """Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
@@ -274,7 +300,9 @@ class BotAPI:
             proximity_alert_radius (int | None, optional): The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. Defaults to None.
             reply_markup (InlineKeyboardMarkup, optional): A JSON-serialized object for a new inline keyboard. Defaults to None.
         """
-        pass
+        url = self.url.add_method("editMessageLiveLocation")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def stop_message_live_location(self, **kwargs) -> None:
         """Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.
@@ -285,7 +313,9 @@ class BotAPI:
             inline_message_id (int | None, optional): Required if chat_id and message_id are not specified. Identifier of the inline message. Defaults to None.
             reply_markup (InlineKeyboardMarkup | None, optional): A JSON-serialized object for a new inline keyboard. Defaults to None.
         """
-        pass
+        url = self.url.add_method("stopMessageLiveLocation")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_venue(self, **kwargs) -> None:
         """Use this method to send information about a venue. On success, the sent Message is returned.
@@ -307,7 +337,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None, optional): _description_. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendVenue")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_contact(self, **kwargs) -> None:
         """Use this method to send phone contacts. On success, the sent Message is returned.
@@ -325,7 +357,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendContact")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_poll(self, **kwargs) -> None:
         """Use this method to send a native poll. On success, the sent Message is returned.
@@ -351,7 +385,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendPoll")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_dice(self, **kwargs) -> None:
         """Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
@@ -366,7 +402,9 @@ class BotAPI:
             allow_sending_without_reply (bool | None, optional): Pass True if the message should be sent even if the specified replied-to message is not found. Defaults to None.
             reply_markup (InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | ForceReply | None, optional): Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user. Defaults to None.
         """
-        pass
+        url = self.url.add_method("sendDice")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def send_chat_action(self, **kwargs) -> None:
         """Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.
@@ -375,7 +413,9 @@ class BotAPI:
             chat_id (int): Unique identifier for the target chat or username of the target channel (in the format @channelusername).
             action (str): Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_voice or upload_voice for voice notes, upload_document for general files, choose_sticker for stickers, find_location for location data, record_video_note or upload_video_note for video notes.
         """
-        pass
+        url = self.url.add_method("sendChatAction")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def get_user_profile_photos(self, **kwargs) -> None:
         """Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
@@ -385,7 +425,9 @@ class BotAPI:
             offset (int | None, optional): Sequential number of the first photo to be returned. By default, all photos are returned. Defaults to None.
             limit (int | None, optional): Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100. Defaults to None.
         """
-        pass
+        url = self.url.add_method("getUserProfilePhotos")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def get_file(self, **kwargs) -> None:
         """Use this method to get basic information about a file and prepare it for downloading.
@@ -393,7 +435,9 @@ class BotAPI:
         Args:
             file_id (int): File identifier to get information about.
         """
-        pass
+        url = self.url.add_method("getFile")
+        res = await self._post(url = url,body = kwargs)
+        return self.parser.parse(res)
 
     async def ban_chat_member(self, **kwargs) -> bool:
         """Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
@@ -433,7 +477,7 @@ class BotAPI:
         Returns:
             bool: Returns True on success.
         """
-        pass
+        return True
 
     async def promote_chat_member(self, **kwargs) -> bool:
         """Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user.
@@ -457,7 +501,7 @@ class BotAPI:
         Returns:
             bool: Returns True on success.
         """
-        pass
+        return True
 
     async def set_chat_administrator_custom_title(self, **kwargs) -> bool:
         """Use this method to set a custom title for an administrator in a supergroup promoted by the bot.
@@ -532,6 +576,7 @@ class BotAPI:
         Returns:
             ChatInviteLink: Returns the new invite link as ChatInviteLink object.
         """
+        return ChatInviteLink()
 
     async def edit_chat_invite_link(self, **kwargs) -> ChatInviteLink:
         """Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
@@ -547,6 +592,7 @@ class BotAPI:
         Returns:
             ChatInviteLink: Returns the edited invite link as ChatInviteLink object.
         """
+        return ChatInviteLink()
 
     async def revoke_chat_invite_link(self, **kwargs) -> ChatInviteLink:
         """Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
@@ -558,6 +604,7 @@ class BotAPI:
         Returns:
             ChatInviteLink: Returns the revoked invite link as ChatInviteLink object.
         """
+        return ChatInviteLink()
 
     async def approve_chat_join_request(self, **kwargs) -> bool:
         """Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
@@ -907,7 +954,7 @@ class BotAPI:
         Returns:
             ChatAdministratorRights: Returns ChatAdministratorRights on success.
         """
-
+        
     async def get_updates (self,**kwargs) -> list[Update]:
         """Use this method to receive incoming updates using long polling (wiki). Returns an Array of Update objects.
 
