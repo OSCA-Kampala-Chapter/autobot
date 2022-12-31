@@ -3,6 +3,7 @@ name = "autobot"
 version = "0.0.1a1"
 dependencies = [
     "httpx >= 0.23.0",
+    "autotelegram @ https://github.com/ht-thomas/autotelegram/archive/refs/tags/autotelegram.zip",
 ]
 
 [build-system]
